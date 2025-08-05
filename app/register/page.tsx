@@ -79,32 +79,64 @@ const RegisterPage = () => {
 
     const renderDoctorForm = () => (
         <>
-            <div className="self-stretch flex flex-col justify-start items-start gap-1">
-                <label htmlFor="nplNumber" className="justify-start text-zinc-800 text-sm font-normal leading-tight">NPL Number</label>
+            <div className="self-stretch flex flex-col sm:flex-row gap-2 ">
+                <div className="flex-1 flex flex-col justify-start items-start gap-1">
+                    <label htmlFor="firstName" className="justify-start text-zinc-800 text-sm font-normal leading-tight">First Name</label>
+                    <input
+                        type="text"
+                        id="firstName"
+                        placeholder="Enter your first name"
+                        className="self-stretch h-8 px-3 py-2 bg-slate-100 rounded-[20px] border-b border-neutral-300 inline-flex justify-start items-center gap-2 text-zinc-500 text-sm font-normal leading-tight"
+                    />
+                </div>
+
+                <div className="flex-1 flex flex-col justify-start items-start gap-1">
+                    <label htmlFor="lastName" className="justify-start text-zinc-800 text-sm font-normal leading-tight">Last Name</label>
+                    <input
+                        type="text"
+                        id="lastName"
+                        placeholder="Enter your last name"
+                        className="self-stretch h-8 px-3 py-2 bg-slate-100 rounded-[20px] border-b border-neutral-300 inline-flex justify-start items-center gap-2 text-zinc-500 text-sm font-normal leading-tight"
+                    />
+                </div>
+            </div>
+
+            <div className="self-stretch flex flex-col justify-start items-start gap-1 w-full">
+                <label htmlFor="email" className="justify-start text-zinc-800 text-sm font-normal leading-tight">Email Address</label>
                 <input
-                    type="text"
-                    id="nplNumber"
-                    placeholder="Enter your NPL number"
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email address"
                     className="self-stretch h-8 px-3 py-2 bg-slate-100 rounded-[20px] border-b border-neutral-300 inline-flex justify-start items-center gap-2 text-zinc-500 text-sm font-normal leading-tight"
                 />
             </div>
 
             <div className="self-stretch flex flex-col justify-start items-start gap-1">
-                <label htmlFor="licenseNumber" className="justify-start text-zinc-800 text-sm font-normal leading-tight">License Number</label>
+                <label htmlFor="phone" className="justify-start text-zinc-800 text-sm font-normal leading-tight">Phone Number</label>
                 <input
-                    type="text"
-                    id="licenseNumber"
-                    placeholder="Enter your license number"
+                    type="tel"
+                    id="phone"
+                    placeholder="Enter your phone number"
                     className="self-stretch h-8 px-3 py-2 bg-slate-100 rounded-[20px] border-b border-neutral-300 inline-flex justify-start items-center gap-2 text-zinc-500 text-sm font-normal leading-tight"
                 />
             </div>
 
             <div className="self-stretch flex flex-col justify-start items-start gap-1">
-                <label htmlFor="licenseState" className="justify-start text-zinc-800 text-sm font-normal leading-tight">License State</label>
+                <label htmlFor="password" className="justify-start text-zinc-800 text-sm font-normal leading-tight">Password</label>
                 <input
-                    type="text"
-                    id="licenseState"
-                    placeholder="Enter your license state"
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    className="self-stretch h-8 px-3 py-2 bg-slate-100 rounded-[20px] border-b border-neutral-300 inline-flex justify-start items-center gap-2 text-zinc-500 text-sm font-normal leading-tight"
+                />
+            </div>
+
+            <div className="self-stretch flex flex-col justify-start items-start gap-1">
+                <label htmlFor="confirmPassword" className="justify-start text-zinc-800 text-sm font-normal leading-tight">Confirm Password</label>
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    placeholder="Confirm your password"
                     className="self-stretch h-8 px-3 py-2 bg-slate-100 rounded-[20px] border-b border-neutral-300 inline-flex justify-start items-center gap-2 text-zinc-500 text-sm font-normal leading-tight"
                 />
             </div>
@@ -117,8 +149,12 @@ const RegisterPage = () => {
 
                 <div className="flex flex-col lg:flex-row flex-1 min-h-0">
                     {/* Left side  */}
-                    <aside className="w-full lg:w-1/2 h-[300px] lg:h-full lg:pl-8 mb-2 lg:mb-0 relative">
-                        <img className="w-full h-full object-cover rounded-[20px] lg:rounded-[32px] shadow-lg" src="https://placehold.co/758x866" alt="Medical consultation" />
+                    <aside className="w-full lg:w-1/2 h-[350px] lg:h-full lg:pl-8 mb-2 lg:mb-0 relative">
+                        <img
+                            className="w-full h-full object-cover rounded-[20px] lg:rounded-[32px] shadow-lg"
+                            src={userType === 'patient' ? '/loginImage.png' : '/registerImage.png'}
+                            alt={userType === 'patient' ? 'Patient consultation' : 'Doctor registration'}
+                        />
 
                         <div className="absolute w-40 sm:w-40 lg:w-48 h-16 lg:h-20 bg-black/20 rounded-xl left-[55%] top-[10%] lg:top-[8%] shadow-md" />
                         <div className="absolute w-40 sm:w-40 lg:w-48 h-16 lg:h-20 bg-white/80 rounded-xl left-[45%] top-[4%] shadow-md" />
@@ -173,31 +209,31 @@ const RegisterPage = () => {
                                 <div className="self-stretch flex flex-col justify-start items-start gap-1">
                                     <label className="justify-start text-zinc-800 text-sm font-normal leading-tight">I am a:</label>
                                     <div className="self-stretch flex gap-3">
-                                                                            <button
-                                        type="button"
-                                        onClick={() => setUserType('patient')}
-                                        className={`flex-1 h-12 px-3 py-2 flex items-center gap-2 ${userType === 'patient'
-                                            ? 'bg-[#08087D]/10 text-[#08087D] shadow-lg rounded-sm'
-                                            : 'bg-white text-[#08087D]'
-                                        }`}
-                                    >
-                                        <div className="w-5 h-5 bg-current rounded-full flex items-center justify-center">
-                                            <span className="text-xs">👤</span>
-                                        </div>
-                                        <div className="flex flex-col items-start">
-                                            <span className="text-sm font-semibold">Patient</span>
-                                            <span className="text-xs opacity-80">Looking for medical care</span>
-                                        </div>
-                                    </button>
-                                    
-                                    <button
-                                        type="button"
-                                        onClick={() => setUserType('doctor')}
-                                        className={`flex-1 h-12 px-3 py-2 flex items-center gap-2 ${userType === 'doctor'
-                                            ? 'bg-[#08087D]/10 text-[#08087D] shadow-lg rounded-b-sm'
-                                            : 'bg-white text-[#08087D]'
-                                        }`}
-                                    >
+                                        <button
+                                            type="button"
+                                            onClick={() => setUserType('patient')}
+                                            className={`flex-1 h-12 px-3 py-2 flex items-center gap-2 ${userType === 'patient'
+                                                ? 'bg-[#08087D]/10 text-[#08087D] shadow-lg rounded-sm'
+                                                : 'bg-white text-[#08087D]'
+                                                }`}
+                                        >
+                                            <div className="w-5 h-5 bg-current rounded-full flex items-center justify-center">
+                                                <span className="text-xs">👤</span>
+                                            </div>
+                                            <div className="flex flex-col items-start">
+                                                <span className="text-sm font-semibold">Patient</span>
+                                                <span className="text-xs opacity-80">Looking for medical care</span>
+                                            </div>
+                                        </button>
+
+                                        <button
+                                            type="button"
+                                            onClick={() => setUserType('doctor')}
+                                            className={`flex-1 h-12 px-3 py-2 flex items-center gap-2 ${userType === 'doctor'
+                                                ? 'bg-[#08087D]/10 text-[#08087D] shadow-lg rounded-b-sm'
+                                                : 'bg-white text-[#08087D]'
+                                                }`}
+                                        >
                                             <div className="w-5 h-5 bg-current rounded-full flex items-center justify-center">
                                                 <span className="text-xs">👨‍⚕️</span>
                                             </div>
@@ -216,15 +252,37 @@ const RegisterPage = () => {
                                     ) : step === 1 ? (
                                         renderDoctorForm()
                                     ) : (
-                                        <div className="self-stretch flex flex-col justify-start items-start gap-1">
-                                            <label htmlFor="additionalInfo" className="justify-start text-zinc-800 text-sm font-normal leading-tight">Additional Information</label>
-                                            <textarea
-                                                id="additionalInfo"
-                                                placeholder="Enter any additional information"
-                                                rows={3}
-                                                className="self-stretch px-3 py-2 bg-slate-100 rounded-[20px] border-b border-neutral-300 text-zinc-500 text-sm font-normal leading-tight resize-none"
-                                            />
-                                        </div>
+                                        <>
+                                            <div className="self-stretch flex flex-col justify-start items-start gap-1">
+                                                <label htmlFor="nplNumber" className="justify-start text-zinc-800 text-sm font-normal leading-tight">NPL Number</label>
+                                                <input
+                                                    type="text"
+                                                    id="nplNumber"
+                                                    placeholder="Enter your NPL number"
+                                                    className="self-stretch h-8 px-3 py-2 bg-slate-100 rounded-[20px] border-b border-neutral-300 inline-flex justify-start items-center gap-2 text-zinc-500 text-sm font-normal leading-tight"
+                                                />
+                                            </div>
+
+                                            <div className="self-stretch flex flex-col justify-start items-start gap-1">
+                                                <label htmlFor="licenseNumber" className="justify-start text-zinc-800 text-sm font-normal leading-tight">License Number</label>
+                                                <input
+                                                    type="text"
+                                                    id="licenseNumber"
+                                                    placeholder="Enter your license number"
+                                                    className="self-stretch h-8 px-3 py-2 bg-slate-100 rounded-[20px] border-b border-neutral-300 inline-flex justify-start items-center gap-2 text-zinc-500 text-sm font-normal leading-tight"
+                                                />
+                                            </div>
+
+                                            <div className="self-stretch flex flex-col justify-start items-start gap-1">
+                                                <label htmlFor="licenseState" className="justify-start text-zinc-800 text-sm font-normal leading-tight">License State</label>
+                                                <input
+                                                    type="text"
+                                                    id="licenseState"
+                                                    placeholder="Enter your license state"
+                                                    className="self-stretch h-8 px-3 py-2 bg-slate-100 rounded-[20px] border-b border-neutral-300 inline-flex justify-start items-center gap-2 text-zinc-500 text-sm font-normal leading-tight"
+                                                />
+                                            </div>
+                                        </>
                                     )}
                                 </div>
 
@@ -239,6 +297,10 @@ const RegisterPage = () => {
                                         </span>
                                     </div>
                                 </button>
+                                {/* <p className="w-full text-center justify-start">
+                                    <span className="text-sm font-normal  leading-tight">Already have an account? </span>
+                                    <a href="#" className="text-Primary-700 text-sm font-normal  leading-tight">Log in</a>
+                                </p> */}
                             </form>
 
                         </section>
