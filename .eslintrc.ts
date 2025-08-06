@@ -28,17 +28,13 @@ const config = {
   ],
   rules: {
     'prettier/prettier': 'error',
-
     'react/react-in-jsx-scope': 'off',
     'react/jsx-uses-react': 'off',
-
     '@typescript-eslint/explicit-function-return-type': 'warn',
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     '@typescript-eslint/no-explicit-any': 'error',
-
     eqeqeq: ['error', 'always'],
     'no-console': ['warn', { allow: ['warn', 'error'] }],
-
     'unused-imports/no-unused-imports': 'error',
     'unused-imports/no-unused-vars': [
       'warn',
@@ -46,7 +42,6 @@ const config = {
     ],
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
-
     'sort-keys-fix/sort-keys-fix': 'warn',
   },
   settings: {
