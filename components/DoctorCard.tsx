@@ -21,20 +21,15 @@ const DoctorCard: React.FC<DoctorCardProps> = ({
   reviewCount,
   description,
   imageUrl,
-  nextAvailable,
   date,
   timeSlots,
 }) => {
   return (
     <div className="bg-white rounded-xl shadow-md p-8 w-full max-w-sm">
       <div className="flex items-center gap-4">
-        <Image
-          src={imageUrl}
-          alt={name}
-          width={64}
-          height={64}
-          className="rounded-full object-cover"
-        />
+        <div className="relative w-16 h-16">
+          <Image src={imageUrl} alt={name} fill className="rounded-full object-cover" />
+        </div>
         <div>
           <h3 className="text-md font-semibold text-[#08087D]">{name}</h3>
           <p className="text-sm text-gray-600">{specialty}</p>
