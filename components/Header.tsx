@@ -22,7 +22,7 @@ const Header = () => {
   };
 
   return (
-    <div className="flex justify-between items-center p-4 px-12 bg-white shadow-xs">
+    <div className="flex justify-between items-center p-4 px-12 bg-white shadow-xs sticky top-0 z-50">
       <div className="flex items-center">
         <p className="text-2xl text-[#08087D]">
           Maven<span className="font-bold">MD</span>
