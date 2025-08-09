@@ -4,7 +4,7 @@ import DashboardCard from './components/DashboardCard';
 import { IconCalendar, IconCash, IconUsers } from '@tabler/icons-react';
 import AnalyticsCard from './components/AnalyticsCard';
 
-const page = () => {
+export default function DashboardPage() {
   return (
     <div className="space-y-6">
       {/* Welcome Banner */}
@@ -53,7 +53,5 @@ const page = () => {
 
       <AnalyticsCard />
     </div>
-  )
+  );
 }
-
-export default page

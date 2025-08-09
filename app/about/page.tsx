@@ -1,11 +1,9 @@
 import React from 'react'
-import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 
 const page = () => {
     return (
        <>
-       <Header />
         <div className='bg-primary-50'>
             <div className="w-full bg-indigo-950/60 py-48 px-4 flex flex-col items-center justify-center gap-10 text-center">
                 <h1 className="text-white text-4xl sm:text-5xl font-extrabold  leading-tight">
