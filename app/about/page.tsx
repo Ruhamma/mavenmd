@@ -1,11 +1,9 @@
 import React from 'react'
-import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 
 const page = () => {
     return (
        <>
-       <Header />
         <div className='bg-primary-50'>
             <div className="w-full bg-indigo-950/60 py-48 px-4 flex flex-col items-center justify-center gap-10 text-center">
                 <h1 className="text-white text-4xl sm:text-5xl font-extrabold  leading-tight">
@@ -114,7 +112,7 @@ const page = () => {
                 {/* Final Image (shares second row with cards) */}
                 <div className="col-span-full sm:col-span-2 lg:col-span-2 xl:col-span-2">
                     <img
-                        src="https://placehold.co/632x274"
+                        src="/Specialities.png"
                         className="w-full h-auto rounded-2xl shadow"
                         alt="Medical Illustration"
                     />
@@ -136,12 +134,12 @@ const page = () => {
                 {/* Image Block */}
                 <div className="relative">
                     <img
-                        src="https://placehold.co/350x344"
+                        src="/WWSF.png"
                         alt="Healthcare Team"
                         className="w-full max-w-sm h-auto rounded-[31.03px] shadow absolute -top-8 -right-2 z-10"
                     />
                     <img
-                        src="https://placehold.co/350x344"
+                        src="/WWSF2.png"
                         alt="Patient Care"
                         className="w-full max-w-sm h-auto rounded-[31.03px] shadow relative z-0 -bottom-32"
                     />
@@ -164,36 +162,36 @@ const page = () => {
                     {/* First Row - 4 items */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 place-items-center">
                         <div className="bg-Primary-50 rounded-[20px] shadow outline-1 outline-zinc-200 p-4 flex justify-center items-center w-full max-w-[288px] h-36">
-                            <img src="https://placehold.co/239x127" alt="Insurance 1" className="h-full object-contain" />
+                            <img src="/BlueCrossBlueSheild.png" alt="Insurance 1" className="h-full object-contain" />
                         </div>
                         <div className="bg-Primary-50 rounded-[20px] shadow outline-1 outline-zinc-200 p-4 flex justify-center items-center w-full max-w-[288px] h-36">
-                            <img src="https://placehold.co/168x95" alt="Insurance 2" className="h-full object-contain" />
+                            <img src="/Aetna.png" alt="Insurance 2" className="h-full object-contain" />
                         </div>
                         <div className="bg-Primary-50 rounded-[20px] shadow outline-1 outline-zinc-200 p-4 flex justify-center items-center w-full max-w-[288px] h-36">
-                            <img src="https://placehold.co/179x89" alt="Insurance 3" className="h-full object-contain" />
+                            <img src="/Cigna.png" alt="Insurance 3" className="h-full object-contain" />
                         </div>
                         <div className="bg-Primary-50 rounded-[20px] shadow outline-1 outline-zinc-200 p-4 flex justify-center items-center w-full max-w-[288px] h-36">
-                            <img src="https://placehold.co/221x135" alt="Insurance 4" className="h-full object-contain" />
+                            <img src="/UnitedHealthCare.png" alt="Insurance 4" className="h-full object-contain" />
                         </div>
                     </div>
 
                     {/* Second Row - 3 items */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 place-items-center">
                         <div className="bg-Primary-50 rounded-[20px] shadow outline-1 outline-zinc-200 p-4 flex justify-center items-center w-full max-w-[288px] h-36">
-                            <img src="https://placehold.co/245x91" alt="Insurance 5" className="h-full object-contain" />
+                            <img src="/KaiserPermanente.png" alt="Insurance 5" className="h-full object-contain" />
                         </div>
                         <div className="bg-Primary-50 rounded-[20px] shadow outline-1 outline-zinc-200 p-4 flex justify-center items-center w-full max-w-[288px] h-36">
-                            <img src="https://placehold.co/153x127" alt="Insurance 6" className="h-full object-contain" />
+                            <img src="/Humana.png" alt="Insurance 6" className="h-full object-contain" />
                         </div>
                         <div className="bg-Primary-50 rounded-[20px] shadow outline-1 outline-zinc-200 p-4 flex justify-center items-center w-full max-w-[288px] h-36">
-                            <img src="https://placehold.co/264x161" alt="Insurance 7" className="h-full object-contain" />
+                            <img src="/MolinaHealthCare.png" alt="Insurance 7" className="h-full object-contain" />
                         </div>
                     </div>
 
                     {/* Third Row - 1 item */}
                     <div className="flex justify-center">
                         <div className="bg-Primary-50 rounded-[20px] shadow outline-1 outline-zinc-200 p-4 flex justify-center items-center w-full max-w-[288px] h-36">
-                            <img src="https://placehold.co/256x162" alt="Insurance 8" className="h-full object-contain" />
+                            <img src="/Medicare.png" alt="Insurance 8" className="h-full object-contain" />
                         </div>
                     </div>
                 </div>
@@ -204,7 +202,7 @@ const page = () => {
                     {/* Image */}
                     <div className="w-full md:w-1/2">
                         <img
-                            src="https://placehold.co/485x402"
+                            src="/mission.png"
                             alt="Mission Image"
                             className="w-full h-auto rounded-lg object-cover"
                         />
@@ -235,7 +233,7 @@ const page = () => {
                     {/* Image */}
                     <div className="w-full md:w-1/2">
                         <img
-                            src="https://placehold.co/485x402"
+                            src="/vision.png"
                             alt="Vision Image"
                             className="w-full h-auto rounded-lg object-cover"
                         />

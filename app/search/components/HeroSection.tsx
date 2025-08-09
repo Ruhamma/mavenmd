@@ -18,13 +18,13 @@ const HeroSection = () => {
 
         {/* Decorative Logos */}
         <div className="absolute top-2 right-85 hidden md:block">
-          <img src="https://placehold.co/140x63" alt="Logo" className="rounded" />
+          <img src="/SearchImage1.png" alt="Logo" className="rounded" />
         </div>
         <div className="absolute top-18 left-32 hidden md:block">
-          <img src="https://placehold.co/140x63" alt="Logo" className="rounded" />
+          <img src="/SearchImage2.png" alt="Logo" className="rounded" />
         </div>
         <div className="absolute bottom-60 right-20 hidden md:block">
-          <img src="https://placehold.co/140x63" alt="Logo" className="rounded" />
+          <img src="/SearchImage3.png" alt="Logo" className="rounded" />
         </div>
 
         {/* Search Bar */}
