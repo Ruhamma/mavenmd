@@ -17,7 +17,11 @@ const sidebarItems = [
   { label: 'Dashboard', path: '/dashboard', icon: <IconLayoutDashboard size={20} /> },
   { label: 'Appointments', path: '/dashboard/appointments', icon: <IconCalendarEvent size={20} /> },
   { label: 'Alerts', path: '/dashboard/alerts', icon: <IconBell size={20} /> },
-  { label: 'Collections and Payments', path: '/dashboard/payments', icon: <IconDatabase size={20} /> },
+  {
+    label: 'Collections and Payments',
+    path: '/dashboard/payments',
+    icon: <IconDatabase size={20} />,
+  },
   { label: 'Patients', path: '/dashboard/patients', icon: <IconUser size={20} /> },
   { label: 'Settings', path: '/dashboard/settings', icon: <IconSettings size={20} /> },
 ];
@@ -38,10 +42,7 @@ const SideBar = () => {
   return (
     <aside className="h-full w-[260px] bg-white  flex flex-col justify-between  py-4 px-4">
       <div>
-        
-
-        {/* Top nav items */}
-        <nav className="space-y-2">
+        <nav className="space-y-10">
           {sidebarItems.map(({ label, path, icon }, index) => {
             const isActive = pathname === path;
             return (
@@ -64,8 +65,9 @@ const SideBar = () => {
         </nav>
       </div>
 
-      {/* Bottom nav items */}
-      <div className="space-y-2 ">
+{/* Bottom nav items */}
+<div className="space-y-2 ">
+
         {bottomItems.map(({ label, path, icon }, index) => (
           <button
             key={index}

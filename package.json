@@ -11,9 +11,11 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-  "*.{js,ts,tsx}": ["eslint --fix", "prettier --write"]
-}
-,
+    "*.{js,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",
     "@tabler/icons-react": "^3.34.1",
