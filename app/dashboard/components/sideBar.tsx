@@ -40,16 +40,16 @@ const SideBar = () => {
   };
 
   return (
-    <aside className="h-full w-[260px] bg-white  flex flex-col justify-between  py-4 px-4">
+    <aside className="h-full w-[70px] md:w-[260px] bg-white flex flex-col justify-between py-4 px-2 md:px-4 transition-all">
       <div>
-        <nav className="space-y-10">
+        <nav className="space-y-6 md:space-y-10">
           {sidebarItems.map(({ label, path, icon }, index) => {
             const isActive = pathname === path;
             return (
               <button
                 key={index}
                 onClick={() => handleNavigation(path)}
-                className={`w-full flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-medium transition-all
+                className={`w-full flex items-center justify-center md:justify-start gap-0 md:gap-3 px-2 md:px-4 py-2 rounded-lg text-sm font-medium transition-all
                   ${
                     isActive
                       ? 'bg-[#E7E7FF] text-[#08087D] font-semibold'
@@ -58,24 +58,23 @@ const SideBar = () => {
                 `}
               >
                 {icon}
-                <span>{label}</span>
+                <span className="hidden md:inline">{label}</span>
               </button>
             );
           })}
         </nav>
       </div>
 
-{/* Bottom nav items */}
-<div className="space-y-2 ">
-
+      {/* Bottom nav items */}
+      <div className="space-y-2">
         {bottomItems.map(({ label, path, icon }, index) => (
           <button
             key={index}
             onClick={() => handleNavigation(path)}
-            className="w-full flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100"
+            className="w-full flex items-center justify-center md:justify-start gap-0 md:gap-3 px-2 md:px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100"
           >
             {icon}
-            <span>{label}</span>
+            <span className="hidden md:inline">{label}</span>
           </button>
         ))}
       </div>
