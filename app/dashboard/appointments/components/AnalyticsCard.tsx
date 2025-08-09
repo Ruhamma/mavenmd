@@ -17,26 +17,26 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
   const isPositive = changeDirection === 'up';
 
   return (
-    <div className="bg-white rounded-3xl shadow-md p-6 w-full max-w-sm">
+    <div className="bg-white rounded-2xl shadow-md p-6 w-full max-w-xs">
       {/* Top section: Icon + Number + Badge */}
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-4">
-          <div className="bg-[#C6C8F7] p-4 rounded-full">
-            <IconUsers size={32} className="text-white" />
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-3">
+          <div className="bg-[#C6C8F7] p-3 rounded-full">
+            <IconUsers size={24} className="text-white" />
           </div>
           <div>
-            <h2 className="text-3xl font-semibold text-gray-900">{totalVisits}</h2>
-            <p className="text-gray-500 text-sm mt-1">Today Visits</p>
+            <h2 className="text-2xl font-semibold text-gray-900">{totalVisits}</h2>
+            <p className="text-gray-500 text-xs mt-0.5">Today Visits</p>
           </div>
         </div>
-        <span className="bg-[#D7CAF6] text-[#4D237A] text-sm font-semibold px-3 py-1 rounded-full">
+        <span className="bg-[#D7CAF6] text-[#4D237A] text-xs font-semibold px-2 py-0.5 rounded-full">
           {percentageChange}
         </span>
       </div>
 
       {/* Bottom section: change text */}
-      <div className="flex items-center text-sm font-medium text-green-600">
-        {isPositive && <IconArrowUpRight size={16} />}
+      <div className="flex items-center text-xs font-medium text-green-600 mt-6">
+        {isPositive && <IconArrowUpRight size={14} />}
         <span className="ml-1">{changeText}</span>
       </div>
     </div>
