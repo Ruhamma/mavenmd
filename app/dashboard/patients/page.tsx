@@ -1,19 +1,34 @@
 import React from 'react'
 import PatientsCard from './components/PatientsCard'
 import PatientsRequests from './components/PatientsRequests'
-import { IconFilter, IconSearch } from '@tabler/icons-react'
+import { IconFilter, IconSearch, IconUsers } from '@tabler/icons-react'
 import AppointmentChart from './components/AppointmentChart'
 const page = () => {
     return (
         <>
             <div className="p-2 grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 
-                <PatientsCard totalVisits={'100'} title={' Total Patients'} />
-                <PatientsCard totalVisits={'100'} title={' Total Patients'} />
 
-                <PatientsCard totalVisits={'100'} title={' Total Patients'} />
-
-                <PatientsCard totalVisits={'100'} title={' Total Patients'} />
+                <PatientsCard
+                    title="Patients"
+                    totalVisits={1200}
+                    icon={<IconUsers size={24} className="text-white" />}
+                />
+                <PatientsCard
+                    title="Patients"
+                    totalVisits={1200}
+                    icon={<IconUsers size={24} className="text-white" />}
+                />
+                <PatientsCard
+                    title="Patients"
+                    totalVisits={1200}
+                    icon={<IconUsers size={24} className="text-white" />}
+                />
+                <PatientsCard
+                    title="Patients"
+                    totalVisits={1200}
+                    icon={<IconUsers size={24} className="text-white" />}
+                />
 
             </div>
             <div className="px-2 mb-4 w-full pt-4 flex justify-between gap-4">
