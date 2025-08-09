@@ -13,34 +13,23 @@ const navItems = [
   { label: 'Help', path: '/symptoms' },
 ];
 
-type HeaderProps = {
-  reverseColors?: boolean;
-};
-
-const Header = ({ reverseColors = false }: HeaderProps) => {
+const Header = () => {
   const router = useRouter();
   const pathname = usePathname();
-
-  const mainBg = reverseColors ? 'bg-[#08087D]' : 'bg-white';
-  const mainText = reverseColors ? 'text-white' : 'text-[#08087D]';
-  const navBg = reverseColors ? 'bg-white' : 'bg-[#08087D]';
-  const navText = reverseColors ? 'text-[#08087D]' : 'text-white';
-  const activeBg = reverseColors ? 'bg-[#08087D]' : 'bg-white';
-  const activeText = reverseColors ? 'text-white' : 'text-[#08087D]';
 
   const handleNavigation = (path: string) => {
     router.push(path);
   };
 
   return (
-    <div className="flex justify-between items-center p-4 px-12 bg-white shadow-xs sticky top-0 z-50">
+    <div className="flex justify-between items-center p-4 px-12 bg-[#08087D] shadow-xs lg:pb-10">
       <div className="flex items-center">
-        <p className={`text-2xl ${mainText}`}>
+        <p className="text-2xl text-white">
           Maven<span className="font-bold">MD</span>
         </p>
       </div>
 
-      <div className={`flex ${navBg} rounded-full px-6 py-2 space-x-2`}>
+      <div className="flex bg-white rounded-full px-6 py-2 space-x-2">
         {navItems.map(({ label, path }, index) => {
           const isActive = pathname === path;
           return (
@@ -50,8 +39,8 @@ const Header = ({ reverseColors = false }: HeaderProps) => {
               className={`w-[100px] text-sm font-medium px-3 py-2 rounded-3xl cursor-pointer transition-all duration-200
                 ${
                   isActive
-                    ? `${activeBg} ${activeText} font-semibold`
-                    : `${navText} hover:${activeBg} hover:${activeText} hover:font-semibold`
+                    ? 'bg-[#08087D] text-white font-semibold'
+                    : 'text-[#08087D] hover:bg-[#08087D] hover:text-white hover:font-semibold'
                 }
               `}
             >
@@ -62,14 +51,15 @@ const Header = ({ reverseColors = false }: HeaderProps) => {
       </div>
 
       <div className="flex items-center space-x-2">
-        {[IconUser, IconSettings, IconBell].map((Icon, i) => (
-          <button
-            key={i}
-            className="p-2 rounded-full hover:bg-gray-100 transition-colors duration-200 cursor-pointer"
-          >
-            <Icon className={mainText} size={24} />
-          </button>
-        ))}
+        <button className="p-2 rounded-full hover:bg-gray-700 transition-colors duration-200 cursor-pointer">
+          <IconUser className="text-white" size={24} />
+        </button>
+        <button className="p-2 rounded-full hover:bg-gray-700 transition-colors duration-200 cursor-pointer">
+          <IconSettings className="text-white" size={24} />
+        </button>
+        <button className="p-2 rounded-full hover:bg-gray-700 transition-colors duration-200 cursor-pointer">
+          <IconBell className="text-white" size={24} />
+        </button>
       </div>
     </div>
   );
