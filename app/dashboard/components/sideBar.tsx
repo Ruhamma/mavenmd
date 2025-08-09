@@ -42,7 +42,7 @@ const SideBar = () => {
   return (
     <aside className="h-full w-[70px] md:w-[260px] bg-white flex flex-col justify-between py-4 px-2 md:px-4 transition-all">
       <div>
-        <nav className="space-y-6 md:space-y-10">
+        <nav className="space-y-3">
           {sidebarItems.map(({ label, path, icon }, index) => {
             const isActive = pathname === path;
             return (
