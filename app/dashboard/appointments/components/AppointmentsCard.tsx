@@ -34,7 +34,7 @@ const AppointmentsCard: React.FC<AppointmentsCardProps> = ({
   const router = useRouter();
 
   const handleClick = () => {
-    router.push('/dashboard/appointments/appointments_detail'); // Navigate to the appointment details page
+    router.push('/dashboard/appointments/appointments-detail'); // Navigate to the appointment details page
   };
 
   return (

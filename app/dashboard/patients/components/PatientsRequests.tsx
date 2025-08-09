@@ -34,7 +34,7 @@ const AppointmentsCard: React.FC<AppointmentsCardProps> = ({
     const router = useRouter();
 
     const handleCardClick = () => {
-        router.push(`/dashboard/patients/patient_detail`);
+        router.push(`/dashboard/patients/patient-detail`);
     };
 
     return (
