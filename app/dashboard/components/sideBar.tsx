@@ -40,7 +40,7 @@ const SideBar = () => {
   };
 
   return (
-    <aside className="h-screen w-[260px] bg-white  flex flex-col justify-between py-8 px-4">
+    <aside className="h-full w-[260px] bg-white  flex flex-col justify-between  py-4 px-4">
       <div>
         <nav className="space-y-10">
           {sidebarItems.map(({ label, path, icon }, index) => {
@@ -65,7 +65,9 @@ const SideBar = () => {
         </nav>
       </div>
 
-      <div className="space-y-2">
+{/* Bottom nav items */}
+<div className="space-y-2 ">
+
         {bottomItems.map(({ label, path, icon }, index) => (
           <button
             key={index}
