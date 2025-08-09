@@ -3,16 +3,22 @@ import { IconArrowUpRight, IconUsers } from '@tabler/icons-react';
 
 type DashboardCardProps = {
   totalVisits: number;
+  title: string;
   percentageChange: string;
   changeDirection: 'up' | 'down';
   changeText: string;
+  icon: React.ReactNode;
+  appointment?: boolean;
 };
 
 const DashboardCard: React.FC<DashboardCardProps> = ({
   totalVisits,
+  title,
   percentageChange,
   changeDirection,
   changeText,
+  icon,
+  appointment,
 }) => {
   const isPositive = changeDirection === 'up';
 
@@ -24,6 +30,8 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
           <div className="bg-[#C6C8F7] p-3 rounded-full">
             <IconUsers size={24} className="text-white" />
           </div>
+
+          {/* Title + Number */}
           <div>
             <h2 className="text-2xl font-semibold text-gray-900">{totalVisits}</h2>
             <p className="text-gray-500 text-xs mt-0.5">Today Visits</p>
