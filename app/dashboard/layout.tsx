@@ -12,7 +12,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       {/* Body section: sidebar + page content */}
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar - fixed position */}
-        <div className="w-[260px] h-full sticky top-0 border-r bg-white">
+        <div className="lg:w-[260px] h-full sticky top-0 border-r bg-white">
           <SideBar />
         </div>
 

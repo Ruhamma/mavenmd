@@ -144,7 +144,7 @@ const RegisterPage = () => {
     )
 
     return (
-        <main className="h-screen w-screen overflow-hidden lg:p-6">
+        <main className="lg:h-screen lg:w-screen overflow-hidden lg:p-6">
             <div className="relative flex flex-col h-full w-full">
 
                 <div className="flex flex-col lg:flex-row flex-1 min-h-0">
