@@ -13,23 +13,34 @@ const navItems = [
   { label: 'Help', path: '/symptoms' },
 ];
 
-const Header = () => {
+type HeaderProps = {
+  reverseColors?: boolean;
+};
+
+const Header = ({ reverseColors = false }: HeaderProps) => {
   const router = useRouter();
   const pathname = usePathname();
+
+  const mainBg = reverseColors ? 'bg-[#08087D]' : 'bg-white';
+  const mainText = reverseColors ? 'text-white' : 'text-[#08087D]';
+  const navBg = reverseColors ? 'bg-white' : 'bg-[#08087D]';
+  const navText = reverseColors ? 'text-[#08087D]' : 'text-white';
+  const activeBg = reverseColors ? 'bg-[#08087D]' : 'bg-white';
+  const activeText = reverseColors ? 'text-white' : 'text-[#08087D]';
 
   const handleNavigation = (path: string) => {
     router.push(path);
   };
 
   return (
-    <div className="flex justify-between items-center p-4 px-12 bg-white shadow-xs">
+    <div className={`flex justify-between items-center p-4 px-12 ${mainBg} shadow-xs`}>
       <div className="flex items-center">
-        <p className="text-2xl text-[#08087D]">
+        <p className={`text-2xl ${mainText}`}>
           Maven<span className="font-bold">MD</span>
         </p>
       </div>
 
-      <div className="flex bg-[#08087D] rounded-full px-6 py-2 space-x-2">
+      <div className={`flex ${navBg} rounded-full px-6 py-2 space-x-2`}>
         {navItems.map(({ label, path }, index) => {
           const isActive = pathname === path;
           return (
@@ -39,8 +50,8 @@ const Header = () => {
               className={`w-[100px] text-sm font-medium px-3 py-2 rounded-3xl cursor-pointer transition-all duration-200
                 ${
                   isActive
-                    ? 'bg-white text-[#08087D] font-semibold'
-                    : 'text-white hover:bg-white hover:text-[#08087D] hover:font-semibold'
+                    ? `${activeBg} ${activeText} font-semibold`
+                    : `${navText} hover:${activeBg} hover:${activeText} hover:font-semibold`
                 }
               `}
             >
@@ -51,15 +62,14 @@ const Header = () => {
       </div>
 
       <div className="flex items-center space-x-2">
-        <button className="p-2 rounded-full hover:bg-gray-100 transition-colors duration-200 cursor-pointer">
-          <IconUser className="text-[#08087D]" size={24} />
-        </button>
-        <button className="p-2 rounded-full hover:bg-gray-100 transition-colors duration-200 cursor-pointer">
-          <IconSettings className="text-[#08087D]" size={24} />
-        </button>
-        <button className="p-2 rounded-full hover:bg-gray-100 transition-colors duration-200 cursor-pointer">
-          <IconBell className="text-[#08087D]" size={24} />
-        </button>
+        {[IconUser, IconSettings, IconBell].map((Icon, i) => (
+          <button
+            key={i}
+            className="p-2 rounded-full hover:bg-gray-100 transition-colors duration-200 cursor-pointer"
+          >
+            <Icon className={mainText} size={24} />
+          </button>
+        ))}
       </div>
     </div>
   );
