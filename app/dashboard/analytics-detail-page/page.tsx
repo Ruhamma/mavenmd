@@ -126,17 +126,17 @@ const page = () => {
 
   const recommendations = [
     {
-      icon: <IconLeaf size={32} className="text-[#08087D]" />,
+      icon: <IconLeaf size={32} className="text-primary-800" />,
       title: 'Reduce Response Time',
       description: 'Set up automated responses and hire additional staff',
     },
     {
-      icon: <IconChristmasTree size={32} className="text-[#08087D]" />,
+      icon: <IconChristmasTree size={32} className="text-primary-800" />,
       title: 'Extend Weekend Hours',
       description: 'Add weekend availability to capture more bookings',
     },
     {
-      icon: <IconCrown size={32} className="text-[#08087D]" />,
+      icon: <IconCrown size={32} className="text-primary-800" />,
       title: 'Improve Communication',
       description: 'Send proactive updates to patients about delays',
     },
@@ -188,7 +188,7 @@ const page = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div className="bg-white rounded-2xl p-4 shadow-sm flex flex-col">
           <div className="flex items-center gap-2 mb-2">
-            <IconChartBar size={24} className="text-[#08087d]" />
+            <IconChartBar size={24} className="text-primary-800" />
             <h2 className="font-semibold text-gray-800 text-lg sm:text-xl">Appointment Bookings</h2>
           </div>
           <div className="flex flex-wrap gap-2 py-4 items-end">
@@ -265,7 +265,7 @@ const page = () => {
               className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm text-center"
             >
               <div className="flex justify-center mb-3">{rec.icon}</div>
-              <h3 className="font-semibold text-[#08087D]">{rec.title}</h3>
+              <h3 className="font-semibold text-primary-800">{rec.title}</h3>
               <p className="text-gray-600 text-sm">{rec.description}</p>
             </div>
           ))}

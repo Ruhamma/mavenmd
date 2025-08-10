@@ -1,208 +1,237 @@
-"use client"
-import React, { useState } from 'react'
-import HeroSection from './components/HeroSection'
-import SearchHeader from './components/SearchHeader'
-import DoctorCard from '../../components/DoctorCard'
-import Footer from '../../components/Footer'
-import AvailableDoctorsCard from './components/AvailableDoctorsCard'
-import { IconMapPinFilled } from '@tabler/icons-react'
+'use client';
+import React, { useState } from 'react';
+import HeroSection from './components/HeroSection';
+import SearchHeader from './components/SearchHeader';
+import DoctorCard from '../../components/DoctorCard';
+import Footer from '../../components/Footer';
+import AvailableDoctorsCard from './components/AvailableDoctorsCard';
+import { IconMapPinFilled } from '@tabler/icons-react';
 
 const Page = () => {
-    const [selectedAvailability, setSelectedAvailability] = useState('today')
-    const [selectedPriceRange, setSelectedPriceRange] = useState('50-100')
-    const [selectedRating, setSelectedRating] = useState('4.5')
-    const [viewMode, setViewMode] = useState('grid')
+  const [selectedAvailability, setSelectedAvailability] = useState('today');
+  const [selectedPriceRange, setSelectedPriceRange] = useState('50-100');
+  const [selectedRating, setSelectedRating] = useState('4.5');
+  const [viewMode, setViewMode] = useState('grid');
 
-    return (
-        <>
-            <SearchHeader />
-            <div className="min-h-screen bg-gray-50">
-                <HeroSection />
-                {/* Main Content */}
-                <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 py-8">
-                    <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-                        {/* Left Sidebar - Filters */}
-                        <div className="lg:col-span-1 hidden lg:block">
-                            <div className="bg-white rounded-lg shadow-sm p-6 sticky top-8">
-                                <h2 className="text-xl font-bold text-gray-900 mb-6">Filters</h2>
+  return (
+    <>
+      <SearchHeader />
+      <div className="min-h-screen bg-gray-50">
+        <HeroSection />
+        {/* Main Content */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-4 lg:px-10 py-8">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <div className="lg:col-span-1 hidden lg:block">
+              <div className="bg-white rounded-lg shadow-sm p-6 sticky top-8">
+                <h2 className="text-xl font-bold text-gray-900 mb-6">Filters</h2>
 
-                                {/* Location */}
+                {/* Location */}
 
-                                <div className="mb-4">
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
-                                    <div className="relative">
-                                        <IconMapPinFilled className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
-                                        <input
-                                            type="text"
-                                            placeholder="Know your address"
-                                            className="w-full pl-8 pr-2 py-1 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-                                        />
-                                    </div>
-                                </div>
-
-                                {/* Specialties */}
-                                <div className="mb-4">
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">Specialties</label>
-                                    <select className="w-full py-1 px-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent">
-                                        <option>All Specialties</option>
-                                        <option>General Practice</option>
-                                        <option>Cardiology</option>
-                                        <option>Dermatology</option>
-                                        <option>Pediatrics</option>
-                                    </select>
-                                </div>
-
-                                {/* Availability */}
-                                <div className="mb-6">
-                                    <label className="block text-sm font-medium text-gray-700 mb-3">Availability</label>
-                                    <div className="space-y-2">
-                                        {['today', 'tomorrow', 'this week', 'weekend'].map((option) => (
-                                            <label key={option} className="flex items-center">
-                                                <input
-                                                    type="radio"
-                                                    name="availability"
-                                                    value={option}
-                                                    checked={selectedAvailability === option}
-                                                    onChange={(e) => setSelectedAvailability(e.target.value)}
-                                                    className="mr-2 text-violet-600 focus:ring-violet-500"
-                                                />
-                                                <span className="text-sm text-gray-700 capitalize">{option}</span>
-                                            </label>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                {/* Price Range */}
-                                <div className="mb-6">
-                                    <label className="block text-sm font-medium text-gray-700 mb-3">Price Range</label>
-                                    <div className="space-y-2">
-                                        {['50-100', '100-200', '200+'].map((range) => (
-                                            <label key={range} className="flex items-center">
-                                                <input
-                                                    type="radio"
-                                                    name="priceRange"
-                                                    value={range}
-                                                    checked={selectedPriceRange === range}
-                                                    onChange={(e) => setSelectedPriceRange(e.target.value)}
-                                                    className="mr-2 text-violet-600 focus:ring-violet-500"
-                                                />
-                                                <span className="text-sm text-gray-700">${range}</span>
-                                            </label>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                {/* Rating */}
-                                <div className="mb-12">
-                                    <label className="block text-sm font-medium text-gray-700 mb-3">Rating</label>
-                                    <div className="space-y-2">
-                                        {['4.5', '4.0'].map((rating) => (
-                                            <label key={rating} className="flex items-center">
-                                                <input
-                                                    type="radio"
-                                                    name="rating"
-                                                    value={rating}
-                                                    checked={selectedRating === rating}
-                                                    onChange={(e) => setSelectedRating(e.target.value)}
-                                                    className="mr-2 text-violet-600 focus:ring-violet-500"
-                                                />
-                                                <span className="text-sm text-gray-700">{rating}+ stars</span>
-                                            </label>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                <button className="w-full bg-violet-950 text-white py-2 rounded-xl font-medium hover:bg-violet-900 transition-colors">
-                                    Apply Filter
-                                </button>
-                            </div>
-                        </div>
-
-                        {/* Right Main Area - Doctor Listings */}
-                        <div className="lg:col-span-3">
-                            {/* Header */}
-                            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
-                                <p className="text-gray-600 mb-4 sm:mb-0">Showing 24 doctors available for house calls.</p>
-                                <div className="flex items-center gap-4">
-                                    <select className="p-2 border border-gray-300 rounded-lg text-sm">
-                                        <option>Sort by distance</option>
-                                        <option>Sort by rating</option>
-                                        <option>Sort by price</option>
-                                    </select>
-                                    <div className="flex border border-gray-300 rounded-lg">
-                                        
-                                        <button
-                                            onClick={() => setViewMode('grid')}
-                                            className={`p-2 rounded-r-none rounded ${viewMode === 'grid' ? 'bg-violet-950 text-white' : 'bg-white text-gray-600'}`}
-                                        >
-                                            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                                            </svg>
-                                        </button>
-                                        <button
-                                            onClick={() => setViewMode('list')}
-                                            className={`p-2 rounded-l-none rounded ${viewMode === 'list' ? 'bg-violet-950 text-white' : 'bg-white text-gray-600'}`}
-                                        >
-                                            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Doctor Cards Grid */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                {Array.from({ length: 8 }).map((_, index) => (
-                                    <AvailableDoctorsCard
-                                        key={index}
-                                        name="Dr. Sarah Johnson"
-                                        specialty="General Practice"
-                                        rating={5.0}
-                                        reviewCount={12}
-                                        price={120}
-                                        distance="2.3 miles away"
-                                        availability="Available Today"
-                                        imageUrl="https://placehold.co/60x60"
-                                        services={["HOUSE CALLS", "SAME DAY", "INSURANCE ACCEPTED"]}
-                                        onBookNow={() => console.log('Book appointment')}
-                                        onFavorite={() => console.log('Toggle favorite')}
-                                        isFavorited={false}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-                    </div>
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
+                  <div className="relative">
+                    <IconMapPinFilled
+                      className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400"
+                      size={18}
+                    />
+                    <input
+                      type="text"
+                      placeholder="Know your address"
+                      className="w-full pl-8 pr-2 py-1 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    />
+                  </div>
                 </div>
-            </div>
 
-            {/* Doctor Cards Horizontal Scroll */}
-            <div className="px-10 py-20">
-                <div className='py-4'>
-                    <p className="text-sm  text-gray-900 mb-2 px-8">Highly rated by patients like you</p>
-                    <h2 className="text-4xl font-semibold text-gray-900 mb-6 px-8">Top Rated Doctors</h2>
+                {/* Specialties */}
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Specialties
+                  </label>
+                  <select className="w-full py-1 px-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                    <option>All Specialties</option>
+                    <option>General Practice</option>
+                    <option>Cardiology</option>
+                    <option>Dermatology</option>
+                    <option>Pediatrics</option>
+                  </select>
                 </div>
-                <div className="flex flex-row gap-x-6 overflow-x-auto pb-4">
-                    {[1, 2, 3, 4, 5, 6].map((i) => (
-                        <div key={i} className="min-w-[200px] max-w-xs flex-shrink-0">
-                            <DoctorCard
-                                name={`Dr. Emily Rodriguez ${i}`}
-                                specialty="Internal medicine"
-                                rating={5}
-                                reviewCount={12}
-                                description="Over 10 years of experience in personalized home care."
-                                imageUrl="https://placehold.co/600x400/000000/FFF"
-                                nextAvailable="Thu, Jul 10"
-                                date="Thu, Jul 10"
-                                timeSlots={['00:00', '00:00', '00:00', '00:00', '00:00', '00:00']}
-                            />
-                        </div>
+
+                {/* Availability */}
+                <div className="mb-6">
+                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                    Availability
+                  </label>
+                  <div className="space-y-2">
+                    {['today', 'tomorrow', 'this week', 'weekend'].map(option => (
+                      <label key={option} className="flex items-center">
+                        <input
+                          type="radio"
+                          name="availability"
+                          value={option}
+                          checked={selectedAvailability === option}
+                          onChange={e => setSelectedAvailability(e.target.value)}
+                          className="mr-2 text-primary-600 focus:ring-primary-500"
+                        />
+                        <span className="text-sm text-gray-700 capitalize">{option}</span>
+                      </label>
                     ))}
+                  </div>
                 </div>
-            </div>
-            <Footer />
-        </>
-    )
-}
 
-export default Page
+                {/* Price Range */}
+                <div className="mb-6">
+                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                    Price Range
+                  </label>
+                  <div className="space-y-2">
+                    {['50-100', '100-200', '200+'].map(range => (
+                      <label key={range} className="flex items-center">
+                        <input
+                          type="radio"
+                          name="priceRange"
+                          value={range}
+                          checked={selectedPriceRange === range}
+                          onChange={e => setSelectedPriceRange(e.target.value)}
+                          className="mr-2 text-primary-600 focus:ring-primary-500"
+                        />
+                        <span className="text-sm text-gray-700">${range}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Rating */}
+                <div className="mb-12">
+                  <label className="block text-sm font-medium text-gray-700 mb-3">Rating</label>
+                  <div className="space-y-2">
+                    {['4.5', '4.0'].map(rating => (
+                      <label key={rating} className="flex items-center">
+                        <input
+                          type="radio"
+                          name="rating"
+                          value={rating}
+                          checked={selectedRating === rating}
+                          onChange={e => setSelectedRating(e.target.value)}
+                          className="mr-2 text-primary-600 focus:ring-primary-500"
+                        />
+                        <span className="text-sm text-gray-700">{rating}+ stars</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                <button className="w-full bg-primary-800 text-white py-2 rounded-xl font-medium hover:bg-violet-900 transition-colors">
+                  Apply Filter
+                </button>
+              </div>
+            </div>
+
+            {/* Right Main Area - Doctor Listings */}
+            <div className="lg:col-span-3">
+              {/* Header */}
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
+                <p className="text-gray-600 mb-4 sm:mb-0">
+                  Showing 24 doctors available for house calls.
+                </p>
+                <div className="flex items-center gap-4">
+                  <select className="p-2 border border-gray-300 rounded-lg text-sm">
+                    <option>Sort by distance</option>
+                    <option>Sort by rating</option>
+                    <option>Sort by price</option>
+                  </select>
+                  <div className="flex border border-gray-300 rounded-lg">
+                    <button
+                      onClick={() => setViewMode('grid')}
+                      className={`p-2 rounded-r-none rounded ${viewMode === 'grid' ? 'bg-primary-800 text-white' : 'bg-white text-gray-600'}`}
+                    >
+                      <svg
+                        className="h-4 w-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+                        />
+                      </svg>
+                    </button>
+                    <button
+                      onClick={() => setViewMode('list')}
+                      className={`p-2 rounded-l-none rounded ${viewMode === 'list' ? 'bg-primary-800 text-white' : 'bg-white text-gray-600'}`}
+                    >
+                      <svg
+                        className="h-4 w-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M4 6h16M4 10h16M4 14h16M4 18h16"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Doctor Cards Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {Array.from({ length: 8 }).map((_, index) => (
+                  <AvailableDoctorsCard
+                    key={index}
+                    name="Dr. Sarah Johnson"
+                    specialty="General Practice"
+                    rating={5.0}
+                    reviewCount={12}
+                    price={120}
+                    distance="2.3 miles away"
+                    availability="Available Today"
+                    imageUrl="https://placehold.co/60x60"
+                    services={['HOUSE CALLS', 'SAME DAY', 'INSURANCE ACCEPTED']}
+                    onBookNow={() => console.log('Book appointment')}
+                    onFavorite={() => console.log('Toggle favorite')}
+                    isFavorited={false}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Doctor Cards Horizontal Scroll */}
+      <div className="px-10 py-20">
+        <div className="py-4">
+          <p className="text-sm  text-gray-900 mb-2 px-8">Highly rated by patients like you</p>
+          <h2 className="text-4xl font-semibold text-gray-900 mb-6 px-8">Top Rated Doctors</h2>
+        </div>
+        <div className="flex flex-row gap-x-6 overflow-x-auto pb-4">
+          {[1, 2, 3, 4, 5, 6].map(i => (
+            <div key={i} className="min-w-[200px] max-w-xs flex-shrink-0">
+              <DoctorCard
+                name={`Dr. Emily Rodriguez ${i}`}
+                specialty="Internal medicine"
+                rating={5}
+                reviewCount={12}
+                description="Over 10 years of experience in personalized home care."
+                imageUrl="https://placehold.co/600x400/000000/FFF"
+                nextAvailable="Thu, Jul 10"
+                date="Thu, Jul 10"
+                timeSlots={['00:00', '00:00', '00:00', '00:00', '00:00', '00:00']}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+      <Footer />
+    </>
+  );
+};
+
+export default Page;

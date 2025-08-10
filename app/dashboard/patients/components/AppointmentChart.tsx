@@ -1,10 +1,6 @@
 'use client';
 
-import {
-  IconPhoneCall,
-  IconMapPin,
-  IconChartBar,
-} from '@tabler/icons-react';
+import { IconPhoneCall, IconMapPin, IconChartBar } from '@tabler/icons-react';
 import { Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -52,8 +48,11 @@ export default function DashboardCards() {
           display: false,
         },
         ticks: {
-          callback: function (value: any) {
-            return `${value / 1000}K`;
+          callback: function (value: string | number, index: number) {
+            if (typeof value === 'number') {
+              return `${value / 1000}K`;
+            }
+            return value;
           },
         },
       },
@@ -88,7 +87,7 @@ export default function DashboardCards() {
           </div>
         </div>
         <div className="flex">
-          <button className="bg-indigo-700 hover:bg-indigo-800 transition-all text-white rounded-full px-4 py-2 flex items-center ml-auto">
+          <button className="bg-primary-700 hover:bg-primary-800 transition-all text-white rounded-full px-4 py-2 flex items-center ml-auto">
             <IconPhoneCall className="w-4 h-4 mr-2" />
             Call
           </button>
@@ -98,7 +97,7 @@ export default function DashboardCards() {
       {/* Bar Chart Card */}
       <div className="bg-white shadow-lg rounded-xl p-4">
         <div className="flex items-center gap-2 mb-2">
-          <IconChartBar className="text-indigo-700 w-5 h-5 -rotate-270" />
+          <IconChartBar className="text-primary-700 w-5 h-5 -rotate-270" />
           <p className="text-lg font-semibold">Bar chart</p>
         </div>
 

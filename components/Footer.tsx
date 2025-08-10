@@ -10,7 +10,7 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="bg-[#08087D] text-white pt-12 pb-8 px-4 md:px-2 lg:px-16">
+    <footer className="bg-primary-800 text-white pt-12 pb-8 px-4 md:px-2 lg:px-16">
       <div className="max-w-8xl mx-auto">
         <div className="flex flex-col md:flex-row justify-evenly mb-12">
           <div className="w-full md:w-1/3 mb-8 md:mb-0">
@@ -30,16 +30,16 @@ const Footer = () => {
               <div className="mb-4">
                 <h3 className="font-bold text-lg mb-2">Follow us</h3>
                 <div className="flex space-x-4">
-                  <a href="#" className="text-[#08087D] bg-white p-1 rounded-full ">
+                  <a href="#" className="text-primary-800 bg-white p-1 rounded-full ">
                     <IconBrandFacebook size={20} />
                   </a>
-                  <a href="#" className="text-[#08087D] bg-white p-1 rounded-full ">
+                  <a href="#" className="text-primary-800 bg-white p-1 rounded-full ">
                     <IconBrandX size={20} />
                   </a>
-                  <a href="#" className="text-[#08087D] bg-white p-1 rounded-full">
+                  <a href="#" className="text-primary-800 bg-white p-1 rounded-full">
                     <IconBrandInstagram size={20} />
                   </a>
-                  <a href="#" className="text-[#08087D] bg-white p-1 rounded-full">
+                  <a href="#" className="text-primary-800 bg-white p-1 rounded-full">
                     <IconBrandLinkedin size={20} />
                   </a>
                 </div>
@@ -150,10 +150,10 @@ const Footer = () => {
             professional healthcare at home.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
-            <button className="bg-[#08087D] text-white py-3 px-6 rounded-lg font-medium hover:text-[#08087D] hover:bg-white transition cursor-pointer">
+            <button className="bg-primary-800 text-white py-3 px-6 rounded-lg font-medium hover:text-primary-800 hover:bg-white transition cursor-pointer">
               Find a doctor
             </button>
-            <button className="border-2 border-white text-white py-3 px-6 rounded-lg font-medium hover:bg-[#08087D] hover:text-white transition cursor-pointer">
+            <button className="border-2 border-white text-white py-3 px-6 rounded-lg font-medium hover:bg-primary-800 hover:text-white transition cursor-pointer">
               Join as a doctor
             </button>
           </div>
