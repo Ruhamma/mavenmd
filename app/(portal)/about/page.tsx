@@ -5,32 +5,44 @@ const page = () => {
   return (
     <>
       <div className="bg-primary-50">
-        <div className="w-full bg-indigo-950/60 py-48 px-4 flex flex-col items-center justify-center gap-10 text-center">
-          <h1 className="text-white text-4xl sm:text-5xl font-extrabold leading-tight">
-            We make health accessible to everyone
-          </h1>
+        <div
+          className="relative w-full bg-primary-800/60 py-48 px-4 "
+          style={{
+            backgroundImage: 'url(/images/about.png)',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
+          <div className="absolute inset-0 z-10">
+            <div className="w-full h-full bg-primary-800/50" />
+          </div>
+          <div className="relative z-40 flex flex-col items-center justify-center gap-10 text-center">
+            <h1 className="text-white text-4xl sm:text-5xl font-extrabold leading-tight">
+              We make health accessible to everyone
+            </h1>
 
-          <p className="text-white text-base sm:text-lg font-bold leading-normal max-w-2xl">
-            No long waits. No hidden costs. Just quality care delivered where and when you need it.
-          </p>
+            <p className="text-white text-base sm:text-lg font-bold leading-normal max-w-2xl">
+              No long waits. No hidden costs. Just quality care delivered where and when you need
+              it.
+            </p>
 
-          <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
-            <button className="px-6 py-3 bg-primary-800  rounded-2xl shadow text-white text-sm font-medium  tracking-wide">
-              Book now
-            </button>
-            <button className="px-6 py-3 rounded-2xl  outline-2 outline-white text-white text-sm font-medium  tracking-wide">
-              Get started
-            </button>
+            <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
+              <button className="px-6 py-3 bg-primary-800  rounded-2xl shadow text-white text-sm font-medium  tracking-wide">
+                Book now
+              </button>
+              <button className="px-6 py-3 rounded-2xl  outline-2 outline-white text-white text-sm font-medium  tracking-wide">
+                Get started
+              </button>
+            </div>
           </div>
         </div>
         <div className="flex flex-col md:flex-row justify-between items-start gap-4 px-8 py-8 w-full">
-          {/* Left side: Heading */}
           <div className="flex-1 text-primary-800  text-3xl md:text-4xl font-bold  leading-snug lg:ml-6">
             Our Medical <br />
-            Specialities
+            Specialties
           </div>
 
-          {/* Right side: Description and link */}
           <div className="flex-1 text-right">
             <p className="text-black text-base font-normal leading-normal">
               Our platform offers a wide range of medical specialties designed to meet the diverse
