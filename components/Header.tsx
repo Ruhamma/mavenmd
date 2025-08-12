@@ -32,7 +32,7 @@ const Header = () => {
         </p>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex bg-primary-800 rounded-full px-6 py-2 space-x-2">
+        <nav className="hidden lg:flex bg-primary-800 rounded-full px-6 py-2 space-x-2">
           {navItems.map(({ label, path }, index) => {
             const isActive = pathname === path;
             return (
@@ -54,7 +54,7 @@ const Header = () => {
         </nav>
 
         {/* Desktop Right Icons */}
-        <div className="hidden md:flex items-center space-x-2">
+        <div className="hidden lg:flex items-center space-x-2">
           <button className="p-2 rounded-full hover:bg-gray-100 transition-colors duration-200">
             <IconUser className="text-primary-800" size={24} />
           </button>
@@ -68,7 +68,7 @@ const Header = () => {
 
         {/* Mobile Hamburger */}
         <button
-          className="md:hidden p-2 rounded-full hover:bg-gray-100 transition-colors duration-200"
+          className="lg:hidden p-2 rounded-full hover:bg-gray-100 transition-colors duration-200"
           onClick={() => setMenuOpen(true)}
         >
           <IconMenu2 className="text-primary-800" size={24} />

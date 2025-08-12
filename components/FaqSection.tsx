@@ -59,7 +59,7 @@ export default function FAQSection() {
   };
 
   return (
-    <div className="bg-white py-16 px-4 sm:px-6 md:px-10 lg:px-20">
+    <div className="py-16 px-4 sm:px-6 md:px-10 lg:px-20 ">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-10 md:gap-16">
         {/* Heading */}
         <div className="md:w-1/3">

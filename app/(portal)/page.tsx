@@ -26,7 +26,6 @@ const specialties = [
   { name: 'Neurology', image: '/images/Hero2.jpg' },
   { name: 'Pediatrics', image: '/images/Hero3.jpg' },
   { name: 'Orthopedics', image: '/images/Hero1.jpg' },
-  { name: 'Psychiatry', image: '/images/Hero2.jpg' },
   { name: 'Geriatrics', image: '/images/Hero3.jpg' },
 ];
 const values = [
@@ -125,8 +124,20 @@ export default function Home() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
+        className="overflow-hidden"
       >
-        <section className="py-16 md:py-24 px-4 md:px-8 lg:px-16 mb-20">
+        <section className="relative py-16 md:py-24 px-4 md:px-8 lg:px-16 mb-20">
+          <div
+            className="absolute inset-0 -z-10 -bottom-26"
+            style={{
+              backgroundImage: "url('/images/pattern.png')",
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              transform: 'rotate(0deg)',
+              opacity: 0.2,
+            }}
+          ></div>
           <div className="max-w-7xl mx-auto">
             <motion.div
               variants={staggerContainer}
@@ -134,7 +145,6 @@ export default function Home() {
               animate="show"
               className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20"
             >
-              {/* Left */}
               <motion.div variants={fadeInUp} className="w-full lg:w-1/2 text-center lg:text-left">
                 <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary-800 mb-4 md:mb-6 leading-tight">
                   Trusted Doctors At Your <br /> Doorstep
@@ -166,7 +176,6 @@ export default function Home() {
                 </motion.button>
               </motion.div>
 
-              {/* Right */}
               <motion.div variants={fadeIn} className="hidden lg:block w-full lg:w-1/2 relative">
                 <motion.div
                   initial={{ scale: 0.95, opacity: 0 }}
@@ -193,10 +202,8 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Floating Bottom Card */}
                 <div className="absolute -bottom-28 -left-62 bg-white/40 rounded-xl shadow-lg p-4">
                   <div className="bg-white rounded-xl overflow-hidden flex">
-                    {/* Image */}
                     <div className="relative w-[200px] aspect-square rounded-xl overflow-hidden">
                       <Image
                         src="/images/Hero2.jpg"
@@ -205,7 +212,6 @@ export default function Home() {
                         className="object-cover"
                       />
                     </div>
-                    {/* Stats */}
                     <div className="p-8">
                       <h3 className="text-base font-bold mb-4">Results we are proud of</h3>
                       <div className="grid grid-cols-3 gap-4">
@@ -239,9 +245,7 @@ export default function Home() {
                 </div>
               </motion.div>
 
-              {/* Mobile Layout - Stacked */}
               <div className="block lg:hidden w-full">
-                {/* Main Image */}
                 <div className="w-full rounded-xl overflow-hidden mb-6 mx-auto">
                   <Image
                     src="/images/Hero3.jpg"
@@ -252,7 +256,6 @@ export default function Home() {
                   />
                 </div>
 
-                {/* Stats Card */}
                 <div className="bg-white rounded-xl shadow-md overflow-hidden">
                   <div className="p-4">
                     <h3 className="text-sm font-bold mb-4">Results we are proud of</h3>
@@ -289,16 +292,14 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="my-10">
+        <section className="mt-10">
           <div className="bg-primary-800  md:rounded-t-[400px] relative overflow-hidden">
-            {/* Top blurry white blob */}
             <div
               className="absolute left-60 bottom-20 w-36 h-36 bg-white rounded-full opacity-20 blur-3xl -translate-x-1/2 mix-blend-screen pointer-events-none"
               aria-hidden="true"
             ></div>
 
             <div className="flex flex-col text-center px-4 pt-10 pb-20 relative z-10">
-              {/* Heading */}
               <div className="mb-8 md:mb-16">
                 <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-tight">
                   We make health accessible to everyone
@@ -308,7 +309,6 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* Responsive Search Bar */}
               <form
                 className="
           mx-auto w-full max-w-4xl bg-white shadow-lg 
@@ -355,9 +355,19 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="relative bg-white overflow-hidden px-6 md:px-20 py-12">
+        <section className="relative overflow-hidden px-6 md:px-20 pt-10">
+          <div
+            className="absolute -z-10 -top-40 -bottom-120 -left-10 w-full h-[calc(100%+12.5rem)]"
+            style={{
+              backgroundImage: "url('/images/pattern2.png')",
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              transform: 'scaleY(-1) rotate(1deg)',
+              opacity: 0.2,
+            }}
+          ></div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            {/* Mobile & Tablet layout */}
             <div className="block md:hidden text-center">
               <h1 className="text-xl sm:text-2xl font-bold text-primary-800 mb-4 leading-tight">
                 Built on trust Focused on Care
@@ -371,7 +381,6 @@ export default function Home() {
                 About us
               </button>
 
-              {/* Image fan effect */}
               <div className="flex justify-center mt-8 space-x-[-40px]">
                 <div className="relative w-48 h-80 rounded-2xl overflow-hidden shadow-md mt-10">
                   <Image
@@ -400,7 +409,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Desktop layout */}
             <div className="hidden md:block">
               <div className="grid grid-cols-2 gap-y-10 gap-6 md:gap-12">
                 <div className="relative w-80 h-70 rounded-xl overflow-hidden opacity-0">
@@ -473,7 +481,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="m-4 md:m-10 my-16 md:my-32">
+        <section className="m-4 md:m-10 my-16 md:my-32 bg-transparent">
           <div className="mb-8 max-w-full md:max-w-none">
             <p className="text-[#0b0ba2] mb-2 text-sm md:text-base">
               Highly Rated by Patients Like You
@@ -483,7 +491,6 @@ export default function Home() {
             </h2>
           </div>
 
-          {/* Container for scrollable on mobile, grid on md+ */}
           <div
             className="flex gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-6"
             style={{ scrollPaddingLeft: '1rem' }}
@@ -541,9 +548,20 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="mx-4 sm:mx-8 md:mx-16 my-12 md:my-50">
-          <div className="flex flex-col md:flex-row md:items-center gap-8">
-            <div className="md:w-[38%] max-w-full">
+        <section className="relative mx-4 sm:mx-8 md:mx-16 my-32 md:my-50">
+          <div
+            className="absolute -top-210 left-0 w-full h-[calc(100%+82.5rem)] -z-10"
+            style={{
+              backgroundImage: "url('/images/pattern2.png')",
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              transform: 'rotate(295deg) scaleY(-1) translateY(0)',
+              opacity: 0.15,
+            }}
+          ></div>
+          <div className="flex flex-col md:flex-row md:items-center gap-8 my-10">
+            <div className="md:w-[50%] max-w-full">
               <p className="text-[#0b0ba2] mb-4 text-sm sm:text-base">
                 Our specialties cover a wide range of medical needs.
               </p>
@@ -552,7 +570,7 @@ export default function Home() {
               </h2>
             </div>
 
-            <div className="flex flex-wrap justify-center md:justify-start gap-8 md:gap-12 w-full md:w-auto">
+            <div className="flex flex-wrap justify-center md:justify-center gap-8 md:gap-12 w-full md:w-auto mt-10">
               {specialties.map((specialty, index) => (
                 <div key={index} className="flex gap-3 items-center min-w-[140px]">
                   <div className="relative w-[60px] h-[60px] rounded-full overflow-hidden sm:w-[70px] sm:h-[70px]">
@@ -588,8 +606,7 @@ export default function Home() {
           </div>
         </section>
         <section className="px-4 sm:px-8 md:px-20 my-16 md:my-32">
-          {/* Heading */}
-          <div className="flex flex-col items-center text-center space-y-3">
+          <div className="flex flex-col items-center text-center space-y-6 sm:space-y-12">
             <h5 className="text-xl sm:text-2xl text-primary-800 font-medium">Driven by Purpose</h5>
             <motion.h2
               variants={fadeInUp}
@@ -601,15 +618,14 @@ export default function Home() {
               {' '}
               The Values That Define Us
             </motion.h2>
-            <p className="text-gray-600 max-w-2xl text-sm sm:text-base">
+            <p className="text-gray-600 max-w-3xl text-sm sm:text-base">
               At MavenMD, we are committed to delivering exceptional in-house care through
               appointment booking and telehealth, ensuring every Patient in Pain and Doctor Hustler
               experiences affordable, compassionate, and reliable healthcare.
             </p>
           </div>
 
-          {/* Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-6 mt-12 px-10 sm:px-0">
             {values.map((value, index) => (
               <motion.div
                 key={value.name}
@@ -619,7 +635,7 @@ export default function Home() {
                 viewport={{ once: true }}
                 whileHover={{ scale: 1.03, y: -5 }}
                 transition={{ type: 'spring', stiffness: 200 }}
-                className="relative bg-white rounded-xl overflow-hidden shadow-md flex flex-col sm:flex-row group"
+                className="relative bg-white rounded-xl overflow-hidden shadow-md flex flex-col sm:flex-row group "
               >
                 <div className="absolute inset-0 z-0">
                   <div className="absolute -top-12 -left-12 w-40 h-40 bg-primary-800 rounded-full opacity-30 blur-3xl"></div>
@@ -646,7 +662,6 @@ export default function Home() {
         </section>
         <section className="px-4 sm:px-8 md:px-20 my-16 md:my-32">
           <div className="bg-gradient-to-r from-primary-800 to-primary-600 text-white space-y-4 p-6 sm:p-8 md:p-12 rounded-2xl shadow-md flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            {/* Text Section */}
             <div className="space-y-3 md:max-w-[60%]">
               <p className="text-2xl sm:text-3xl font-semibold">Book Your Appointment Now!</p>
               <p className="text-sm sm:text-base leading-relaxed">
@@ -704,7 +719,7 @@ export default function Home() {
           </button>
         </section>
         <section>
-          <div className="py-16 px-4 sm:px-6 md:px-10 bg-white text-center">
+          <div className="py-16 px-4 sm:px-6 md:px-10 text-center">
             <p className="text-primary-800 font-medium mb-2 text-sm sm:text-base">
               Choose what is right for you
             </p>
@@ -743,7 +758,17 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section>
+        <section className="relative">
+          <div
+            className="absolute inset-0 -z-10 -top-320 md:-top-160"
+            style={{
+              backgroundImage: "url('/images/pattern2.png')",
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              opacity: 0.2,
+            }}
+          ></div>
           <FAQSection />
         </section>
       </motion.div>
