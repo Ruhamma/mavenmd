@@ -1,10 +1,9 @@
 import React from 'react';
-import SideBar from './components/SideBar';
 import Header from './components/Header';
+import SideBar from './components/sideBar';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-
     <div className="flex flex-col h-screen overflow-hidden">
       {/* Top header - full width */}
       <Header />
@@ -17,7 +16,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </div>
 
         {/* Page content - scrollable */}
-        <main className="flex-1 overflow-y-auto p-6 bg-[#08087D]/5 rounded-tl-3xl">
+        <main className="flex-1 overflow-y-auto p-6 bg-primary-800/5 rounded-tl-3xl">
           {children}
         </main>
       </div>

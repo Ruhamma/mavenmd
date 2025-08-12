@@ -84,15 +84,15 @@ const AppointmentsCard: React.FC<AppointmentsCardProps> = ({
             status === 'Confirmed'
               ? 'bg-green-600 text-white'
               : status === 'Pending'
-              ? 'bg-yellow-500 text-white'
-              : 'bg-gray-400 text-white'
+                ? 'bg-yellow-500 text-white'
+                : 'bg-gray-400 text-white'
           }`}
         >
           {status}
         </span>
         <button
-          className="border border-[#08087D] text-[#08087D] rounded-lg p-1"
-          onClick={(e) => {
+          className="border border-primary-800 text-primary-800 rounded-lg p-1"
+          onClick={e => {
             e.stopPropagation(); // Prevent routing when clicking phone button
           }}
         >
@@ -100,7 +100,7 @@ const AppointmentsCard: React.FC<AppointmentsCardProps> = ({
         </button>
         <button
           className="text-gray-500 hover:text-black"
-          onClick={(e) => {
+          onClick={e => {
             e.stopPropagation(); // Prevent routing when clicking dots button
           }}
         >

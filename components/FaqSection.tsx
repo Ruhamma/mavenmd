@@ -59,37 +59,39 @@ export default function FAQSection() {
   };
 
   return (
-    <div className="bg-white py-20 px-4">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-8">
+    <div className="bg-white py-16 px-4 sm:px-6 md:px-10 lg:px-20">
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-10 md:gap-16">
+        {/* Heading */}
         <div className="md:w-1/3">
-          <h2 className="text-[#031E87] text-3xl md:text-4xl font-bold leading-tight">
+          <h2 className="text-[#031E87] text-3xl sm:text-4xl font-bold leading-tight mb-6 md:mb-0">
             Frequently <br /> Asked Questions
           </h2>
         </div>
 
-        <div className="md:w-2/3 space-y-3">
+        {/* FAQ list */}
+        <div className="md:w-2/3 space-y-4 sm:space-y-5">
           {faqs.map((faq, index) => {
             const isActive = activeIndex === index;
             return (
               <div
                 key={index}
                 className={`bg-white shadow-md rounded-xl transition-all duration-300 ${
-                  isActive ? 'ring-1 ring-[#031E87]/20' : ''
+                  isActive ? 'ring-2 ring-[#031E87]/30' : ''
                 }`}
               >
                 <button
                   onClick={() => toggle(index)}
-                  className="w-full flex items-center justify-between text-left px-6 py-4 font-medium text-[#031E87]  cursor-pointer"
+                  className="w-full flex items-center justify-between text-left px-5 sm:px-6 py-4 sm:py-5 font-medium text-[#031E87] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-600"
                 >
-                  <span>{faq.question}</span>
-                  {isActive ? <IconX size={20} /> : <IconPlus size={20} />}
+                  <span className="text-base sm:text-lg">{faq.question}</span>
+                  {isActive ? <IconX size={22} /> : <IconPlus size={22} />}
                 </button>
                 <div
-                  className={`overflow-hidden transition-max-height duration-300 ease-in-out px-6 ${
-                    isActive ? 'max-h-[500px] py-2' : 'max-h-0'
+                  className={`overflow-hidden transition-[max-height] duration-300 ease-in-out px-5 sm:px-6 ${
+                    isActive ? 'max-h-[600px] py-3 sm:py-4' : 'max-h-0'
                   }`}
                 >
-                  <p className="text-sm text-gray-700 pb-4">{faq.answer}</p>
+                  <p className="text-sm sm:text-base text-gray-700">{faq.answer}</p>
                 </div>
               </div>
             );

@@ -8,7 +8,7 @@ export default function DashboardPage() {
   return (
     <div className="space-y-6">
       {/* Welcome Banner */}
-      <div className="bg-[#08087D] text-white p-6 sm:p-8 md:p-10 rounded-xl shadow-md mx-auto">
+      <div className="bg-primary-800 text-white p-6 sm:p-8 md:p-10 rounded-xl shadow-md mx-auto">
         <p className="text-2xl sm:text-3xl md:text-4xl font-semibold">Welcome Doctor Sarah!</p>
         <p className="text-base sm:text-lg md:text-xl mt-2 leading-snug">
           Take care and stay sharp. <br className="hidden sm:block" /> Your work matters!

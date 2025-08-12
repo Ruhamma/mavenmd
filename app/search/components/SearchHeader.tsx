@@ -22,7 +22,7 @@ const Header = () => {
   };
 
   return (
-    <div className="flex justify-between items-center p-4 px-12 bg-[#08087D] shadow-xs lg:pb-10">
+    <div className="flex justify-between items-center p-4 px-12 bg-primary-800 shadow-xs lg:pb-10">
       <div className="flex items-center">
         <p className="text-2xl text-white">
           Maven<span className="font-bold">MD</span>
@@ -39,8 +39,8 @@ const Header = () => {
               className={`w-[100px] text-sm font-medium px-3 py-2 rounded-3xl cursor-pointer transition-all duration-200
                 ${
                   isActive
-                    ? 'bg-[#08087D] text-white font-semibold'
-                    : 'text-[#08087D] hover:bg-[#08087D] hover:text-white hover:font-semibold'
+                    ? 'bg-primary-800 text-white font-semibold'
+                    : 'text-primary-800 hover:bg-primary-800 hover:text-white hover:font-semibold'
                 }
               `}
             >

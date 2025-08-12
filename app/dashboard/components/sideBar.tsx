@@ -52,7 +52,7 @@ const SideBar = () => {
                 className={`w-full flex items-center justify-center md:justify-start gap-0 md:gap-3 px-2 md:px-4 py-2 rounded-lg text-sm font-medium transition-all
                   ${
                     isActive
-                      ? 'bg-[#E7E7FF] text-[#08087D] font-semibold'
+                      ? 'bg-[#E7E7FF] text-primary-800 font-semibold'
                       : 'text-gray-700 hover:bg-gray-100'
                   }
                 `}

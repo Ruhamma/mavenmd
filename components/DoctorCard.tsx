@@ -31,7 +31,7 @@ const DoctorCard: React.FC<DoctorCardProps> = ({
           <Image src={imageUrl} alt={name} fill className="rounded-full object-cover" />
         </div>
         <div>
-          <h3 className="text-md font-semibold text-[#08087D]">{name}</h3>
+          <h3 className="text-md font-semibold text-primary-800">{name}</h3>
           <p className="text-sm text-gray-600">{specialty}</p>
           <div className="flex items-center gap-1 text-yellow-500 mt-1">
             {Array.from({ length: 5 }, (_, i) => (
@@ -47,14 +47,17 @@ const DoctorCard: React.FC<DoctorCardProps> = ({
       <p className="text-sm text-gray-600 italic mt-4">{description}</p>
 
       <div className="flex justify-between items-center text-sm mt-6 font-medium">
-        <span className="text-[#08087D]">Next Available</span>
+        <span className="text-primary-800">Next Available</span>
         <span>{date}</span>
       </div>
       <hr className="my-4 opacity-20" />
 
       <div className="grid grid-cols-3 gap-2 mt-2">
         {timeSlots.map((slot, index) => (
-          <button key={index} className="bg-[#08087D] text-white py-1 text-xs rounded-full w-full">
+          <button
+            key={index}
+            className="bg-primary-800 text-white py-1 text-xs rounded-full w-full"
+          >
             {slot}
           </button>
         ))}

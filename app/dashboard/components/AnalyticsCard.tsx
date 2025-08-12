@@ -93,7 +93,7 @@ export default function AnalyticsCard() {
       {/* Appointment Bookings */}
       <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-sm flex flex-col">
         <div className="flex items-center gap-2 mb-2">
-          <IconChartBar size={20} className="text-[#08087d]" />
+          <IconChartBar size={20} className="text-primary-800" />
           <h2 className="font-semibold text-gray-800 text-lg sm:text-xl">Appointment Bookings</h2>
         </div>
         <div className="flex gap-2 py-4 items-end">
@@ -110,7 +110,7 @@ export default function AnalyticsCard() {
       {/* Earning */}
       <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-sm flex flex-col">
         <div className="flex items-center gap-2 mb-2">
-          <IconChartLine size={20} className="text-[#08087d]" />
+          <IconChartLine size={20} className="text-primary-800" />
           <h2 className="font-semibold text-gray-800 text-lg sm:text-xl">Earning</h2>
         </div>
         <div className="flex gap-2 py-4 items-end">

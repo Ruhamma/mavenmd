@@ -60,7 +60,7 @@ const AvailableDoctorsCard: React.FC<AvailableDoctorsCardProps> = ({
 
         <div className="flex-1">
           {/* Name and Specialty */}
-          <h3 className="text-base font-bold text-[#08087D]">{name}</h3>
+          <h3 className="text-base font-bold text-primary-800">{name}</h3>
           <p className="text-xs text-gray-600">{specialty}</p>
 
           {/* Rating */}
@@ -70,7 +70,7 @@ const AvailableDoctorsCard: React.FC<AvailableDoctorsCardProps> = ({
                 <IconStar key={i} size={16} className="text-yellow-500 fill-current" />
               ))}
             </div>
-            <span className="text-[#08087D] text-xs font-medium ml-1">
+            <span className="text-primary-800 text-xs font-medium ml-1">
               {rating.toFixed(1)} ({reviewCount})
             </span>
           </div>
@@ -78,7 +78,7 @@ const AvailableDoctorsCard: React.FC<AvailableDoctorsCardProps> = ({
 
         {/* Price Section */}
         <div className="text-right">
-          <div className="text-xl font-bold text-[#08087D]">${price}</div>
+          <div className="text-xl font-bold text-primary-800">${price}</div>
           <div className="text-xs text-gray-600">Per visit</div>
         </div>
       </div>
@@ -86,12 +86,12 @@ const AvailableDoctorsCard: React.FC<AvailableDoctorsCardProps> = ({
       {/* Location and Availability */}
       <div className="flex items-center gap-4 mt-8">
         <div className="flex items-center gap-1">
-          <IconMapPin size={16} className="text-[#08087D]" />
-          <span className="text-[#08087D] text-xs font-medium">{distance}</span>
+          <IconMapPin size={16} className="text-primary-800" />
+          <span className="text-primary-800 text-xs font-medium">{distance}</span>
         </div>
         <div className="flex items-center gap-1">
-          <IconClock size={16} className="text-[#08087D]" />
-          <span className="text-[#08087D] text-xs font-medium">{availability}</span>
+          <IconClock size={16} className="text-primary-800" />
+          <span className="text-primary-800 text-xs font-medium">{availability}</span>
         </div>
       </div>
 
@@ -111,24 +111,21 @@ const AvailableDoctorsCard: React.FC<AvailableDoctorsCardProps> = ({
       <div className="flex gap-3 mt-6">
         <button
           onClick={onBookNow}
-          className="flex-1 bg-[#08087D] text-white py-0.5 px-4 rounded-2xl font-semibold hover:bg-[#06065a] transition-colors"
+          className="flex-1 bg-primary-800 text-white py-0.5 px-4 rounded-2xl font-semibold hover:bg-[#06065a] transition-colors"
         >
           Book Now
         </button>
         <button
-  onClick={onFavorite}
-  className={`h-10 px-4 rounded-2xl border-2 flex items-center justify-center transition-colors ${
-    isFavorited
-      ? 'bg-white border-[#08087D] text-[#08087D]'
-      : 'bg-[#08087D] text-white border-[#08087D] hover:bg-white hover:text-[#08087D]'
-  }`}
->
-  <IconHeart size={20} className={isFavorited ? 'fill-[#08087D]' : 'none'} />
-</button>
-
+          onClick={onFavorite}
+          className={`h-10 px-4 rounded-2xl border-2 flex items-center justify-center transition-colors ${
+            isFavorited
+              ? 'bg-white border-primary-800 text-primary-800'
+              : 'bg-primary-800 text-white border-primary-800 hover:bg-white hover:text-primary-800'
+          }`}
+        >
+          <IconHeart size={20} className={isFavorited ? 'fill-primary-800' : 'none'} />
+        </button>
       </div>
-
-
     </div>
   );
 };
