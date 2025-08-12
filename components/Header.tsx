@@ -130,7 +130,7 @@ const Header = () => {
       {/* Background overlay */}
       {menuOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-30 z-40"
+          className="fixed inset-0 bg-black/70 bg-opacity-30 z-40"
           onClick={() => setMenuOpen(false)}
         />
       )}
