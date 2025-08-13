@@ -1,0 +1,54 @@
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+export const api = createApi({
+  reducerPath: 'api',
+  baseQuery: fetchBaseQuery({
+    baseUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/',
+  }),
+  tagTypes: ['Posts'],
+  endpoints: builder => ({
+    getPosts: builder.query({
+      query: () => 'posts',
+      providesTags: ['Posts'],
+    }),
+
+    getPost: builder.query({
+      query: id => `posts/${id}`,
+      providesTags: ['Posts'],
+    }),
+
+    createPost: builder.mutation({
+      query: newPost => ({
+        url: 'posts',
+        method: 'POST',
+        body: newPost,
+      }),
+      invalidatesTags: ['Posts'],
+    }),
+
+    updatePost: builder.mutation({
+      query: ({ id, ...patch }) => ({
+        url: `posts/${id}`,
+        method: 'PUT',
+        body: patch,
+      }),
+      invalidatesTags: ['Posts'],
+    }),
+
+    deletePost: builder.mutation({
+      query: id => ({
+        url: `posts/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Posts'],
+    }),
+  }),
+});
+
+export const {
+  useGetPostsQuery,
+  useGetPostQuery,
+  useCreatePostMutation,
+  useUpdatePostMutation,
+  useDeletePostMutation,
+} = api;
