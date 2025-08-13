@@ -17,7 +17,7 @@ const Footer = () => {
             <h1 className="text-xl font-bold mb-4">
               Maven <span className="font-semibold">MD</span>
             </h1>
-            <p className="text-gray-300 mb-6">
+            <p className="text-gray-300 mb-6 lg:text-sm sm:text-xs">
               Bringing healthcare to your doorstep.
               <br /> Connect with qualified doctors for professional <br /> house calls, making
               healthcare accessible and convenient.
@@ -25,7 +25,7 @@ const Footer = () => {
             <hr className="opacity-30 w-[90%]" />
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-16 w-full md:w-2/3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-16 w-full md:w-2/3">
             <div>
               <div className="mb-4">
                 <h3 className="font-bold text-lg mb-2">Follow us</h3>
@@ -143,7 +143,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="bg-white/5 text-white rounded-3xl p-10 py-16 mb-12 mx-auto w-2/3">
+        <div className="bg-white/5 text-white rounded-3xl p-10 py-16 mb-12 mx-auto md:w-2/3">
           <h2 className="text-2xl font-bold mb-4 text-center">Ready to get started?</h2>
           <p className="mb-6 text-center">
             Join thousands of patients and doctors who trust MavenMD <br /> for convenient,

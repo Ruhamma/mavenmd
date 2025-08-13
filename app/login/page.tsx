@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { IconBrandGoogle, IconBrandApple } from '@tabler/icons-react';
 
 const page = () => {
@@ -130,16 +131,16 @@ const page = () => {
             </section>
           </div>
 
-          {/* Right side */}
           <aside className="w-full lg:w-[55%] lg:-mt-14 relative flex justify-center  items-center lg:px-2">
             <div className="relative w-full max-w-[100vw]  md:max-w-[560px] lg:max-w-[640px] lg:max-h-[85vh]">
-              <img
-                className="w-full h-auto object-right-bottom rounded-[20px] lg:rounded-[32px] shadow max-h-[85vh]"
+              <Image
+                className="w-full h-auto object-cover rounded-[20px] lg:rounded-[32px] shadow max-h-[85vh]"
                 src="/loginImage.png"
                 alt="Medical consultation"
+                width={640}
+                height={480}
+                priority
               />
-
-              {/* Overlay elements */}
               <div className="absolute w-40 sm:w-40 lg:w-48 h-16 lg:h-20 bg-black/20 rounded-xl left-[55%] top-[10%] lg:top-[8%] shadow-md" />
               <div className="absolute w-40 sm:w-40 lg:w-48 h-16 lg:h-20 bg-white/80 rounded-xl left-[45%] top-[4%] shadow-md" />
 
