@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
 import '../styles/globals.css';
-import Footer from '../components/Footer';
-import Header from '../components/Header';
 import { Inter, DM_Sans } from 'next/font/google';
+import { Providers } from '../store/providers';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -25,7 +24,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${dmsans.variable}`}>
-      <body>{children}</body>
+      <body>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }
