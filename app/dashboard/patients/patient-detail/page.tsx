@@ -6,10 +6,10 @@ import { IconSearch, IconPrinter, IconCalendarCheck, IconInfoCircle } from '@tab
 
 export default function PatientVisitPage() {
   return (
-    <div className="p-6 space-y-6 bg-[#f5f6fb] min-h-screen">
+    <div className="lg:p-6 space-y-6 bg-[#f5f6fb] min-h-screen">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div className="text-sm text-gray-500 font-medium">
+      <div className="flex flex-col sm:flex-row items-center justify-between">
+        <div className="text-sm text-gray-500 font-medium hidden sm:block">
           Patients &gt; <span className="text-black">Sarah Johnson</span>
         </div>
         <div className="flex items-center gap-2">
@@ -69,8 +69,8 @@ export default function PatientVisitPage() {
             </div>
 
             {/* Right Side: Patient Details */}
-            <div className="flex flex-row justify-center gap-20 text-sm w-full md:w-2/3 pl-4">
-              <div className="flex flex-col justify-between">
+            <div className="flex flex-col sm:flex-row justify-center gap-8 sm:gap-20 text-sm w-full md:w-2/3 pl-4">
+              <div className="flex flex-col justify-between gap-2 sm:gap-0 mb-4 sm:mb-0">
                 <span>
                   <strong>Gender</strong>
                   <br />
@@ -92,7 +92,8 @@ export default function PatientVisitPage() {
                   1234 Oak Street, Apt 2B, San Francisco, CA 94102
                 </span>
               </div>
-              <div className="flex flex-col justify-between">
+
+              <div className="flex flex-col justify-between gap-2 sm:gap-0">
                 <span>
                   <strong>Blood Type</strong>
                   <br />
@@ -110,6 +111,7 @@ export default function PatientVisitPage() {
                 </span>
               </div>
             </div>
+
           </div>
 
           {/* Bottom: Chief Complaint Card */}

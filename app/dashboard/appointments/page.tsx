@@ -30,7 +30,7 @@ export default function DashboardPage() {
                 </div>
             </div>
             {/* Dashboard Cards */}
-            <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-4 sm:gap-6 grid-cols-2 lg:grid-cols-4">
                 <DashboardCard
                     totalVisits={10}
                     title="Total Visits"
@@ -65,16 +65,16 @@ export default function DashboardPage() {
                 />
             </div>
 
-            <div className="p-6 m-2 bg-white rounded-xs">
-                <div className='flex justify-between'>
-                    <h1 className="text-2xl font-semibold mb-6">Recent Appointments</h1>
+            <div className="p-6 mt-2 bg-white rounded-xs">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4">
+                    <h1 className="text-lg sm:text-2xl font-semibold mb-2 sm:mb-6 text-center sm:text-left">Recent Appointments</h1>
 
                     {/* Filters */}
-                    <div className="flex justify-end gap-4 mb-6">
-                        <select className="border border-gray-400 rounded px-4 py-1">
+                    <div className="flex  justify-center sm:justify-end gap-2 sm:gap-4 mb-2 sm:mb-6 items-center">
+                        <select className="border border-gray-400 rounded px-3 py-1 text-xs sm:text-base">
                             <option>All status</option>
                         </select>
-                        <select className="border border-gray-400 rounded px-4 py-1">
+                        <select className="border border-gray-400 rounded px-3 py-1 text-xs sm:text-base">
                             <option>Today</option>
                         </select>
                     </div>
@@ -140,18 +140,18 @@ export default function DashboardPage() {
                 </div>
 
                 {/* Pagination */}
-                <div className="mt-6 flex justify-between items-center text-sm text-gray-700">
-                    <span>Showing 1-4 of 24 appointments</span>
-                    <div className="flex gap-1">
-                        <button className="px-2 py-1 border rounded text-blue-900 disabled:opacity-50">
+                <div className="mt-6 flex flex-col sm:flex-row sm:justify-between items-center text-xs sm:text-sm text-gray-700">
+                    <span className="hidden sm:inline">Showing 1-4 of 24 appointments</span>
+                    <div className="flex gap-0.5 sm:gap-1 justify-center items-center mt-2 sm:mt-0">
+                        <button className="px-1.5 py-0.5 sm:px-2 sm:py-1 border rounded text-blue-900 disabled:opacity-50 text-xs sm:text-sm">
                             &lt;
                         </button>
-                        <button className="px-3 py-1 border rounded bg-blue-900 text-white">1</button>
-                        <button className="px-3 py-1 border rounded">2</button>
-                        <button className="px-3 py-1 border rounded">...</button>
-                        <button className="px-3 py-1 border rounded">9</button>
-                        <button className="px-3 py-1 border rounded">10</button>
-                        <button className="px-2 py-1 border rounded text-blue-900">&gt;</button>
+                        <button className="px-2 py-0.5 sm:px-3 sm:py-1 border rounded bg-blue-900 text-white text-xs sm:text-sm">1</button>
+                        <button className="px-2 py-0.5 sm:px-3 sm:py-1 border rounded text-xs sm:text-sm">2</button>
+                        <button className="px-2 py-0.5 sm:px-3 sm:py-1 border rounded text-xs sm:text-sm">3</button>
+                        <button className="px-2 py-0.5 sm:px-3 sm:py-1 border rounded text-xs sm:text-sm">4</button>
+                        <button className="px-2 py-0.5 sm:px-3 sm:py-1 border rounded text-xs sm:text-sm">5</button>
+                        <button className="px-1.5 py-0.5 sm:px-2 sm:py-1 border rounded text-blue-900 text-xs sm:text-sm">&gt;</button>
                     </div>
                 </div>
             </div>
