@@ -92,18 +92,19 @@ const AppointmentsCard: React.FC<AppointmentsCardProps> = ({
           {/* Actions on mobile (below request/distance) */}
           <div className="flex sm:hidden items-center gap-2 mt-2">
             <span
-              className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${status === 'Confirmed'
+              className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${
+                status === 'Confirmed'
                   ? 'bg-green-600 text-white'
                   : status === 'Pending'
                     ? 'bg-yellow-500 text-white'
                     : 'bg-gray-400 text-white'
-                }`}
+              }`}
             >
               {status}
             </span>
             <button
               className="border border-primary-800 text-primary-800 rounded-md p-1"
-              onClick={(e) => {
+              onClick={e => {
                 e.stopPropagation();
               }}
             >
@@ -111,7 +112,7 @@ const AppointmentsCard: React.FC<AppointmentsCardProps> = ({
             </button>
             <button
               className="text-gray-500 hover:text-black"
-              onClick={(e) => {
+              onClick={e => {
                 e.stopPropagation();
               }}
             >
@@ -124,18 +125,19 @@ const AppointmentsCard: React.FC<AppointmentsCardProps> = ({
       {/* Right side: Actions (desktop only) */}
       <div className="hidden sm:flex items-center gap-3">
         <span
-          className={`text-xs px-3 py-1 rounded-full font-medium ${status === 'Confirmed'
+          className={`text-xs px-3 py-1 rounded-full font-medium ${
+            status === 'Confirmed'
               ? 'bg-green-600 text-white'
               : status === 'Pending'
                 ? 'bg-yellow-500 text-white'
                 : 'bg-gray-400 text-white'
-            }`}
+          }`}
         >
           {status}
         </span>
         <button
           className="border border-primary-800 text-primary-800 rounded-lg p-1"
-          onClick={(e) => {
+          onClick={e => {
             e.stopPropagation();
           }}
         >
@@ -143,7 +145,7 @@ const AppointmentsCard: React.FC<AppointmentsCardProps> = ({
         </button>
         <button
           className="text-gray-500 hover:text-black"
-          onClick={(e) => {
+          onClick={e => {
             e.stopPropagation();
           }}
         >

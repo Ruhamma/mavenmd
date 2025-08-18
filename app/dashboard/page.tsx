@@ -7,7 +7,6 @@ import AnalyticsCard from './components/AnalyticsCard';
 export default function DashboardPage() {
   return (
     <div className="space-y-6">
-      {/* Welcome Banner */}
       <div className="bg-primary-800 text-white p-6 sm:p-8 md:p-10 rounded-xl shadow-md mx-auto">
         <p className="text-2xl sm:text-3xl md:text-4xl font-semibold">Welcome Doctor Sarah!</p>
         <p className="text-base sm:text-lg md:text-xl mt-2 leading-snug">
@@ -15,15 +14,14 @@ export default function DashboardPage() {
         </p>
       </div>
 
-      {/* Dashboard Cards */}
-      <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 sm:gap-6 grid-cols-2 lg:grid-cols-4">
         <DashboardCard
           totalVisits={10}
           title="Total Patients"
           percentageChange="+2.5%"
           changeDirection="up"
           changeText="8% vs yesterday"
-          icon={<IconUsers size={24} className="text-white" />}
+          icon={<IconUsers size={16} className="text-white sm:size-[24px]" />}
         />
         <DashboardCard
           totalVisits={10}
@@ -31,7 +29,7 @@ export default function DashboardPage() {
           percentageChange="-2.5%"
           changeDirection="down"
           changeText="8% vs yesterday"
-          icon={<IconCalendar size={24} className="text-white" />}
+          icon={<IconCalendar size={16} className="text-white sm:size-[24px]" />}
         />
         <DashboardCard
           totalVisits={10}
@@ -39,7 +37,7 @@ export default function DashboardPage() {
           changeDirection="up"
           changeText="8% vs yesterday"
           title="Total Earning"
-          icon={<IconCash size={24} className="text-white" />}
+          icon={<IconCash size={16} className="text-white sm:size-[24px]" />}
         />
         <DashboardCard
           totalVisits={10}
@@ -47,7 +45,7 @@ export default function DashboardPage() {
           percentageChange="-2.5%"
           changeDirection="down"
           changeText="8% vs yesterday"
-          icon={<IconCalendar size={24} className="text-white" />}
+          icon={<IconCalendar size={16} className="text-white sm:size-[24px]" />}
         />
       </div>
 
