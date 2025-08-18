@@ -4,6 +4,7 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { IconPhone, IconDotsVertical, IconClock, IconMapPin } from '@tabler/icons-react';
+import id from 'zod/v4/locales/id';
 
 type Urgency = {
   label: string;
@@ -18,10 +19,12 @@ type AppointmentsCardProps = {
   urgency: Urgency | null;
   requestedAgo: string;
   distance: string;
-  status: 'Confirmed' | 'Pending' | 'Cancelled';
+  status: string;
+  id: number;
 };
 
 const AppointmentsCard: React.FC<AppointmentsCardProps> = ({
+  id,
   name,
   genderAge,
   symptoms,
@@ -34,7 +37,7 @@ const AppointmentsCard: React.FC<AppointmentsCardProps> = ({
   const router = useRouter();
 
   const handleClick = () => {
-    router.push('/dashboard/appointments/appointments-detail');
+    router.push(`/dashboard/appointments/appointments-detail/${id}`);
   };
 
   return (

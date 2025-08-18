@@ -32,15 +32,19 @@ interface RegisterRequest {
 }
 
 interface AuthResponse {
+  result: any;
+  accessToken: any;
   user: User;
 }
 
 export const authApi = createApi({
+  //naming, use it in store
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_API || 'https://mavenmd-backend.onrender.com/api/',
     credentials: 'include',
   }),
+  //refetching
   tagTypes: ['Auth', 'profile'],
   endpoints: builder => ({
     login: builder.mutation<AuthResponse, LoginRequest>({
@@ -74,6 +78,7 @@ export const authApi = createApi({
       }),
       invalidatesTags: ['Auth'],
     }),
+    //Ruhammas speciality
     getMe: builder.query<User | null, void>({
       query: () => '/user/me/',
       providesTags: ['Auth', 'profile'],

@@ -34,16 +34,19 @@ const Login = () => {
       password: '',
     },
   });
-  const onSubmit = async (data: LoginFormData) => {
-    try {
-      await login(data).unwrap();
-      route.push('/');
-      // notify('Success', 'Logged in successfully');
-    } catch (error) {
-      // console.error("Login failed:", error);
-      // notify('Error', 'Failed to login');
+const onSubmit = async (data: LoginFormData) => {
+  try {
+    const response = await login(data).unwrap();
+    // Store the access token from response.result.accessToken
+    if (response.result && response.result.accessToken) {
+      localStorage.setItem('accessToken', response.result.accessToken);
     }
-  };
+    route.push('/dashboard/appointments');
+    // notify('Success', 'Logged in successfully');
+  } catch (error) {
+    // handle error
+  }
+};
   return (
     <main className="lg:h-screen lg:w-screen overflow-hidden lg:p-6">
       <div className="relative flex flex-col h-full w-full overflow-hidden">
