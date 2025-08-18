@@ -1,8 +1,49 @@
+'use client';
 import React from 'react';
 import Image from 'next/image';
 import { IconBrandGoogle, IconBrandApple } from '@tabler/icons-react';
+import { useForm } from 'react-hook-form';
+import { useLoginMutation } from '../../services/auth/api';
+import z from 'zod';
+import { useRouter } from 'next/navigation';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-const page = () => {
+const loginSchema = z.object({
+  email: z.string().email('Invalid email address').min(1, 'Email is required'),
+  password: z
+    .string()
+    .min(8, 'Password must be at least 8 characters')
+    .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
+    .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
+    .regex(/[0-9]/, 'Password must contain at least one number'),
+});
+
+type LoginFormData = z.infer<typeof loginSchema>;
+const Login = () => {
+  const route = useRouter();
+  const [login, { isLoading: isLoginLoading }] = useLoginMutation();
+
+  const {
+    register: registerField,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
+  const onSubmit = async (data: LoginFormData) => {
+    try {
+      await login(data).unwrap();
+      route.push('/');
+      // notify('Success', 'Logged in successfully');
+    } catch (error) {
+      // console.error("Login failed:", error);
+      // notify('Error', 'Failed to login');
+    }
+  };
   return (
     <main className="lg:h-screen lg:w-screen overflow-hidden lg:p-6">
       <div className="relative flex flex-col h-full w-full overflow-hidden">
@@ -15,7 +56,6 @@ const page = () => {
         </header>
 
         <div className="flex flex-col-reverse lg:flex-row flex-1 min-h-0">
-          {/* Left side */}
           <div className="w-full lg:w-[47%] flex flex-col justify-center items-center gap-4 p-2 h-full">
             <section className="flex flex-col justify-center items-center gap-3 w-full max-w-sm lg:max-w-md flex-1">
               <div className="w-full flex flex-col justify-start items-start gap-2">
@@ -33,7 +73,10 @@ const page = () => {
                 </div>
               </div>
 
-              <form className="w-full flex flex-col justify-start items-start lg:mb-4 gap-6 lg:gap-4">
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="w-full flex flex-col justify-start items-start lg:mb-4 gap-6 lg:gap-4"
+              >
                 <div className="self-stretch flex flex-col justify-start items-start gap-1">
                   <div className="self-stretch flex flex-col justify-start items-start gap-2">
                     <label
@@ -45,9 +88,11 @@ const page = () => {
                     <input
                       type="email"
                       id="email"
+                      {...registerField('email')}
                       placeholder="Enter your email address"
                       className="self-stretch h-10 px-4 py-5 bg-slate-100 rounded-[20px] border-b border-neutral-300 inline-flex justify-start items-center gap-2 text-zinc-500 text-sm font-normal  leading-tight"
                     />
+                    <p className="text-red-500 text-xs mt-1"> {errors.email?.message}</p>
                   </div>
                 </div>
 
@@ -64,7 +109,9 @@ const page = () => {
                       id="password"
                       placeholder="Enter your password"
                       className="self-stretch h-02 px-4 py-3 bg-slate-100 rounded-[20px] border-b border-neutral-300 inline-flex justify-start items-center gap-2 text-zinc-500 text-sm font-normal  leading-tight"
+                      {...registerField('password')}
                     />
+                    <p className="text-red-500 text-xs mt-1">{errors.password?.message}</p>
                   </div>
                   <p className="self-stretch text-center justify-start text-zinc-500 text-sm font-normal  leading-tight">
                     It must be a combination of minimum 8 letters, numbers, and symbols.
@@ -190,4 +237,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Login;

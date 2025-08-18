@@ -89,8 +89,7 @@ export default function AnalyticsCard() {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-      {/* Appointment Bookings */}
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
       <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-sm flex flex-col">
         <div className="flex items-center gap-2 mb-2">
           <IconChartBar size={20} className="text-primary-800" />
@@ -107,7 +106,6 @@ export default function AnalyticsCard() {
         </div>
       </div>
 
-      {/* Earning */}
       <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-sm flex flex-col">
         <div className="flex items-center gap-2 mb-2">
           <IconChartLine size={20} className="text-primary-800" />
