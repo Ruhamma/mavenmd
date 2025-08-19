@@ -49,7 +49,7 @@ export default function AnalyticsCard() {
         },
         borderRadius: 20,
         barPercentage: 0.5,
-        barThickness: 50, // smaller for mobile
+        barThickness: 50,
         minBarLength: 20,
       },
     ],
