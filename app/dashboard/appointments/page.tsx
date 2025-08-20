@@ -118,9 +118,10 @@ export default function DashboardPage() {
           {filteredAppointments.map(app => (
             <AppointmentsCard
               key={app.id}
+              id={app.id} 
               name={app.Patient?.user?.fullName ?? 'Unknown'}
               genderAge={`${app.Patient?.gender ?? 'N/A'}, ${app.Patient?.age ?? 'N/A'} years`}
-              symptoms={Array.isArray(app.symptoms) ? app.symptoms.join(', ') : 'No symptoms'}
+              symptoms={Array.isArray(app.symptoms) && app.symptoms.length > 0 ? app.symptoms.join(', ') : 'No symptoms'}
               imageUrl="/images/default-avatar.png"
               urgency={{
                 label: app.type,
