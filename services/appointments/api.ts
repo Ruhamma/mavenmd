@@ -20,7 +20,7 @@ export interface Appointment {
   paymentMade: boolean;
   createdAt: string;
   updatedAt: string;
-  Patient: {   // <-- lowercase "patient" matches API response
+  Patient: {
     id: number;
     userId: number;
     gender: string | null;
@@ -49,7 +49,7 @@ interface AppointmentsResponse {
 }
 
 interface AppointmentByIdResponse {
-  result: Appointment; // <-- now a single object, not array
+  result: Appointment;
   message: string;
   statusCode: number;
 }
@@ -71,7 +71,56 @@ export const appointmentApi = createApi({
       query: (id) => `/appointments/${id}`,
       providesTags: ['Appointments'],
     }),
+    confirmAppointment: builder.mutation<
+      { result: { id: number; status: string }; message: string; statusCode: number },
+      number
+    >({
+      query: (id) => ({
+        url: `/appointments/${id}/confirm`,
+        method: 'PUT',
+      }),
+      invalidatesTags: ['Appointments'],
+    }),
+    cancelAppointment: builder.mutation<
+      { result: { id: number; status: string }; message: string; statusCode: number },
+      number
+    >({
+      query: (id) => ({
+        url: `/appointments/${id}/cancel`,
+        method: 'PUT',
+      }),
+      invalidatesTags: ['Appointments'],
+    }),
+    updateSessionNotes: builder.mutation<
+      { result: { id: number; sessionNotes: SessionNotes }; message: string; statusCode: number },
+      { id: number; sessionNotes: SessionNotes }
+    >({
+      query: ({ id, sessionNotes }) => ({
+        url: `/appointments/${id}/session-notes`,
+        method: 'PUT',
+        body: { sessionNotes },
+      }),
+      invalidatesTags: ['Appointments'],
+    }),
+    completeAppointment: builder.mutation<
+      { result: { id: number; status: string }; message: string; statusCode: number },
+      number
+    >({
+      query: (id) => ({
+        url: `/appointments/${id}/complete`,
+        method: 'PUT',
+      }),
+      invalidatesTags: ['Appointments'],
+    }),
   }),
 });
 
-export const { useGetAppointmentsQuery, useGetAppointmentByIdQuery } = appointmentApi;
+export const {
+  useGetAppointmentsQuery,
+  useGetAppointmentByIdQuery,
+  useConfirmAppointmentMutation,
+  useCancelAppointmentMutation,
+  useUpdateSessionNotesMutation,
+  useCompleteAppointmentMutation,
+  
+} = appointmentApi;

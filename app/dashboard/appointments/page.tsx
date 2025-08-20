@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { IconCalendar, IconCash, IconSearch, IconUsers } from '@tabler/icons-react';
+import { IconCalendar, IconCash, IconChevronLeft, IconChevronRight, IconSearch, IconUsers } from '@tabler/icons-react';
 import AppointmentsCard from './components/AppointmentsCard';
 import DashboardCard from '../components/DashboardCard';
 import { useGetAppointmentsQuery } from '@/services/appointments/api';
@@ -15,13 +15,36 @@ export default function DashboardPage() {
   const pendingCount = appointments.filter(a => a.status === 'PENDING').length;
   const completedCount = appointments.filter(a => a.status === 'COMPLETED').length;
 
-  // state for status filter
-  const [statusFilter, setStatusFilter] = useState<string>('All');
 
+  // Search state
+  const [search, setSearch] = useState('');
+
+  // Filter by patient name (search)
+  const searchedAppointments = appointments.filter(a =>
+    (a.Patient?.user?.fullName ?? 'Unknown')
+      .toLowerCase()
+      .includes(search.toLowerCase())
+  );
+
+  // Status filter
+  const [statusFilter, setStatusFilter] = useState<string>('All');
   const filteredAppointments =
     statusFilter === 'All'
-      ? appointments
-      : appointments.filter(a => a.status === statusFilter);
+      ? searchedAppointments
+      : searchedAppointments.filter(a => a.status === statusFilter);
+
+  // Pagination
+  const itemsPerPage = 5;
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = Math.ceil(filteredAppointments.length / itemsPerPage);
+  const paginatedAppointments = filteredAppointments.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  const goToPage = (page: number) => {
+    if (page >= 1 && page <= totalPages) setCurrentPage(page);
+  };
 
   return (
     <>
@@ -36,7 +59,9 @@ export default function DashboardPage() {
         <div className="relative">
           <input
             type="search"
-            placeholder="Search..."
+            placeholder="Search by patient name..."
+            value={search}
+            onChange={e => setSearch(e.target.value)}
             className="w-full pl-10 pr-4 py-2 rounded-lg shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <IconSearch
@@ -99,6 +124,7 @@ export default function DashboardPage() {
               <option value="PENDING">Pending</option>
               <option value="CONFIRMED">Confirmed</option>
               <option value="COMPLETED">Completed</option>
+              <option value="CANCELLED">Cancelled</option>
             </select>
 
             <select className="border border-gray-400 rounded px-3 py-1 text-xs sm:text-base">
@@ -110,15 +136,15 @@ export default function DashboardPage() {
         {/* Cards */}
         {isLoading && <p>Loading appointments...</p>}
         {isError && <p className="text-red-500">Failed to load appointments</p>}
-        {!isLoading && filteredAppointments.length === 0 && (
+        {!isLoading && paginatedAppointments.length === 0 && (
           <p className="text-gray-500">No appointments found.</p>
         )}
 
         <div className="space-y-4">
-          {filteredAppointments.map(app => (
+          {paginatedAppointments.map(app => (
             <AppointmentsCard
               key={app.id}
-              id={app.id} 
+              id={app.id}
               name={app.Patient?.user?.fullName ?? 'Unknown'}
               genderAge={`${app.Patient?.gender ?? 'N/A'}, ${app.Patient?.age ?? 'N/A'} years`}
               symptoms={Array.isArray(app.symptoms) && app.symptoms.length > 0 ? app.symptoms.join(', ') : 'No symptoms'}
@@ -134,12 +160,43 @@ export default function DashboardPage() {
           ))}
         </div>
 
-        {/* Pagination */}
-        <div className="mt-6 flex flex-col sm:flex-row sm:justify-between items-center text-xs sm:text-sm text-gray-700">
+        {/* Pagination Buttons */}
+        {/* Pagination Row */}
+        <div className="mt-6 flex flex-col sm:flex-row sm:justify-between items-center text-xs sm:text-sm text-gray-700 gap-2 sm:gap-0">
+          {/* Left side: showing count */}
           <span className="hidden sm:inline">
-            Showing {filteredAppointments.length} of {totalAppointments} appointments
+            Showing {paginatedAppointments.length} of {filteredAppointments.length} appointments
           </span>
+
+          {/* Right side: pagination buttons */}
+          <div className="flex justify-center sm:justify-end items-center gap-2">
+            <button
+              onClick={() => goToPage(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+            >
+              <IconChevronLeft size={24} stroke={2} />
+            </button>
+            {Array.from({ length: totalPages }, (_, i) => (
+              <button
+                key={i + 1}
+                onClick={() => goToPage(i + 1)}
+                className={`px-3 py-1 rounded ${currentPage === i + 1 ? 'bg-primary-800 text-white' : 'bg-gray-200 hover:bg-gray-300'
+                  }`}
+              >
+                {i + 1}
+              </button>
+            ))}
+            <button
+              onClick={() => goToPage(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+            >
+              <IconChevronRight size={24} stroke={2} />
+            </button>
+          </div>
         </div>
+
       </div>
     </>
   );

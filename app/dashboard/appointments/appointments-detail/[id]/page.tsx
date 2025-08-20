@@ -1,7 +1,7 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { useGetAppointmentsQuery, useGetAppointmentByIdQuery } from '@/services/appointments/api';
+import { useGetAppointmentsQuery, useGetAppointmentByIdQuery, useUpdateSessionNotesMutation, useCompleteAppointmentMutation } from '@/services/appointments/api';
 import { IconPhoneFilled, IconMailFilled, IconFileDescriptionFilled } from '@tabler/icons-react';
 import { useState, useEffect } from 'react';
 
@@ -9,18 +9,14 @@ export default function SessionPage() {
     const params = useParams();
     const id = Number(params.id);
 
-    // Fetch list of appointments (contains patient + user info)
     const { data: allData } = useGetAppointmentsQuery();
     const allAppointments = allData?.result?.appointments ?? [];
 
-    // Fetch appointment detail (has sessionNotes, status, etc.)
     const { data, isLoading, isError } = useGetAppointmentByIdQuery(id);
     const appointmentDetail = data?.result;
 
-    // Find matching appointment from all appointments for patient info
     const appointmentWithPatient = allAppointments.find(a => a.id === id);
 
-    // Merge: detail is source of truth for session/metadata, patient info comes from list
     const appointment = {
         ...appointmentWithPatient,
         ...appointmentDetail,
@@ -29,13 +25,13 @@ export default function SessionPage() {
     const patient = appointment?.Patient;
     const user = patient?.user;
 
-    // Local state for editable session notes
     const [symptoms, setSymptoms] = useState('');
     const [diagnosis, setDiagnosis] = useState('');
     const [treatmentPlan, setTreatmentPlan] = useState('');
     const [findings, setFindings] = useState('');
+    const [updateSessionNotes, { isLoading: isUpdating }] = useUpdateSessionNotesMutation();
+    const [completeAppointment, { isLoading: isCompleting }] = useCompleteAppointmentMutation();
 
-    // Prefill only when appointment id changes (prevents overwriting user edits)
     useEffect(() => {
         if (appointment) {
             setSymptoms(
@@ -47,9 +43,33 @@ export default function SessionPage() {
             setTreatmentPlan(appointment.sessionNotes?.treatmentPlan ?? '');
             setFindings(appointment.sessionNotes?.examinationFindings ?? '');
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [appointment?.id]);
-
+    const handleSaveNotes = async () => {
+        try {
+            const res = await updateSessionNotes({
+                id,
+                sessionNotes: {
+                    symptoms,
+                    diagnosis,
+                    treatmentPlan,
+                    examinationFindings: findings,
+                },
+            }).unwrap();
+            alert(res.message || 'Session notes saved successfully');
+        } catch (err: any) {
+            console.error('Failed to save session notes:', err);
+            alert(err?.data?.message || 'Failed to save session notes');
+        }
+    };
+    const handleComplete = async () => {
+        try {
+            const res = await completeAppointment(id).unwrap();
+            alert(res.message || 'Appointment marked as completed');
+        } catch (err: any) {
+            console.error('Failed to complete appointment:', err);
+            alert(err?.data?.message || 'Failed to complete appointment');
+        }
+    };
     if (isLoading) return <p className="p-6">Loading...</p>;
     if (isError || !appointment) return <p className="p-6 text-red-500">Error loading appointment</p>;
 
@@ -166,15 +186,12 @@ export default function SessionPage() {
                             />
                         </div>
 
-                        {/* Save button placeholder */}
                         <button
-                            className="mt-4 w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-md font-semibold text-sm"
-                            onClick={() => {
-                                console.log('Save clicked:', { symptoms, diagnosis, treatmentPlan, findings });
-                                // TODO: Call RTK mutation here
-                            }}
+                            className={`mt-4 w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-md font-semibold text-sm ${isUpdating ? 'opacity-70 cursor-not-allowed' : ''}`}
+                            onClick={handleSaveNotes}
+                            disabled={isUpdating}
                         >
-                            Save Notes
+                            {isUpdating ? 'Saving...' : 'Save Notes'}
                         </button>
                     </div>
                 </div>
@@ -232,10 +249,21 @@ export default function SessionPage() {
                                 </span>
                             </li>
                         </ul>
-
-                        <button className="mt-4 w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-md font-semibold text-sm">
-                            Mark as complete
+                        <button
+                            className={`mt-4 w-full py-2 rounded-md font-semibold text-sm text-white ${appointment?.status === 'COMPLETED'
+                                    ? 'bg-gray-400 cursor-not-allowed'
+                                    : 'bg-green-600 hover:bg-green-700'
+                                } ${isCompleting ? 'opacity-70 cursor-not-allowed' : ''}`}
+                            onClick={handleComplete}
+                            disabled={isCompleting || appointment?.status === 'COMPLETED'}
+                        >
+                            {appointment?.status === 'COMPLETED'
+                                ? 'Completed'
+                                : isCompleting
+                                    ? 'Completing...'
+                                    : 'Mark as complete'}
                         </button>
+
                     </div>
                 </div>
             </div>
