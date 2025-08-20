@@ -37,7 +37,7 @@ const Login = () => {
   const onSubmit = async (data: LoginFormData) => {
     try {
       await login(data).unwrap();
-      route.push('/');
+      route.push('/dashboard/appointments');
       // notify('Success', 'Logged in successfully');
     } catch (error) {
       // console.error("Login failed:", error);
@@ -138,7 +138,7 @@ const Login = () => {
 
                 <button
                   type="submit"
-                  className="self-stretch h-12 px-3 py-4 bg-primary-800 rounded-[20px] outline-2 outline-offset-[-2px] outline-white inline-flex justify-center items-center"
+                  className="self-stretch h-12 px-3 py-4 bg-primary-800 hover:bg-primary-600 rounded-[20px] outline-2 outline-offset-[-2px] outline-white inline-flex justify-center items-center"
                 >
                   <div className="px-4 flex justify-center items-center gap-2.5">
                     <span className="justify-start text-white text-base font-medium  leading-none tracking-wide">

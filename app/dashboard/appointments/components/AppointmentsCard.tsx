@@ -18,7 +18,7 @@ type AppointmentsCardProps = {
   urgency: Urgency | null;
   requestedAgo: string;
   distance: string;
-  status: 'Confirmed' | 'Pending' | 'Cancelled';
+  status: string;
 };
 
 const AppointmentsCard: React.FC<AppointmentsCardProps> = ({
