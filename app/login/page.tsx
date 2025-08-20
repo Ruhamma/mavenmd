@@ -37,7 +37,7 @@ const Login = () => {
   const onSubmit = async (data: LoginFormData) => {
     try {
       await login(data).unwrap();
-      route.push('/dashboard/appointments');
+      route.push('/dashboard');
       // notify('Success', 'Logged in successfully');
     } catch (error) {
       // console.error("Login failed:", error);
