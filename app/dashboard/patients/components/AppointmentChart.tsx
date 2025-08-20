@@ -11,10 +11,20 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import { useGetAppointmentsQuery } from '@/services/appointments/api'; // ✅ Add your query hook
+import { format } from 'date-fns';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 export default function DashboardCards() {
+  //  Fetch all appointments, we should change this later
+  const { data, isLoading } = useGetAppointmentsQuery();
+
+  //  Extract and sort next appointment
+  const nextAppointment = data?.result?.appointments
+    ?.filter((a: any) => a.status === 'PENDING' && new Date(a.appointmentDate) > new Date())
+    ?.sort((a: any, b: any) => new Date(a.appointmentDate).getTime() - new Date(b.appointmentDate).getTime())[0];
+
   const barData = {
     labels: ['Jun', 'May', 'Apr', 'Mar', 'Feb', 'Jan'],
     datasets: [
@@ -66,35 +76,46 @@ export default function DashboardCards() {
 
   return (
     <div className="flex flex-col gap-6 p-4 max-w-md mx-auto">
-      {/* Next Appointment Card */}
+      {/* ✅ Next Appointment Card */}
       <div className="bg-white shadow-lg rounded-xl p-4 flex flex-col gap-4">
         <div>
-          <p className="text-lg font-semibold">Next</p>
-          <p className="text-lg font-semibold">Appointment</p>
+          <p className="text-lg font-semibold">Next Appointment</p>
         </div>
-        <div className="flex items-center gap-3">
-          <img
-            src="https://randomuser.me/api/portraits/men/32.jpg"
-            alt="James Johnson"
-            className="w-12 h-12 rounded-full"
-          />
-          <div>
-            <p className="font-bold">James Johnson</p>
-            <div className="flex items-center text-sm text-gray-600">
-              <IconMapPin className="w-4 h-4 mr-1" />
-              <span>Manhattan, NY</span>
+
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : nextAppointment ? (
+          <>
+            <div className="flex items-center gap-3">
+              <img
+                src="https://randomuser.me/api/portraits/men/32.jpg"
+                alt={nextAppointment.Patient?.user?.fullName}
+                className="w-12 h-12 rounded-full"
+              />
+              <div>
+                <p className="font-bold">{nextAppointment.Patient?.user?.fullName}</p>
+                <div className="text-sm text-gray-600">
+                  <p>{format(new Date(nextAppointment.appointmentDate), 'PPP p')}</p>
+                </div>
+                <div className="flex items-center text-sm text-gray-600">
+                  <IconMapPin className="w-4 h-4 mr-1" />
+                  <span>{nextAppointment.Patient?.Address || 'No address provided'}</span>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <div className="flex">
-          <button className="bg-primary-700 hover:bg-primary-800 transition-all text-white rounded-full px-4 py-2 flex items-center ml-auto">
-            <IconPhoneCall className="w-4 h-4 mr-2" />
-            Call
-          </button>
-        </div>
+            <div className="flex">
+              <button className="bg-primary-700 hover:bg-primary-800 transition-all text-white rounded-full px-4 py-2 flex items-center ml-auto">
+                <IconPhoneCall className="w-4 h-4 mr-2" />
+                Call
+              </button>
+            </div>
+          </>
+        ) : (
+          <p>No upcoming appointments</p>
+        )}
       </div>
 
-      {/* Bar Chart Card */}
+      {/* ✅ Bar Chart Card */}
       <div className="bg-white shadow-lg rounded-xl p-4">
         <div className="flex items-center gap-2 mb-2">
           <IconChartBar className="text-primary-700 w-5 h-5 -rotate-270" />
