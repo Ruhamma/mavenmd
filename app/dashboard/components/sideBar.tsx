@@ -10,6 +10,7 @@ import {
   IconHelp,
   IconLogout,
   IconLayoutDashboard,
+  IconTools,
 } from '@tabler/icons-react';
 import React from 'react';
 
@@ -23,6 +24,7 @@ const sidebarItems = [
     icon: <IconDatabase size={20} />,
   },
   { label: 'Patients', path: '/dashboard/patients', icon: <IconUser size={20} /> },
+  { label: 'Customize', path: '/dashboard/customize', icon: <IconTools size={20} /> },
   { label: 'Settings', path: '/dashboard/settings', icon: <IconSettings size={20} /> },
 ];
 

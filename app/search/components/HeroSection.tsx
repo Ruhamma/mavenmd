@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { IconMapPin, IconStethoscope } from '@tabler/icons-react';
+type HeroSectionProps = {
+  onSearch: (location: string, query: string) => void;
+};
 
-const HeroSection = () => {
+const HeroSection = ({ onSearch }: HeroSectionProps) => {
+  const [location, setLocation] = useState('');
+  const [query, setQuery] = useState('');
+
+  const handleSearch = () => {
+    onSearch(location, query);
+  };
   return (
     <section className="relative w-full bg-white overflow-hidden">
       <div className="relative w-full bg-primary-800 rounded-b-[300px] shadow-md py-20 px-6 md:px-16">
         <div
-          className="absolute inset-0 z-10"
+          className="absolute inset-0 z-0"
           style={{
             backgroundImage: "url('/images/pattern.png')",
             backgroundRepeat: 'no-repeat',
@@ -15,7 +24,7 @@ const HeroSection = () => {
             opacity: 0.1,
           }}
         />
-        <div className="z-20">
+        <div className="relative z-10">
           <div className=" max-w-3xl mx-auto text-center text-white space-y-6">
             <h1 className="text-3xl md:text-5xl font-semibold leading-snug">
               Meet Our Trusted Healthcare <br /> Experts
@@ -26,7 +35,7 @@ const HeroSection = () => {
             </p>
           </div>
 
-          <div className="absolute top-2 right-85 hidden md:block">
+          <div className="absolute -top-15 right-85 hidden md:block">
             <img src="/SearchImage1.png" alt="Logo" className="rounded" />
           </div>
           <div className="absolute top-18 left-32 hidden md:block">
@@ -36,9 +45,7 @@ const HeroSection = () => {
             <img src="/SearchImage3.png" alt="Logo" className="rounded" />
           </div>
 
-          {/* Search Bar */}
           <div className="mt-16 mx-auto max-w-5xl bg-white shadow-xl rounded-b-[80px] px-10 py-4 flex flex-col md:flex-row items-center justify-between gap-2">
-            {/* Location */}
             <div className="flex-col items-center gap-3 flex-1 ">
               <span className="text-sm text-zinc-800 font-bold">Location</span>
               <div className="relative">
@@ -49,12 +56,13 @@ const HeroSection = () => {
                 <input
                   type="text"
                   placeholder="Enter your location"
+                  value={location}
+                  onChange={e => setLocation(e.target.value)}
                   className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2  focus:border-transparent rounded-bl-[30px] focus:ring-primary-500"
                 />
               </div>
             </div>
 
-            {/* Specialty/Search */}
             <div className="flex-col items-center gap-3 flex-1">
               <span className="text-sm text-primary-800 font-bold">Symptoms or Doctors</span>
               <div className="relative">
@@ -65,13 +73,17 @@ const HeroSection = () => {
                 <input
                   type="text"
                   placeholder="Search for doctors, specialties..."
+                  value={query}
+                  onChange={e => setQuery(e.target.value)}
                   className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                 />
               </div>
             </div>
 
-            {/* Search Button */}
-            <button className="bg-primary-800 text-white rounded-md px-12 py-3 font-bold hover:bg-primary-800 transition-colors h-[48px] md:h-auto rounded-br-[30px] mt-6">
+            <button
+              className="bg-primary-800 hover:bg-green-800 text-white rounded-md px-12 py-3 font-bold transition-colors h-[48px] md:h-auto rounded-br-[30px] mt-6"
+              onClick={handleSearch}
+            >
               Search
             </button>
           </div>

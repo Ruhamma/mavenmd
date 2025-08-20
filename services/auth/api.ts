@@ -18,7 +18,7 @@ export const authApi = createApi({
     }),
     registerUser: builder.mutation({
       query: userData => ({
-        url: '/patients/register',
+        url: 'patient/register-patient',
         method: 'POST',
         body: userData,
       }),
