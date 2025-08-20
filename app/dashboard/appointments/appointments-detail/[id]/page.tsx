@@ -187,7 +187,7 @@ export default function SessionPage() {
                         </div>
 
                         <button
-                            className={`mt-4 w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-md font-semibold text-sm ${isUpdating ? 'opacity-70 cursor-not-allowed' : ''}`}
+                            className={`mt-4 w-full bg-primary-800 hover:bg-primary-500 text-white py-2 rounded-md font-semibold text-sm ${isUpdating ? 'opacity-70 cursor-not-allowed' : ''}`}
                             onClick={handleSaveNotes}
                             disabled={isUpdating}
                         >
@@ -249,20 +249,35 @@ export default function SessionPage() {
                                 </span>
                             </li>
                         </ul>
-                        <button
-                            className={`mt-4 w-full py-2 rounded-md font-semibold text-sm text-white ${appointment?.status === 'COMPLETED'
-                                    ? 'bg-gray-400 cursor-not-allowed'
-                                    : 'bg-green-600 hover:bg-green-700'
-                                } ${isCompleting ? 'opacity-70 cursor-not-allowed' : ''}`}
-                            onClick={handleComplete}
-                            disabled={isCompleting || appointment?.status === 'COMPLETED'}
-                        >
-                            {appointment?.status === 'COMPLETED'
-                                ? 'Completed'
-                                : isCompleting
-                                    ? 'Completing...'
-                                    : 'Mark as complete'}
-                        </button>
+                        <div className="relative group">
+                            <button
+                                className={`mt-4 w-full py-2 rounded-md font-semibold text-sm text-white
+                                    ${appointment?.status === 'COMPLETED' || appointment?.status !== 'CONFIRMED'
+                                        ? 'bg-gray-400 cursor-not-allowed'
+                                        : 'bg-green-600 hover:bg-green-700'
+                                    }
+                                    ${isCompleting ? 'opacity-70 cursor-not-allowed' : ''}`}
+                                onClick={handleComplete}
+                                disabled={
+                                    isCompleting ||
+                                    appointment?.status === 'COMPLETED' ||
+                                    appointment?.status !== 'CONFIRMED'
+                                }
+                            >
+                                {appointment?.status === 'COMPLETED'
+                                    ? 'Completed'
+                                    : appointment?.status !== 'CONFIRMED'
+                                        ? 'Mark as complete'
+                                        : isCompleting
+                                            ? 'Completing...'
+                                            : 'Mark as complete'}
+                            </button>
+                            {appointment?.status !== 'CONFIRMED' && appointment?.status !== 'COMPLETED' && (
+                                <span className="absolute left-1/2 -translate-x-1/2 mt-2 z-10 hidden group-hover:block bg-gray-800 text-white text-xs rounded px-3 py-1 whitespace-nowrap shadow-lg">
+                                    You can only mark as complete if the appointment is confirmed
+                                </span>
+                            )}
+                        </div>
 
                     </div>
                 </div>

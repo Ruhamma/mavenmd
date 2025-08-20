@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import '../styles/globals.css';
 import { Inter, DM_Sans } from 'next/font/google';
 import { Providers } from '../store/providers';
-
+import { Toaster } from 'sonner';
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
@@ -25,7 +25,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${dmsans.variable}`}>
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <Toaster richColors position="bottom-right" />
+        </Providers>
       </body>
     </html>
   );
