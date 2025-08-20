@@ -1,40 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-interface User {
-  id: number;
-  email: string;
-  username: string;
-  role: {
-    id: number;
-    name: string;
-    permissions: string;
-  };
-  created_at?: string;
-  updated_at?: string;
-  profile_picture?: string;
-  first_name?: string;
-  last_name?: string;
-  is_active?: string;
-  phone_number?: string;
-}
-
-interface LoginRequest {
-  email: string;
-  password: string;
-}
-
-interface RegisterRequest {
-  email: string;
-  username: string;
-  password: string;
-  confirm_password: string;
-  role: string;
-}
-
-interface AuthResponse {
-  user: User;
-}
-
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
@@ -43,7 +8,7 @@ export const authApi = createApi({
   }),
   tagTypes: ['Auth', 'profile'],
   endpoints: builder => ({
-    login: builder.mutation<AuthResponse, LoginRequest>({
+    login: builder.mutation({
       query: credentials => ({
         url: '/user/login/',
         method: 'POST',
@@ -51,15 +16,15 @@ export const authApi = createApi({
       }),
       invalidatesTags: ['Auth'],
     }),
-    registerUser: builder.mutation<AuthResponse, RegisterRequest>({
+    registerUser: builder.mutation({
       query: userData => ({
-        url: '/patient/register-patient',
+        url: '/patients/register',
         method: 'POST',
         body: userData,
       }),
       invalidatesTags: ['Auth'],
     }),
-    registerProvider: builder.mutation<AuthResponse, RegisterRequest>({
+    registerProvider: builder.mutation({
       query: userData => ({
         url: '/service-provider/register',
         method: 'POST',
@@ -67,19 +32,19 @@ export const authApi = createApi({
       }),
       invalidatesTags: ['Auth'],
     }),
-    logout: builder.mutation<void, void>({
+    logout: builder.mutation({
       query: () => ({
         url: '/user/logout/',
         method: 'POST',
       }),
       invalidatesTags: ['Auth'],
     }),
-    getMe: builder.query<User | null, void>({
+    getMe: builder.query({
       query: () => '/user/me/',
       providesTags: ['Auth', 'profile'],
       transformErrorResponse: () => null,
     }),
-    refreshToken: builder.mutation<void, void>({
+    refreshToken: builder.mutation({
       query: () => ({
         url: '/user/login/refresh/',
         method: 'POST',
@@ -88,11 +53,17 @@ export const authApi = createApi({
   }),
 });
 
-export const { useLoginMutation, useLogoutMutation, useGetMeQuery, useRefreshTokenMutation } =
-  authApi;
+export const {
+  useLoginMutation,
+  useLogoutMutation,
+  useGetMeQuery,
+  useRefreshTokenMutation,
+  useRegisterProviderMutation,
+  useRegisterUserMutation,
+} = authApi;
 
 export const useAuth = () => {
-  const { data: user, isLoading } = useGetMeQuery();
+  const { data: user, isLoading } = useGetMeQuery({});
 
   return {
     user,

@@ -7,6 +7,8 @@ import { useLoginMutation } from '../../services/auth/api';
 import z from 'zod';
 import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from 'sonner';
+import { Button } from '@/components/ui/button';
 
 const loginSchema = z.object({
   email: z.string().email('Invalid email address').min(1, 'Email is required'),
@@ -37,13 +39,13 @@ const Login = () => {
   const onSubmit = async (data: LoginFormData) => {
     try {
       await login(data).unwrap();
-      route.push('/dashboard/appointments');
-      // notify('Success', 'Logged in successfully');
+      route.push('/');
+      toast.success('Logged in successfully!');
     } catch (error) {
-      // console.error("Login failed:", error);
-      // notify('Error', 'Failed to login');
+      toast.error('Login failed. Please check your credentials.');
     }
   };
+
   return (
     <main className="lg:h-screen lg:w-screen overflow-hidden lg:p-6">
       <div className="relative flex flex-col h-full w-full overflow-hidden">
@@ -136,7 +138,8 @@ const Login = () => {
                   </a>
                 </div>
 
-                <button
+                <Button
+                  disabled={isLoginLoading}
                   type="submit"
                   className="self-stretch h-12 px-3 py-4 bg-primary-800 hover:bg-primary-600 rounded-[20px] outline-2 outline-offset-[-2px] outline-white inline-flex justify-center items-center"
                 >
@@ -145,7 +148,7 @@ const Login = () => {
                       Log In
                     </span>
                   </div>
-                </button>
+                </Button>
               </form>
 
               <div className="w-full h-12 outline-1 outline-offset-[-1px] outline-white inline-flex justify-start items-start gap-4">
@@ -171,7 +174,7 @@ const Login = () => {
                 <span className="text-Miscellaneous-Floating-Tab---Text-Unselected text-sm font-normal  leading-tight">
                   No account yet?{' '}
                 </span>
-                <a href="#" className="text-Primary-700 text-sm font-normal  leading-tight">
+                <a href="/register" className="text-primary-700 text-sm font-normal  leading-tight">
                   Sign Up
                 </a>
               </p>
