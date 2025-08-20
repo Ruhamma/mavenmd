@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { ReactNode } from 'react';
+
 interface SessionNotes {
   symptoms: string;
   diagnosis: string;
@@ -20,15 +20,15 @@ export interface Appointment {
   paymentMade: boolean;
   createdAt: string;
   updatedAt: string;
-  Patient: {
+  Patient: {   // <-- lowercase "patient" matches API response
     id: number;
     userId: number;
-    gender: string;
-    age: number;
-    Dob: string;
-    insurances: string[];
-    BloodType: string;
-    Address: string;
+    gender: string | null;
+    age: number | null;
+    Dob: string | null;
+    insurances: string[] | null;
+    BloodType: string | null;
+    Address: string | null;
     user: {
       id: number;
       fullName: string;
@@ -49,14 +49,10 @@ interface AppointmentsResponse {
 }
 
 interface AppointmentByIdResponse {
-  result: {
-    appointments: Appointment[]; // <-- API still wraps it in an array
-    count: number;
-  };
+  result: Appointment; // <-- now a single object, not array
   message: string;
   statusCode: number;
 }
-
 
 // ---- API ----
 export const appointmentApi = createApi({
@@ -77,6 +73,5 @@ export const appointmentApi = createApi({
     }),
   }),
 });
-
 
 export const { useGetAppointmentsQuery, useGetAppointmentByIdQuery } = appointmentApi;
