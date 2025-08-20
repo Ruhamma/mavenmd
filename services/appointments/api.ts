@@ -53,6 +53,22 @@ interface AppointmentByIdResponse {
   message: string;
   statusCode: number;
 }
+interface AppointmentAnalyticsResponse {
+  result: {
+    totalAppointments: number;
+    totalPatients: number;
+    totalPendingAppointments: number;
+    totalActiveAppointments: number;
+    totalCompletedAppointments: number;
+    totalCancelledAppointments: number;
+    totalAppointmentsToday: number;
+    totalAppointmentsThisWeek: number;
+    totalAppointmentsThisMonth: number;
+    totalAppointmentsThisYear: number;
+  };
+  message: string;
+  statusCode: number;
+}
 
 // ---- API ----
 export const appointmentApi = createApi({
@@ -112,6 +128,11 @@ export const appointmentApi = createApi({
       }),
       invalidatesTags: ['Appointments'],
     }),
+    //add provider tags if neccessary
+    getAppointmentsAnalytics: builder.query<AppointmentAnalyticsResponse, void>({
+      query: () => '/appointments/analytics',
+    }),
+
   }),
 });
 
@@ -122,5 +143,6 @@ export const {
   useCancelAppointmentMutation,
   useUpdateSessionNotesMutation,
   useCompleteAppointmentMutation,
-  
+  useGetAppointmentsAnalyticsQuery,
+
 } = appointmentApi;
