@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     const refreshTokenInterval = setInterval(
       () => {
-        refreshToken();
+        refreshToken({});
       },
       14 * 60 * 1000,
     );

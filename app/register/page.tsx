@@ -71,22 +71,6 @@ const RegisterPage = () => {
       setStep(2);
     }
   };
-  type ApiErrorDetail = {
-    field: string;
-    message: string;
-    value?: string | number;
-    code: string;
-  };
-
-  type ApiErrorResponse = {
-    result: null;
-    message: string;
-    statusCode: number;
-    timestamp: string;
-    requestId: string;
-    code: string;
-    details?: ApiErrorDetail[];
-  };
 
   const onSubmitPatient: SubmitHandler<PatientForm> = async data => {
     try {

@@ -129,13 +129,13 @@ const doctors: Doctor[] = [
   },
 ];
 const Page = () => {
-  const [selectedAvailability, setSelectedAvailability] = useState();
-  const [selectedPriceRange, setSelectedPriceRange] = useState();
+  const [selectedAvailability, setSelectedAvailability] = useState<string | undefined>();
+  const [selectedPriceRange, setSelectedPriceRange] = useState('');
   const [selectedRating, setSelectedRating] = useState('');
   const [viewMode, setViewMode] = useState('grid');
   const [selectedSpecialty, setSelectedSpecialty] = useState('');
   const [location, setLocation] = useState('');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [, setSearchQuery] = useState('');
   const filteredDoctors = doctors.filter(doc => {
     let matches = true;
 

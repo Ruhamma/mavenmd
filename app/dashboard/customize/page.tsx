@@ -193,14 +193,6 @@ const availableCharts = [
 ];
 
 export default function CustomizeDashboardPage() {
-  const defaultLayout: Layout[] = availableCards.slice(0, 4).map((c, i) => ({
-    i: c.key,
-    x: i % 4,
-    y: Math.floor(i / 4),
-    w: 1,
-    h: 1,
-  }));
-
   const [layout, setLayout] = useState<Layout[]>([]);
   const [selectedCards, setSelectedCards] = useState<string[]>([]);
   const [selectedCharts, setSelectedCharts] = useState<string[]>([]);

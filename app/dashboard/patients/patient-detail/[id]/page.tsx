@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { IconSearch, IconPrinter, IconBrain, IconHeartFilled, IconPill } from '@tabler/icons-react';
@@ -97,15 +97,43 @@ export default function PatientVisitPage() {
             {/* Patient Details */}
             <div className="flex flex-col sm:flex-row justify-center gap-8 sm:gap-20 text-sm w-full md:w-2/3 pl-4">
               <div className="flex flex-col gap-2">
-                <span><strong>Gender</strong><br />{patient?.gender ?? 'N/A'}</span>
-                <span><strong>Age</strong><br />{patient?.age ? `${patient.age} years` : 'N/A'}</span>
-                <span><strong>Phone Number</strong><br />{user?.phoneNumber ?? 'N/A'}</span>
-                <span><strong>Location</strong><br />{patient?.Address ?? 'N/A'}</span>
+                <span>
+                  <strong>Gender</strong>
+                  <br />
+                  {patient?.gender ?? 'N/A'}
+                </span>
+                <span>
+                  <strong>Age</strong>
+                  <br />
+                  {patient?.age ? `${patient.age} years` : 'N/A'}
+                </span>
+                <span>
+                  <strong>Phone Number</strong>
+                  <br />
+                  {user?.phoneNumber ?? 'N/A'}
+                </span>
+                <span>
+                  <strong>Location</strong>
+                  <br />
+                  {patient?.Address ?? 'N/A'}
+                </span>
               </div>
               <div className="flex flex-col gap-2">
-                <span><strong>Blood Type</strong><br />{patient?.BloodType ?? 'N/A'}</span>
-                <span><strong>Insurance</strong><br />{patient?.insurances ?? 'N/A'}</span>
-                <span><strong>Email</strong><br />{user?.email ?? 'N/A'}</span>
+                <span>
+                  <strong>Blood Type</strong>
+                  <br />
+                  {patient?.BloodType ?? 'N/A'}
+                </span>
+                <span>
+                  <strong>Insurance</strong>
+                  <br />
+                  {patient?.insurances ?? 'N/A'}
+                </span>
+                <span>
+                  <strong>Email</strong>
+                  <br />
+                  {user?.email ?? 'N/A'}
+                </span>
               </div>
             </div>
           </div>
@@ -145,11 +173,21 @@ export default function PatientVisitPage() {
             </div>
             <h2 className="font-semibold text-xl mb-4 pt-6">Visit Summary</h2>
             <div className="space-y-3">
-              <p><strong>Requested Time</strong><br />{appointment?.appointmentDate ? new Date(appointment.appointmentDate).toLocaleString() : 'N/A'}</p>
+              <p>
+                <strong>Requested Time</strong>
+                <br />
+                {appointment?.appointmentDate
+                  ? new Date(appointment.appointmentDate).toLocaleString()
+                  : 'N/A'}
+              </p>
               {/* <p><strong>Estimated Duration</strong><br />{appointment?.duration ?? 'N/A'}<hr /></p> */}
-              <p><strong>Estimated Duration</strong>45min</p>
+              <p>
+                <strong>Estimated Duration</strong>45min
+              </p>
               {/* <p><strong>Service Fee</strong><br />${appointment?.fee ?? 'N/A'}<hr /></p> */}
-              <p><strong>Service Fee</strong>120$</p>
+              <p>
+                <strong>Service Fee</strong>120$
+              </p>
             </div>
           </div>
 
@@ -164,7 +202,7 @@ export default function PatientVisitPage() {
               ))}
             </ul>
           </div> */}
-           <div className="bg-white rounded-xl shadow px-4 py-8 text-sm text-gray-800">
+          <div className="bg-white rounded-xl shadow px-4 py-8 text-sm text-gray-800">
             <h2 className="font-semibold text-lg mb-3">Medical History</h2>
             <ul className="space-y-2">
               <li className="flex items-center gap-2">

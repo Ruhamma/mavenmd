@@ -1,17 +1,11 @@
 'use client';
 import React from 'react';
 import { IconMail, IconPhone, IconMapPin, IconCake, IconEdit, IconPlus } from '@tabler/icons-react';
-import { useAuth } from '@/services/auth/api';
-import { useGetUserDetailQuery } from '@/services/profile/api';
 
 export default function ProfilePage() {
-  const { user } = useAuth();
-  const { data } = useGetUserDetailQuery({ id: user?.result?.user?.id || '' });
   return (
     <div className="p-4 sm:p-6 md:px-20 bg-gray-100 min-h-screen">
-      {/* Profile Card + Details Container */}
       <div className="flex flex-col lg:flex-row gap-8">
-        {/* Sidebar */}
         <div className="bg-white rounded-xl shadow-md p-4 w-full lg:w-1/4 flex-shrink-0">
           <div className="bg-gradient-to-r from-primary-800 to-[#6B5BFF] rounded-xl p-4 text-white text-center">
             <div className="w-20 h-20 rounded-full mx-auto border-4 border-white overflow-hidden">

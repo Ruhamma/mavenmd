@@ -63,7 +63,7 @@ export default function DashboardCards() {
           display: false,
         },
         ticks: {
-          callback: function (value: string | number, index: number) {
+          callback: function (value: string | number) {
             if (typeof value === 'number') {
               return `${value / 1000}K`;
             }

@@ -31,7 +31,7 @@ const sidebarItems = [
   { label: 'Settings', path: '/dashboard/settings', icon: <IconSettings size={20} /> },
 ];
 
-const initialSidebarItems = sidebarItems.map((item, idx) => ({
+const initialSidebarItems = sidebarItems.map(item => ({
   ...item,
   i: item.label.replace(/\s+/g, '-').toLowerCase(),
 }));
@@ -63,7 +63,7 @@ const SideBar = () => {
   const handleLayoutChange = (newLayout: Layout[]) => {
     const reorderedItems = newLayout
       .sort((a, b) => a.y - b.y)
-      .map((layoutItem) => items.find((item) => item.i === layoutItem.i)!);
+      .map(layoutItem => items.find(item => item.i === layoutItem.i)!);
     setItems(reorderedItems);
   };
 
@@ -89,9 +89,10 @@ const SideBar = () => {
                 <button
                   onClick={() => handleNavigation(path)}
                   className={`w-full flex items-center justify-center md:justify-start gap-0 md:gap-3 px-2 md:px-3 py-1.5 rounded-lg text-sm font-medium transition-all
-                    ${isActive
-                      ? 'bg-[#E7E7FF] text-primary-800 font-semibold'
-                      : 'text-gray-700 hover:bg-gray-100'
+                    ${
+                      isActive
+                        ? 'bg-[#E7E7FF] text-primary-800 font-semibold'
+                        : 'text-gray-700 hover:bg-gray-100'
                     }
                   `}
                 >
