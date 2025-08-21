@@ -10,7 +10,7 @@ const navItems = [
   { label: 'Home', path: '/' },
   { label: 'About', path: '/about' },
   { label: 'Specialties', path: '/doctors' },
-  { label: 'Doctors', path: '/doctors' },
+  { label: 'Doctors', path: '/search' },
   { label: 'Symptoms', path: '/symptoms' },
   { label: 'Help', path: '/help' },
 ];
