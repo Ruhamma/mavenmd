@@ -7,18 +7,178 @@ import Footer from '../../components/Footer';
 import AvailableDoctorsCard from './components/AvailableDoctorsCard';
 import { IconMapPinFilled } from '@tabler/icons-react';
 
-const Page = () => {
-  const [selectedAvailability, setSelectedAvailability] = useState('today');
-  const [selectedPriceRange, setSelectedPriceRange] = useState('50-100');
-  const [selectedRating, setSelectedRating] = useState('4.5');
-  const [viewMode, setViewMode] = useState('grid');
+type Doctor = {
+  id: number;
+  name: string;
+  specialty: string;
+  rating: number;
+  reviewCount: number;
+  price: number;
+  distance: string;
+  availability: string;
+  imageUrl: string;
+  services: string[];
+  location: string;
+};
 
+// Mock Doctors
+const doctors: Doctor[] = [
+  {
+    id: 1,
+    name: 'Dr. Sarah Johnson',
+    specialty: 'General Practice',
+    rating: 4.8,
+    reviewCount: 22,
+    price: 100,
+    distance: '2.3 miles',
+    availability: 'today',
+    imageUrl: 'https://placehold.co/60x60',
+    services: ['HOUSE CALLS', 'INSURANCE ACCEPTED'],
+    location: 'New York',
+  },
+  {
+    id: 2,
+    name: 'Dr. Mark Lee',
+    specialty: 'Cardiology',
+    rating: 4.9,
+    reviewCount: 18,
+    price: 200,
+    distance: '5 miles',
+    availability: 'tomorrow',
+    imageUrl: 'https://placehold.co/60x60',
+    services: ['SAME DAY', 'INSURANCE ACCEPTED'],
+    location: 'Boston',
+  },
+  {
+    id: 3,
+    name: 'Dr. Emily Carter',
+    specialty: 'Dermatology',
+    rating: 4.7,
+    reviewCount: 30,
+    price: 150,
+    distance: '1.5 miles',
+    availability: 'this week',
+    imageUrl: 'https://placehold.co/60x60',
+    services: ['HOUSE CALLS'],
+    location: 'Chicago',
+  },
+  {
+    id: 4,
+    name: 'Dr. James Anderson',
+    specialty: 'Pediatrics',
+    rating: 5.0,
+    reviewCount: 40,
+    price: 80,
+    distance: '3 miles',
+    availability: 'weekend',
+    imageUrl: 'https://placehold.co/60x60',
+    services: ['HOUSE CALLS', 'INSURANCE ACCEPTED'],
+    location: 'New York',
+  },
+  {
+    id: 5,
+    name: 'Dr. Rachel Kim',
+    specialty: 'Cardiology',
+    rating: 4.5,
+    reviewCount: 12,
+    price: 250,
+    distance: '4.2 miles',
+    availability: 'today',
+    imageUrl: 'https://placehold.co/60x60',
+    services: ['SAME DAY'],
+    location: 'Los Angeles',
+  },
+  {
+    id: 6,
+    name: 'Dr. John Smith',
+    specialty: 'General Practice',
+    rating: 4.0,
+    reviewCount: 8,
+    price: 120,
+    distance: '6 miles',
+    availability: 'this week',
+    imageUrl: 'https://placehold.co/60x60',
+    services: ['HOUSE CALLS'],
+    location: 'Boston',
+  },
+  {
+    id: 7,
+    name: 'Dr. Olivia Brown',
+    specialty: 'Dermatology',
+    rating: 4.6,
+    reviewCount: 20,
+    price: 180,
+    distance: '2 miles',
+    availability: 'tomorrow',
+    imageUrl: 'https://placehold.co/60x60',
+    services: ['SAME DAY', 'INSURANCE ACCEPTED'],
+    location: 'Chicago',
+  },
+  {
+    id: 8,
+    name: 'Dr. Daniel White',
+    specialty: 'Pediatrics',
+    rating: 4.9,
+    reviewCount: 15,
+    price: 90,
+    distance: '7 miles',
+    availability: 'weekend',
+    imageUrl: 'https://placehold.co/60x60',
+    services: ['HOUSE CALLS'],
+    location: 'Los Angeles',
+  },
+];
+const Page = () => {
+  const [selectedAvailability, setSelectedAvailability] = useState();
+  const [selectedPriceRange, setSelectedPriceRange] = useState();
+  const [selectedRating, setSelectedRating] = useState('');
+  const [viewMode, setViewMode] = useState('grid');
+  const [selectedSpecialty, setSelectedSpecialty] = useState('');
+  const [location, setLocation] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+  const filteredDoctors = doctors.filter(doc => {
+    let matches = true;
+
+    if (selectedAvailability && doc.availability !== selectedAvailability) {
+      matches = false;
+    }
+
+    if (selectedPriceRange) {
+      const [min, max] = selectedPriceRange.split('-').map(Number);
+      if (selectedPriceRange === '200+' && doc.price < 200) {
+        matches = false;
+      } else if (max && (doc.price < min || doc.price > max)) {
+        matches = false;
+      }
+    }
+
+    if (selectedRating && doc.rating < parseFloat(selectedRating)) {
+      matches = false;
+    }
+
+    if (
+      selectedSpecialty &&
+      selectedSpecialty !== 'All Specialties' &&
+      doc.specialty !== selectedSpecialty
+    ) {
+      matches = false;
+    }
+
+    if (location && !doc.location.toLowerCase().includes(location.toLowerCase())) {
+      matches = false;
+    }
+
+    return matches;
+  });
+  const handleHeroSearch = (loc: string, query: string) => {
+    setLocation(loc);
+    setSearchQuery(query);
+  };
   return (
     <>
       <SearchHeader />
       <div className="min-h-screen bg-gray-50">
-        <HeroSection />
-        {/* Main Content */}
+        <HeroSection onSearch={handleHeroSearch} />
         <div className="max-w-7xl mx-auto px-4 sm:px-4 lg:px-10 py-8">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             <div className="lg:col-span-1 hidden lg:block">
@@ -37,6 +197,8 @@ const Page = () => {
                     <input
                       type="text"
                       placeholder="Know your address"
+                      value={location}
+                      onChange={e => setLocation(e.target.value)}
                       className="w-full pl-8 pr-2 py-1 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                     />
                   </div>
@@ -47,7 +209,11 @@ const Page = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Specialties
                   </label>
-                  <select className="w-full py-1 px-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                  <select
+                    value={selectedSpecialty}
+                    onChange={e => setSelectedSpecialty(e.target.value)}
+                    className="w-full py-1 px-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  >
                     <option>All Specialties</option>
                     <option>General Practice</option>
                     <option>Cardiology</option>
@@ -131,7 +297,7 @@ const Page = () => {
               {/* Header */}
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
                 <p className="text-gray-600 mb-4 sm:mb-0">
-                  Showing 24 doctors available for house calls.
+                  Showing {filteredDoctors.length} doctors available for house calls.
                 </p>
                 <div className="flex items-center gap-4">
                   <select className="p-2 border border-gray-300 rounded-lg text-sm">
@@ -182,18 +348,18 @@ const Page = () => {
 
               {/* Doctor Cards Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {Array.from({ length: 8 }).map((_, index) => (
+                {filteredDoctors.map(doc => (
                   <AvailableDoctorsCard
-                    key={index}
-                    name="Dr. Sarah Johnson"
-                    specialty="General Practice"
-                    rating={5.0}
-                    reviewCount={12}
-                    price={120}
-                    distance="2.3 miles away"
-                    availability="Available Today"
-                    imageUrl="https://placehold.co/60x60"
-                    services={['HOUSE CALLS', 'SAME DAY', 'INSURANCE ACCEPTED']}
+                    key={doc.id}
+                    name={doc.name}
+                    specialty={doc.specialty}
+                    rating={doc.rating}
+                    reviewCount={doc.reviewCount}
+                    price={doc.price}
+                    distance={doc.distance}
+                    availability={doc.availability}
+                    imageUrl={doc.imageUrl}
+                    services={doc.services}
                     onBookNow={() => console.log('Book appointment')}
                     onFavorite={() => console.log('Toggle favorite')}
                     isFavorited={false}
@@ -205,7 +371,6 @@ const Page = () => {
         </div>
       </div>
 
-      {/* Doctor Cards Horizontal Scroll */}
       <div className="px-10 py-20">
         <div className="py-4">
           <p className="text-sm  text-gray-900 mb-2 px-8">Highly rated by patients like you</p>

@@ -10,20 +10,25 @@ import {
   IconHelp,
   IconLogout,
   IconLayoutDashboard,
+  IconTools,
 } from '@tabler/icons-react';
 import React, { useState } from 'react';
 import GridLayout, { Layout } from 'react-grid-layout';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 
-const initialSidebarItems = [
-  { i: 'dashboard', label: 'Dashboard', path: '/dashboard', icon: <IconLayoutDashboard size={20} /> },
-  { i: 'appointments', label: 'Appointments', path: '/dashboard/appointments', icon: <IconCalendarEvent size={20} /> },
-  { i: 'alerts', label: 'Alerts', path: '/dashboard/alerts', icon: <IconBell size={20} /> },
-  { i: 'payments', label: 'Collections and Payments', path: '/dashboard/payments', icon: <IconDatabase size={20} /> },
-  { i: 'patients', label: 'Patients', path: '/dashboard/patients', icon: <IconUser size={20} /> },
-  { i: 'settings', label: 'Settings', path: '/dashboard/settings', icon: <IconSettings size={20} /> },
-];
+const sidebarItems = [
+  { label: 'Dashboard', path: '/dashboard', icon: <IconLayoutDashboard size={20} /> },
+  { label: 'Appointments', path: '/dashboard/appointments', icon: <IconCalendarEvent size={20} /> },
+  { label: 'Alerts', path: '/dashboard/alerts', icon: <IconBell size={20} /> },
+  {
+    label: 'Collections and Payments',
+    path: '/dashboard/payments',
+    icon: <IconDatabase size={20} />,
+  },
+  { label: 'Patients', path: '/dashboard/patients', icon: <IconUser size={20} /> },
+  { label: 'Customize', path: '/dashboard/customize', icon: <IconTools size={20} /> },
+  { label: 'Settings', path: '/dashboard/settings', icon: <IconSettings size={20} /> },
 
 const bottomItems = [
   { label: 'Help', path: '/help', icon: <IconHelp size={20} /> },
