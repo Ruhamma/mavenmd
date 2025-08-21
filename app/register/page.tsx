@@ -2,12 +2,12 @@
 import { useRegisterProviderMutation, useRegisterUserMutation } from '@/services/auth/api';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { IconStethoscope, IconUser } from '@tabler/icons-react';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { FieldErrors, SubmitHandler, useForm, UseFormRegister } from 'react-hook-form';
 import { toast } from 'sonner';
 import z from 'zod';
 
-// ✅ Strict schemas
 const patientSchema = z
   .object({
     firstName: z.string().min(1, 'First name required'),
@@ -43,7 +43,6 @@ const doctorSchemaStep2 = z.object({
   caqhNumber: z.string().min(1),
 });
 
-// ✅ Type inference
 type PatientForm = z.infer<typeof patientSchema>;
 type DoctorFormStep1 = z.infer<typeof doctorSchemaStep1>;
 type DoctorFormStep2 = z.infer<typeof doctorSchemaStep2>;
@@ -53,7 +52,7 @@ const RegisterPage = () => {
 
   const [registerUser] = useRegisterUserMutation();
   const [registerProvider] = useRegisterProviderMutation();
-
+  const route = useRouter();
   const patientForm = useForm<PatientForm>({
     resolver: zodResolver(patientSchema),
   });
@@ -97,6 +96,7 @@ const RegisterPage = () => {
       }).unwrap();
 
       toast.success('Patient registered successfully!');
+      route.push('/login');
     } catch (err: any) {
       if (err?.data?.details) {
         err.data.details.forEach(d => {
