@@ -50,7 +50,7 @@ const SideBar = () => {
     router.push(path);
   };
 
-  // Layout config for React Grid Layout
+  // Desktop layout (md+)
   const layout: Layout[] = items.map((item, index) => ({
     i: item.i,
     x: 0,
@@ -68,55 +68,118 @@ const SideBar = () => {
   };
 
   return (
-    <aside className="h-full w-[70px] md:w-[270px] bg-white flex flex-col justify-between py-4 px-2 md:px-3 transition-all">
-      <div>
-        <GridLayout
-          className="layout"
-          layout={layout}
-          cols={1}
-          rowHeight={40}
-          width={220} // approximate width of sidebar
-          isDraggable={true}
-          isResizable={false}
-          onLayoutChange={handleLayoutChange}
-          compactType="vertical"
-          draggableHandle=".sidebar-drag-handle"
-        >
-          {items.map(({ i, label, path, icon }) => {
+    <aside className="h-full w-[70px] md:w-[270px] bg-white flex flex-col py-4 px-2 md:px-3 transition-all">
+      {/* ===================== Desktop (md+) — Reorderable ===================== */}
+      <div className="hidden md:flex md:flex-col md:justify-between h-full">
+        <div>
+          <GridLayout
+            className="layout"
+            layout={layout}
+            cols={1}
+            rowHeight={40}
+            width={240}            // tuned for md:w-[270px] minus padding
+            isDraggable={true}     // only rendered on md+, so it's fine
+            isResizable={false}
+            onLayoutChange={handleLayoutChange}
+            compactType="vertical"
+            draggableHandle=".sidebar-drag-handle"
+          >
+            {items.map(({ i, label, path, icon }) => {
+              const isActive = pathname === path;
+              return (
+                <div key={i} className="draggable-item">
+                  <button
+                    onClick={() => handleNavigation(path)}
+                    className={`w-full flex items-center justify-start gap-3 px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+                      ${
+                        isActive
+                          ? 'bg-[#E7E7FF] text-primary-800 font-semibold'
+                          : 'text-gray-700 hover:bg-gray-100'
+                      }
+                    `}
+                  >
+                    <span className="sidebar-drag-handle flex items-center">{icon}</span>
+                    <span className="whitespace-nowrap">{label}</span>
+                  </button>
+                </div>
+              );
+            })}
+          </GridLayout>
+        </div>
+
+        {/* Bottom nav items (desktop) */}
+        <div className="space-y-2 mt-2">
+          {bottomItems.map(({ label, path, icon }, index) => {
             const isActive = pathname === path;
             return (
-              <div key={i} className="draggable-item">
-                <button
-                  onClick={() => handleNavigation(path)}
-                  className={`w-full flex items-center justify-center md:justify-start gap-0 md:gap-3 px-2 md:px-3 py-1.5 rounded-lg text-sm font-medium transition-all
-                    ${
-                      isActive
-                        ? 'bg-[#E7E7FF] text-primary-800 font-semibold'
-                        : 'text-gray-700 hover:bg-gray-100'
-                    }
-                  `}
-                >
-                  <span className="sidebar-drag-handle flex items-center">{icon}</span>
-                  <span className="hidden md:inline whitespace-nowrap">{label}</span>
-                </button>
-              </div>
+              <button
+                key={index}
+                onClick={() => handleNavigation(path)}
+                className={`w-full flex items-center justify-start gap-3 px-4 py-2 rounded-lg text-sm font-medium transition-all
+                  ${
+                    isActive
+                      ? 'bg-[#E7E7FF] text-primary-800 font-semibold'
+                      : 'text-gray-700 hover:bg-gray-100'
+                  }
+                `}
+              >
+                {icon}
+                <span>{label}</span>
+              </button>
             );
           })}
-        </GridLayout>
+        </div>
       </div>
 
-      {/* Bottom nav items */}
-      <div className="space-y-2">
-        {bottomItems.map(({ label, path, icon }, index) => (
-          <button
-            key={index}
-            onClick={() => handleNavigation(path)}
-            className="w-full flex items-center justify-center md:justify-start gap-0 md:gap-3 px-2 md:px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100"
-          >
-            {icon}
-            <span className="hidden md:inline">{label}</span>
-          </button>
-        ))}
+      {/* ===================== Mobile (< md) — Icons only ===================== */}
+      <div className="flex md:hidden flex-col justify-between h-full">
+        <div className="space-y-2">
+          {sidebarItems.map(({ label, path, icon }, index) => {
+            const isActive = pathname === path;
+            return (
+              <button
+                key={index}
+                onClick={() => handleNavigation(path)}
+                aria-label={label}
+                className={`w-full flex items-center justify-center px-2 py-2 rounded-lg text-sm transition-all
+                  ${
+                    isActive
+                      ? 'bg-[#E7E7FF] text-primary-800'
+                      : 'text-gray-700 hover:bg-gray-100'
+                  }
+                `}
+              >
+                {icon}
+                {/* keep for a11y only */}
+                <span className="sr-only">{label}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Bottom nav items (mobile) */}
+        <div className="space-y-2 mt-2">
+          {bottomItems.map(({ label, path, icon }, index) => {
+            const isActive = pathname === path;
+            return (
+              <button
+                key={index}
+                onClick={() => handleNavigation(path)}
+                aria-label={label}
+                className={`w-full flex items-center justify-center px-2 py-2 rounded-lg text-sm transition-all
+                  ${
+                    isActive
+                      ? 'bg-[#E7E7FF] text-primary-800'
+                      : 'text-gray-700 hover:bg-gray-100'
+                  }
+                `}
+              >
+                {icon}
+                <span className="sr-only">{label}</span>
+              </button>
+            );
+          })}
+        </div>
       </div>
     </aside>
   );
