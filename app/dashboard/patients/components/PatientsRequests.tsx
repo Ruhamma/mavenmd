@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { IconClock, IconMapPin } from '@tabler/icons-react';
+import { useConfirmAppointmentMutation, useCancelAppointmentMutation } from '@/services/appointments/api';
 
 type Urgency = {
   label: string;
@@ -11,6 +12,7 @@ type Urgency = {
 };
 
 type AppointmentsCardProps = {
+  id: number;
   name: string;
   genderAge: string;
   symptoms: string;
@@ -18,10 +20,11 @@ type AppointmentsCardProps = {
   urgency: Urgency | null;
   requestedAgo: string;
   distance: string;
-  status: 'Confirmed' | 'Pending' | 'Cancelled';
+  status: string;
 };
 
 const AppointmentsCard: React.FC<AppointmentsCardProps> = ({
+  id,
   name,
   genderAge,
   symptoms,
@@ -32,9 +35,36 @@ const AppointmentsCard: React.FC<AppointmentsCardProps> = ({
   status,
 }) => {
   const router = useRouter();
+  const [confirmAppointment, { isLoading }] = useConfirmAppointmentMutation();
+  const [cancelAppointment, { isLoading: isCancelling }] = useCancelAppointmentMutation();
 
   const handleCardClick = () => {
-    router.push(`/dashboard/patients/patient-detail`);
+    router.push(`/dashboard/patients/patient-detail/${id}`);
+  };
+
+  const handleAccept = async () => {
+    try {
+      const res = await confirmAppointment(id).unwrap();
+      console.log('Appointment confirmed:', res);
+      alert('Appointment confirmed successfully');
+      // Optionally, refresh the page or trigger a refetch
+      router.refresh();
+    } catch (err: any) {
+      console.error('Error confirming appointment:', err);
+      alert(err?.data?.message || 'Failed to confirm appointment');
+    }
+  };
+
+  const handleDecline = async () => {
+    try {
+      const res = await cancelAppointment(id).unwrap();
+      console.log('Appointment cancelled:', res);
+      alert('Appointment cancelled successfully');
+      router.refresh();
+    } catch (err: any) {
+      console.error('Error cancelling appointment:', err);
+      alert(err?.data?.message || 'Failed to cancel appointment');
+    }
   };
 
   return (
@@ -65,7 +95,6 @@ const AppointmentsCard: React.FC<AppointmentsCardProps> = ({
                 />
               )}
             </h3>
-            {/* Show label only on sm and up */}
             {urgency && (
               <span
                 className="hidden sm:inline-block text-xs text-white px-2 py-0.5 rounded-full"
@@ -94,11 +123,21 @@ const AppointmentsCard: React.FC<AppointmentsCardProps> = ({
         className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 mt-2 sm:mt-0 w-full sm:w-auto"
         onClick={e => e.stopPropagation()} // Prevent routing when buttons are clicked
       >
-        <button className="text-[10px] sm:text-xs py-1 sm:py-2 px-2 sm:px-4 rounded-lg font-medium bg-green-600 text-white hover:opacity-90 transition w-full sm:w-auto">
-          Accept
+        <button
+          onClick={handleAccept}
+          disabled={isLoading || status === 'CONFIRMED'}
+          className={`text-[10px] sm:text-xs py-1 sm:py-2 px-2 sm:px-4 rounded-lg font-medium text-white transition w-full sm:w-auto
+            ${status === 'CONFIRMED' ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-600 hover:opacity-90'}
+          `}
+        >
+          {status === 'CONFIRMED' ? 'Confirmed' : isLoading ? 'Confirming...' : 'Accept'}
         </button>
-        <button className="text-[10px] sm:text-xs py-1 sm:py-2 px-2 sm:px-4 rounded-lg font-medium border border-red-500 text-red-500 hover:bg-red-100 transition w-full sm:w-auto">
-          Decline
+        <button
+          onClick={handleDecline}
+          disabled={isCancelling}
+          className="text-[10px] sm:text-xs py-1 sm:py-2 px-2 sm:px-4 rounded-lg font-medium border border-red-500 text-red-500 hover:bg-red-100 transition w-full sm:w-auto"
+        >
+          {isCancelling ? 'Declining...' : 'Decline'}
         </button>
       </div>
     </div>

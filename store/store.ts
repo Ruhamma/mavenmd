@@ -7,10 +7,8 @@ export const store = configureStore({
   reducer: {
     [api.reducerPath]: api.reducer,
     [authApi.reducerPath]: authApi.reducer,
-        [appointmentApi.reducerPath]: appointmentApi.reducer,
-
-
+    [appointmentApi.reducerPath]: appointmentApi.reducer,
   },
-middleware: getDefaultMiddleware =>
-  getDefaultMiddleware().concat(api.middleware, authApi.middleware, appointmentApi.middleware),
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware().concat(api.middleware, authApi.middleware, appointmentApi.middleware),
 });

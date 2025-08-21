@@ -1,41 +1,82 @@
-import React from 'react'
-import PatientsCard from './components/PatientsCard'
-import PatientsRequests from './components/PatientsRequests'
-import { IconFilter, IconSearch, IconUsers } from '@tabler/icons-react'
-import AppointmentChart from './components/AppointmentChart'
-const page = () => {
+'use client';
+
+import React, { useMemo, useState } from 'react';
+import { IconFilter, IconSearch, IconUsers } from '@tabler/icons-react';
+import PatientsCard from './components/PatientsCard';
+import PatientsRequests from './components/PatientsRequests';
+import AppointmentChart from './components/AppointmentChart';
+import { useGetAppointmentsQuery } from '@/services/appointments/api';
+
+const PendingAppointmentsPage = () => {
+    const { data, isLoading, isError } = useGetAppointmentsQuery();
+    const appointments = data?.result?.appointments || [];
+
+
+    // Search state
+    const [search, setSearch] = useState('');
+
+    // Filter pending appointments by search (patient name)
+    const pendingAppointments = useMemo(
+        () =>
+            appointments.filter(
+                a =>
+                    a.status === 'PENDING' &&
+                    (a.Patient?.user?.fullName ?? 'Unknown')
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+            ),
+        [appointments, search]
+    );
+
+    // Pagination
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 5;
+    const totalPages = Math.ceil(pendingAppointments.length / itemsPerPage);
+
+    const paginatedAppointments = pendingAppointments.slice(
+        (currentPage - 1) * itemsPerPage,
+        currentPage * itemsPerPage
+    );
+
+    const goToPage = (page: number) => {
+        if (page < 1 || page > totalPages) return;
+        setCurrentPage(page);
+    };
+
     return (
         <>
+            {/* Top Cards */}
             <div className="grid gap-4 sm:gap-6 grid-cols-2 lg:grid-cols-4">
-
-
                 <PatientsCard
-                    title="Patients"
-                    totalVisits={1200}
+                    title="Total Patients"
+                    totalVisits={appointments.length}
                     icon={<IconUsers size={24} className="text-white" />}
                 />
                 <PatientsCard
-                    title="Patients"
-                    totalVisits={1200}
+                    title="Pending Requests"
+                    totalVisits={pendingAppointments.length}
                     icon={<IconUsers size={24} className="text-white" />}
                 />
                 <PatientsCard
-                    title="Patients"
-                    totalVisits={1200}
+                    title="Confirmed"
+                    totalVisits={appointments.filter(a => a.status === 'CONFIRMED').length}
                     icon={<IconUsers size={24} className="text-white" />}
                 />
                 <PatientsCard
-                    title="Patients"
-                    totalVisits={1200}
+                    title="Completed"
+                    totalVisits={appointments.filter(a => a.status === 'COMPLETED').length}
                     icon={<IconUsers size={24} className="text-white" />}
                 />
-
             </div>
+
+            {/* Search & Filter Bar */}
             <div className="px-2 mb-4 w-full pt-4 flex flex-col sm:flex-row justify-between gap-4">
                 <div className="relative w-full">
                     <input
                         type="search"
-                        placeholder="Search..."
+                        placeholder="Search by patient name..."
+                        value={search}
+                        onChange={e => setSearch(e.target.value)}
                         className="w-full bg-white pl-10 pr-4 py-2 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                     <IconSearch
@@ -43,12 +84,10 @@ const page = () => {
                         className="absolute left-3 top-1/3 -translate-y-1/2 text-gray-400 pointer-events-none"
                     />
                 </div>
-
                 <div className="flex justify-end gap-4 mb-6 w-full sm:w-auto">
                     <select className="border border-gray-400 rounded px-4 py-2 w-full sm:w-auto">
-                        <option>All status</option>
+                        <option>Pending</option>
                     </select>
-
                     <button className="flex items-center gap-2 border px-4 py-2 rounded-full shadow hover:opacity-90 transition w-full sm:w-auto">
                         <IconFilter size={18} />
                         Filters
@@ -56,92 +95,91 @@ const page = () => {
                 </div>
             </div>
 
-            <div className='flex flex-col sm:flex-row gap-8 sm:gap-10'>
+            {/* Pending Appointments List */}
+            <div className="flex flex-col sm:flex-row gap-8 sm:gap-10">
                 <div className="w-full sm:w-4/5">
                     <div className="flex gap-2 mb-6 items-center">
-                        <h1 className="text-xl sm:text-2xl font-semibold">Recent Appointments</h1>
+                        <h1 className="text-xl sm:text-2xl font-semibold">Pending Appointments</h1>
                         <p className="bg-green-800 p-2 text-[10px] sm:text-[10px] rounded-full text-white">
-                            <span className="sm:hidden">12</span>
-                            <span className="hidden sm:inline">12 Requests</span>
+                            <span className="hidden sm:inline">{pendingAppointments.length} Requests</span>
+                            <span className="sm:hidden">{pendingAppointments.length}</span>
                         </p>
                     </div>
 
-                    <div className=' flex flex-col gap-4'>
-                        <PatientsRequests name="David Kim"
-                            genderAge="Male, 27 years"
-                            symptoms="Sudden rash, itching"
-                            imageUrl="/images/david.jpg"
-                            urgency={{
-                                label: "FOLLOW UP",
-                                bgColor: "#4338CA", // indigo-700
-                            }}
-                            requestedAgo="9 min ago"
-                            distance="1.6 miles away"
-                            status="Confirmed" />
-                        <PatientsRequests name="David Kim"
-                            genderAge="Male, 27 years"
-                            symptoms="Sudden rash, itching"
-                            imageUrl="/images/david.jpg"
-                            urgency={{
-                                label: "FOLLOW UP",
-                                bgColor: "#4338CA", // indigo-700
-                            }}
-                            requestedAgo="9 min ago"
-                            distance="1.6 miles away"
-                            status="Confirmed" />
-                        <PatientsRequests name="David Kim"
-                            genderAge="Male, 27 years"
-                            symptoms="Sudden rash, itching"
-                            imageUrl="/images/david.jpg"
-                            urgency={{
-                                label: "FOLLOW UP",
-                                bgColor: "#4338CA", // indigo-700
-                            }}
-                            requestedAgo="9 min ago"
-                            distance="1.6 miles away"
-                            status="Confirmed" />
-                        <PatientsRequests name="David Kim"
-                            genderAge="Male, 27 years"
-                            symptoms="Sudden rash, itching"
-                            imageUrl="/images/david.jpg"
-                            urgency={{
-                                label: "FOLLOW UP",
-                                bgColor: "#4338CA", // indigo-700
-                            }}
-                            requestedAgo="9 min ago"
-                            distance="1.6 miles away"
-                            status="Confirmed" />
-                    </div>
-                    <div className="flex gap-2 mb-6 mt-8 items-center">
-                        <h1 className="text-xl sm:text-2xl font-semibold">Active Appointments</h1>
-                        <p className="bg-green-800 p-2 text-[10px] sm:text-[10px] rounded-full text-white">
-                            <span className="sm:hidden">12</span>
-                            <span className="hidden sm:inline">12 Requests</span>
-                        </p>
+                    {isLoading && <p>Loading pending appointments...</p>}
+                    {isError && <p className="text-red-500">Failed to load appointments.</p>}
+                    {!isLoading && pendingAppointments.length === 0 && (
+                        <p className="text-gray-500">No pending appointments found.</p>
+                    )}
+
+                    <div className="flex flex-col gap-4">
+                        {paginatedAppointments.map(app => (
+                            <PatientsRequests
+                                key={app.id}
+                                id={app.id}
+                                name={app.Patient?.user?.fullName ?? 'Unknown'}
+                                genderAge={`${app.Patient?.gender ?? 'N/A'}, ${app.Patient?.age ?? 'N/A'} years`}
+                                symptoms={
+                                    Array.isArray(app.symptoms) && app.symptoms.length > 0
+                                        ? app.symptoms.join(', ')
+                                        : 'No symptoms'
+                                }
+                                imageUrl="/images/default-avatar.png"
+                                urgency={{
+                                    label: app.type,
+                                    bgColor: app.type === 'ROUTINE' ? '#4338CA' : '#B91C1C',
+                                }}
+                                requestedAgo={new Date(app.createdAt).toLocaleDateString()}
+                                distance="N/A"
+                                status={app.status}
+                            />
+                        ))}
                     </div>
 
-                    <div>
-                        <PatientsRequests name="David Kim"
-                            genderAge="Male, 27 years"
-                            symptoms="Sudden rash, itching"
-                            imageUrl="/images/david.jpg"
-                            urgency={{
-                                label: "FOLLOW UP",
-                                bgColor: "#4338CA", // indigo-700
-                            }}
-                            requestedAgo="9 min ago"
-                            distance="1.6 miles away"
-                            status="Confirmed" />
+                    {/* Pagination Row */}
+                    <div className="mt-6 flex flex-col sm:flex-row sm:justify-between items-center text-xs sm:text-sm text-gray-700 gap-2 sm:gap-0">
+                        {/* Left side: showing count */}
+                        <span className="hidden sm:inline">
+                            Showing {paginatedAppointments.length} of {pendingAppointments.length} appointments
+                        </span>
+
+                        {/* Right side: pagination buttons */}
+                        <div className="flex justify-center sm:justify-end items-center gap-2">
+                            <button
+                                onClick={() => goToPage(currentPage - 1)}
+                                disabled={currentPage === 1}
+                                className="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+                            >
+                                Prev
+                            </button>
+                            {Array.from({ length: totalPages }, (_, i) => (
+                                <button
+                                    key={i + 1}
+                                    onClick={() => goToPage(i + 1)}
+                                    className={`px-3 py-1 rounded ${currentPage === i + 1 ? 'bg-primary-800 text-white' : 'bg-gray-200 hover:bg-gray-300'
+                                        }`}
+                                >
+                                    {i + 1}
+                                </button>
+                            ))}
+                            <button
+                                onClick={() => goToPage(currentPage + 1)}
+                                disabled={currentPage === totalPages}
+                                className="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+                            >
+                                Next
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div className=" w-full sm:w-auto">
+
+                {/* Chart Section */}
+                <div className="w-full sm:w-auto">
                     <AppointmentChart />
                 </div>
-
             </div>
         </>
+    );
+};
 
-    )
-}
-
-export default page
+export default PendingAppointmentsPage;
