@@ -15,6 +15,7 @@ import {
 } from 'chart.js';
 import { useGetAppointmentsQuery } from '@/services/appointments/api'; // ✅ Add your query hook
 import { format } from 'date-fns';
+import Image from 'next/image';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -92,9 +93,11 @@ export default function DashboardCards() {
         ) : nextAppointment ? (
           <>
             <div className="flex items-center gap-3">
-              <img
+              <Image
                 src="https://randomuser.me/api/portraits/men/32.jpg"
-                alt={nextAppointment.Patient?.user?.fullName}
+                alt={nextAppointment.Patient?.user?.fullName || 'Patient Avatar'}
+                width={48}
+                height={48}
                 className="w-12 h-12 rounded-full"
               />
               <div>

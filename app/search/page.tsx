@@ -6,6 +6,8 @@ import DoctorCard from '../../components/DoctorCard';
 import Footer from '../../components/Footer';
 import AvailableDoctorsCard from './components/AvailableDoctorsCard';
 import { IconMapPinFilled } from '@tabler/icons-react';
+import { useRouter } from 'next/navigation';
+import { useGetServiceProvideQuery } from '@/services/profile/api';
 
 type Doctor = {
   id: number;
@@ -21,11 +23,10 @@ type Doctor = {
   location: string;
 };
 
-// Mock Doctors
 const doctors: Doctor[] = [
   {
     id: 1,
-    name: 'Dr. Sarah Johnson',
+    name: 'Dr. Samuel Endale',
     specialty: 'General Practice',
     rating: 4.8,
     reviewCount: 22,
@@ -129,6 +130,9 @@ const doctors: Doctor[] = [
   },
 ];
 const Page = () => {
+  const route = useRouter();
+  const { data: userData } = useGetServiceProvideQuery({});
+  console.log('User Data:', userData);
   const [selectedAvailability, setSelectedAvailability] = useState<string | undefined>();
   const [selectedPriceRange, setSelectedPriceRange] = useState('');
   const [selectedRating, setSelectedRating] = useState('');
@@ -185,8 +189,6 @@ const Page = () => {
               <div className="bg-white rounded-lg shadow-sm p-6 sticky top-8">
                 <h2 className="text-xl font-bold text-gray-900 mb-6">Filters</h2>
 
-                {/* Location */}
-
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
                   <div className="relative">
@@ -204,7 +206,6 @@ const Page = () => {
                   </div>
                 </div>
 
-                {/* Specialties */}
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Specialties
@@ -222,7 +223,6 @@ const Page = () => {
                   </select>
                 </div>
 
-                {/* Availability */}
                 <div className="mb-6">
                   <label className="block text-sm font-medium text-gray-700 mb-3">
                     Availability
@@ -244,7 +244,6 @@ const Page = () => {
                   </div>
                 </div>
 
-                {/* Price Range */}
                 <div className="mb-6">
                   <label className="block text-sm font-medium text-gray-700 mb-3">
                     Price Range
@@ -265,8 +264,6 @@ const Page = () => {
                     ))}
                   </div>
                 </div>
-
-                {/* Rating */}
                 <div className="mb-12">
                   <label className="block text-sm font-medium text-gray-700 mb-3">Rating</label>
                   <div className="space-y-2">
@@ -292,9 +289,7 @@ const Page = () => {
               </div>
             </div>
 
-            {/* Right Main Area - Doctor Listings */}
             <div className="lg:col-span-3">
-              {/* Header */}
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
                 <p className="text-gray-600 mb-4 sm:mb-0">
                   Showing {filteredDoctors.length} doctors available for house calls.
@@ -346,7 +341,6 @@ const Page = () => {
                 </div>
               </div>
 
-              {/* Doctor Cards Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {filteredDoctors.map(doc => (
                   <AvailableDoctorsCard
@@ -360,7 +354,7 @@ const Page = () => {
                     availability={doc.availability}
                     imageUrl={doc.imageUrl}
                     services={doc.services}
-                    onBookNow={() => console.log('Book appointment')}
+                    onBookNow={() => route.push(`/doctor-profile/${doc.id}`)}
                     onFavorite={() => console.log('Toggle favorite')}
                     isFavorited={false}
                   />

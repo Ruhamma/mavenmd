@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { IconStethoscope, IconUser } from '@tabler/icons-react';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { FieldErrors, SubmitHandler, useForm, UseFormRegister } from 'react-hook-form';
 import { toast } from 'sonner';
 import z from 'zod';
@@ -443,10 +444,12 @@ const RegisterPage = () => {
       <div className="relative flex flex-col h-full w-full">
         <div className="flex flex-col lg:flex-row flex-1 min-h-0">
           <aside className="w-full lg:w-1/2 h-[350px] lg:h-full lg:pl-8 mb-2 lg:mb-0 relative">
-            <img
+            <Image
               className="w-full h-full object-cover rounded-[20px] lg:rounded-[32px] shadow-lg"
               src={userType === 'patient' ? '/loginImage.png' : '/registerImage.png'}
               alt={userType === 'patient' ? 'Patient consultation' : 'Doctor registration'}
+              fill
+              priority
             />
 
             <div className="absolute w-40 sm:w-40 lg:w-48 h-16 lg:h-20 bg-black/20 rounded-xl left-[55%] top-[10%] lg:top-[8%] shadow-md" />
@@ -467,7 +470,6 @@ const RegisterPage = () => {
             <div className="absolute w-2.5 h-2.5 rounded-full bg-blue-700 left-[82%] top-[19%]" />
 
             <div className="absolute w-60 sm:w-72 lg:w-80 h-24 sm:h-28 lg:h-28 bg-zinc-200/70 rounded-3xl left-[7%] top-[75%] shadow-xl" />
-
             {[
               '/loginEllipse1.png',
               '/loginEllipse2.png',
@@ -476,12 +478,15 @@ const RegisterPage = () => {
               '/loginEllipse1.png',
               '/loginEllipse2.png',
             ].map((src, index) => (
-              <img
+              <Image
                 key={index}
                 className={`absolute w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full`}
                 style={{ left: `${12 + index * 6}%`, top: '82%' }}
                 src={src}
                 alt={`Ellipse ${index + 1}`}
+                width={48}
+                height={48}
+                priority
               />
             ))}
 

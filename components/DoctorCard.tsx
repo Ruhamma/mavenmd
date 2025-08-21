@@ -1,6 +1,6 @@
 import React from 'react';
 import { IconStar } from '@tabler/icons-react';
-import Image from 'next/image';
+import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 
 type DoctorCardProps = {
   name: string;
@@ -8,7 +8,7 @@ type DoctorCardProps = {
   rating: number;
   reviewCount: number;
   description: string;
-  imageUrl: string;
+  imageUrl?: string;
   nextAvailable: string;
   date: string;
   timeSlots: string[];
@@ -20,16 +20,16 @@ const DoctorCard: React.FC<DoctorCardProps> = ({
   rating,
   reviewCount,
   description,
-  imageUrl,
   date,
   timeSlots,
 }) => {
   return (
     <div className="bg-white rounded-xl shadow-md p-8 w-full max-w-sm">
       <div className="flex items-center gap-4">
-        <div className="relative w-16 h-16">
-          <Image src={imageUrl} alt={name} fill className="rounded-full object-cover" />
-        </div>
+        <Avatar className="w-16 h-16">
+          <AvatarImage src={''} className="rounded-full w-20 object-cover" />
+          <AvatarFallback>{name.slice(0, 2).toUpperCase()}</AvatarFallback>
+        </Avatar>
         <div>
           <h3 className="text-md font-semibold text-primary-800">{name}</h3>
           <p className="text-sm text-gray-600">{specialty}</p>

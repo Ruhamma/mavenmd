@@ -1,5 +1,6 @@
 import React from 'react';
 import Footer from '../../../components/Footer';
+import Image from 'next/image';
 
 const page = () => {
   return (
@@ -54,7 +55,6 @@ const page = () => {
           </div>
         </div>
         <div className="w-full px-12 py-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {/* Card 1 */}
           <div className="relative bg-white rounded-2xl shadow p-6 flex flex-col gap-4">
             <div className="absolute w-16 h-16 bg-primary-800/60 rounded-2xl blur-[50px] rotate-[-108.37deg] top-12 right-4" />
             <div className="text-primary-800  text-6xl font-semibold  leading-none">01</div>
@@ -67,7 +67,6 @@ const page = () => {
             </p>
           </div>
 
-          {/* Card 2 */}
           <div className="relative bg-white rounded-2xl shadow p-6 flex flex-col gap-4">
             <div className="text-primary-800  text-6xl font-semibold  leading-none">02</div>
             <div className="text-black text-xl font-semibold ">Pediatrics</div>
@@ -79,7 +78,6 @@ const page = () => {
             </p>
           </div>
 
-          {/* Card 3 */}
           <div className="relative bg-white rounded-2xl shadow p-6 flex flex-col gap-4">
             <div className="absolute w-16 h-16 bg-primary-800/60 rounded-2xl blur-[50px] rotate-[-108.37deg] top-12 right-4" />
             <div className="text-primary-800  text-6xl font-semibold  leading-none">03</div>
@@ -92,7 +90,6 @@ const page = () => {
             </p>
           </div>
 
-          {/* Card 4 */}
           <div className="relative bg-white rounded-2xl shadow p-6 flex flex-col gap-4">
             <div className="text-primary-800  text-6xl font-semibold  leading-none">04</div>
             <div className="text-black text-xl font-semibold ">Dermatology</div>
@@ -104,7 +101,6 @@ const page = () => {
             </p>
           </div>
 
-          {/* Card 5 */}
           <div className="relative bg-white rounded-2xl shadow p-6 flex flex-col gap-4">
             <div className="absolute w-16 h-16 bg-primary-800/60 rounded-2xl blur-[50px] rotate-[-108.37deg] top-12 right-4" />
             <div className="text-primary-800  text-6xl font-semibold  leading-none">05</div>
@@ -117,7 +113,6 @@ const page = () => {
             </p>
           </div>
 
-          {/* Card 6 */}
           <div className="relative bg-white rounded-2xl shadow p-6 flex flex-col gap-4">
             <div className="text-primary-800  text-6xl font-semibold  leading-none">06</div>
             <div className="text-black text-xl font-semibold ">Geriatrics</div>
@@ -129,17 +124,17 @@ const page = () => {
             </p>
           </div>
 
-          {/* Final Image (shares second row with cards) */}
           <div className="col-span-full sm:col-span-2 lg:col-span-2 xl:col-span-2">
-            <img
+            <Image
               src="/Specialities.png"
-              className="w-full h-auto rounded-2xl shadow"
               alt="Medical Illustration"
+              width={800}
+              height={400}
+              className="w-full h-auto rounded-2xl shadow"
             />
           </div>
         </div>
         <div className="w-full px-12 py-24 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-          {/* Text Block */}
           <div className="flex flex-col gap-6 lg:ml-12 w-4/5 lg:pt-20">
             <div className="text-primary-800  text-4xl font-semibold  leading-10 ">
               What We Stand For
@@ -156,23 +151,25 @@ const page = () => {
             </div>
           </div>
 
-          {/* Image Block */}
           <div className="relative">
-            <img
+            <Image
               src="/WWSF.png"
               alt="Healthcare Team"
               className="w-full max-w-sm h-auto rounded-[31.03px] shadow absolute -top-8 -right-2 z-10"
+              width={400}
+              height={400}
             />
-            <img
+            <Image
               src="/WWSF2.png"
               alt="Patient Care"
+              width={400}
+              height={400}
               className="w-full max-w-sm h-auto rounded-[31.03px] shadow relative z-0 -bottom-32"
             />
           </div>
         </div>
 
         <div className="w-full px-4 py-32 flex flex-col items-center gap-12">
-          {/* Heading Section */}
           <div className="max-w-xl text-center flex flex-col gap-3">
             <h2 className="text-primary-800  text-4xl font-semibold  leading-[52px]">
               Insurance we support
@@ -182,74 +179,101 @@ const page = () => {
             </p>
           </div>
 
-          {/* Insurance Logos Grid */}
           <div className="flex flex-col gap-6">
-            {/* First Row - 4 items */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 place-items-center">
               <div className="bg-Primary-50 rounded-[20px] shadow outline-1 outline-zinc-200 p-4 flex justify-center items-center w-full max-w-[288px] h-36">
-                <img
+                <Image
                   src="/BlueCrossBlueSheild.png"
                   alt="Insurance 1"
+                  width={288}
+                  height={144}
                   className="h-full object-contain"
                 />
               </div>
               <div className="bg-Primary-50 rounded-[20px] shadow outline-1 outline-zinc-200 p-4 flex justify-center items-center w-full max-w-[288px] h-36">
-                <img src="/Aetna.png" alt="Insurance 2" className="h-full object-contain" />
+                <Image
+                  src="/Aetna.png"
+                  alt="Insurance 2"
+                  width={288}
+                  height={144}
+                  className="h-full object-contain"
+                />
               </div>
               <div className="bg-Primary-50 rounded-[20px] shadow outline-1 outline-zinc-200 p-4 flex justify-center items-center w-full max-w-[288px] h-36">
-                <img src="/Cigna.png" alt="Insurance 3" className="h-full object-contain" />
+                <Image
+                  src="/Cigna.png"
+                  alt="Insurance 3"
+                  width={288}
+                  height={144}
+                  className="h-full object-contain"
+                />
               </div>
               <div className="bg-Primary-50 rounded-[20px] shadow outline-1 outline-zinc-200 p-4 flex justify-center items-center w-full max-w-[288px] h-36">
-                <img
+                <Image
                   src="/UnitedHealthCare.png"
                   alt="Insurance 4"
+                  width={288}
+                  height={144}
                   className="h-full object-contain"
                 />
               </div>
             </div>
 
-            {/* Second Row - 3 items */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 place-items-center">
               <div className="bg-Primary-50 rounded-[20px] shadow outline-1 outline-zinc-200 p-4 flex justify-center items-center w-full max-w-[288px] h-36">
-                <img
+                <Image
                   src="/KaiserPermanente.png"
                   alt="Insurance 5"
+                  width={288}
+                  height={144}
                   className="h-full object-contain"
                 />
               </div>
               <div className="bg-Primary-50 rounded-[20px] shadow outline-1 outline-zinc-200 p-4 flex justify-center items-center w-full max-w-[288px] h-36">
-                <img src="/Humana.png" alt="Insurance 6" className="h-full object-contain" />
+                <Image
+                  src="/Humana.png"
+                  alt="Insurance 6"
+                  width={288}
+                  height={144}
+                  className="h-full object-contain"
+                />
               </div>
               <div className="bg-Primary-50 rounded-[20px] shadow outline-1 outline-zinc-200 p-4 flex justify-center items-center w-full max-w-[288px] h-36">
-                <img
+                <Image
                   src="/MolinaHealthCare.png"
                   alt="Insurance 7"
+                  width={288}
+                  height={144}
                   className="h-full object-contain"
                 />
               </div>
             </div>
 
-            {/* Third Row - 1 item */}
             <div className="flex justify-center">
               <div className="bg-Primary-50 rounded-[20px] shadow outline-1 outline-zinc-200 p-4 flex justify-center items-center w-full max-w-[288px] h-36">
-                <img src="/Medicare.png" alt="Insurance 8" className="h-full object-contain" />
+                <Image
+                  src="/Medicare.png"
+                  alt="Insurance 8"
+                  width={288}
+                  height={144}
+                  className="h-full object-contain"
+                />
               </div>
             </div>
           </div>
         </div>
         <section className="flex flex-col gap-16 py-12 px-6 md:px-32">
-          {/* Row 1: Image left, Text right */}
           <div className="flex flex-col md:flex-row items-start gap-12">
-            {/* Image */}
             <div className="w-full md:w-1/2">
-              <img
+              <Image
                 src="/mission.png"
                 alt="Mission Image"
+                width={800}
+                height={600}
                 className="w-full h-auto rounded-lg object-cover"
               />
             </div>
 
-            {/* Text */}
             <div className="w-full md:w-1/2 flex flex-col justify-start pt-16 px-4">
               <h2 className="text-primary-800  text-4xl font-semibold leading-10 mb-4">
                 Our Mission
@@ -263,9 +287,7 @@ const page = () => {
             </div>
           </div>
 
-          {/* Row 2: Text left, Image right */}
           <div className="flex flex-col-reverse md:flex-row items-start gap-12">
-            {/* Text */}
             <div className="w-full md:w-1/2 flex flex-col justify-start pt-16 px-4">
               <h2 className="text-primary-800  text-4xl font-semibold leading-10 mb-4">
                 Our Vision
@@ -277,11 +299,12 @@ const page = () => {
               </p>
             </div>
 
-            {/* Image */}
             <div className="w-full md:w-1/2">
-              <img
+              <Image
                 src="/vision.png"
                 alt="Vision Image"
+                width={800}
+                height={600}
                 className="w-full h-auto rounded-lg object-cover"
               />
             </div>
@@ -289,17 +312,14 @@ const page = () => {
         </section>
         <div className="px-4 md:px-8 lg:px-16 py-20">
           <div className="relative w-full bg-primary-800 rounded-3xl px-12 py-12 text-white overflow-hidden">
-            {/* Top right blur */}
             <div className="absolute top-0 right-0 w-80 h-72 bg-white/20 rounded-2xl blur-[116px] transform rotate-[-108deg]"></div>
-            {/* Bottom left blur */}
+
             <div className="absolute bottom-0 left-0 w-80 h-72 bg-white/20 rounded-2xl blur-[116px] transform rotate-[-108deg]"></div>
             <div>
-              {/* Heading */}
               <h2 className="text-Primary-50 text-3xl md:text-4xl font-semibold  leading-loose px-6 py-4">
                 Book Your Appointment Now!
               </h2>
 
-              {/* Description */}
               <p className=" text-base font-normal leading-relaxed max-w-3xl">
                 Take the first step towards personalized in-house care with MavenMD. Book your
                 appointment today and experience expert healthcare tailored to your needs, right at
@@ -307,14 +327,11 @@ const page = () => {
               </p>
             </div>
 
-            {/* Buttons */}
             <div className="flex flex-wrap justify-end gap-4 mt-4 pr-4">
-              {/* Book Now Button */}
               <button className="bg-white rounded-2xl shadow-[6px_6px_10px_0px_rgba(0,0,0,0.25)] px-6 py-3 text-sm font-medium text-primary-800   tracking-wide">
                 Book now
               </button>
 
-              {/* Get Started Button */}
               <button className="rounded-2xl o outline-[1] outline-white px-6 py-3 text-sm font-medium   tracking-wide">
                 Get started
               </button>

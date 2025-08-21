@@ -10,6 +10,7 @@ import {
 } from '@/services/appointments/api';
 import { IconPhoneFilled, IconMailFilled, IconFileDescriptionFilled } from '@tabler/icons-react';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 export default function SessionPage() {
   const params = useParams();
@@ -85,8 +86,10 @@ export default function SessionPage() {
             {/* Mobile layout */}
             <div className="flex flex-col gap-2 sm:hidden">
               <div className="flex items-center gap-3">
-                <img
+                <Image
                   src="https://placehold.co/80x80"
+                  width={64}
+                  height={64}
                   className="rounded-full w-16 h-16"
                   alt="profile"
                 />
@@ -115,10 +118,11 @@ export default function SessionPage() {
                 <span className="text-xs text-gray-600">📍 {patient?.Address ?? 'N/A'}</span>
               </div>
             </div>
-            {/* Desktop layout */}
             <div className="hidden sm:flex items-center gap-4">
-              <img
+              <Image
                 src="https://placehold.co/80x80"
+                width={80}
+                height={80}
                 className="rounded-full w-20 h-20"
                 alt="profile"
               />
