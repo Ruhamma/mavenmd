@@ -43,10 +43,9 @@ const Header = () => {
                 key={index}
                 onClick={() => handleNavigation(path)}
                 className={`w-[100px] text-sm font-medium px-3 py-2 rounded-3xl transition-all duration-200
-                  ${
-                    isActive
-                      ? 'bg-white text-primary-800 font-semibold'
-                      : 'text-white hover:bg-white hover:text-primary-800 hover:font-semibold'
+                  ${isActive
+                    ? 'bg-white text-primary-800 font-semibold'
+                    : 'text-white hover:bg-white hover:text-primary-800 hover:font-semibold'
                   }
                 `}
               >
@@ -121,10 +120,9 @@ const Header = () => {
                 key={index}
                 onClick={() => handleNavigation(path)}
                 className={`w-full text-left text-base font-medium px-4 py-3 rounded-xl transition-all duration-200
-                  ${
-                    isActive
-                      ? 'bg-primary-800 text-white font-semibold'
-                      : 'text-primary-800 hover:bg-primary-800 hover:text-white hover:font-semibold'
+                  ${isActive
+                    ? 'bg-primary-800 text-white font-semibold'
+                    : 'text-primary-800 hover:bg-primary-800 hover:text-white hover:font-semibold'
                   }
                 `}
               >
@@ -133,12 +131,31 @@ const Header = () => {
             );
           })}
         </div>
-
         {/* Icons inside menu */}
         <div className="mt-auto p-4 border-t border-gray-200 flex space-x-3">
-          <button className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors duration-200">
-            <IconUser className="text-primary-800" size={24} />
-          </button>
+          {!user ? (
+            <Button
+              className="w-full transition-colors duration-200"
+              onClick={() => {
+                router.push('/login');
+                setMenuOpen(false);
+              }}
+              variant="outline"
+            >
+              Login
+            </Button>
+          ) : (
+            <button
+              className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors duration-200"
+              onClick={() => {
+                router.push(user?.result?.user?.role === 'patient' ? '/patient-profile' : '/dashboard');
+                setMenuOpen(false);
+              }}
+            >
+              <IconUser className="text-primary-800" size={24} />
+            </button>
+          )}
+
           <button className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors duration-200">
             <IconSettings className="text-primary-800" size={24} />
           </button>
