@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import { IconMail, IconPhone, IconMapPin, IconCake, IconEdit, IconPlus } from '@tabler/icons-react';
+import Image from 'next/image';
 
 export default function ProfilePage() {
   return (
@@ -9,10 +10,12 @@ export default function ProfilePage() {
         <div className="bg-white rounded-xl shadow-md p-4 w-full lg:w-1/4 flex-shrink-0">
           <div className="bg-gradient-to-r from-primary-800 to-[#6B5BFF] rounded-xl p-4 text-white text-center">
             <div className="w-20 h-20 rounded-full mx-auto border-4 border-white overflow-hidden">
-              <img
+              <Image
                 src="https://randomuser.me/api/portraits/women/44.jpg"
                 alt="profile"
                 className="object-cover w-full h-full"
+                width={80}
+                height={80}
               />
             </div>
             <h2 className="mt-2 font-bold text-lg sm:text-xl">Savannah Nguyen</h2>
@@ -155,10 +158,12 @@ export default function ProfilePage() {
                   className="flex items-center justify-between bg-gray-50 p-3 shadow-sm rounded-lg"
                 >
                   <div className="flex items-center gap-3">
-                    <img
+                    <Image
                       className="w-10 h-10 rounded-full object-cover"
                       src={appt.img}
                       alt={appt.name}
+                      width={40}
+                      height={40}
                     />
                     <div>
                       <p className="font-semibold text-sm sm:text-base">{appt.name}</p>

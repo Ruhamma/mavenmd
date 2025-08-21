@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { IconMapPin, IconStethoscope } from '@tabler/icons-react';
 type HeroSectionProps = {
   onSearch: (location: string, query: string) => void;
@@ -34,15 +35,32 @@ const HeroSection = ({ onSearch }: HeroSectionProps) => {
               whenever and wherever you need it.
             </p>
           </div>
-
           <div className="absolute -top-15 right-85 hidden md:block">
-            <img src="/SearchImage1.png" alt="Logo" className="rounded" />
+            <Image
+              src="/SearchImage1.png"
+              alt="Logo"
+              className="rounded"
+              width={120}
+              height={120}
+            />
           </div>
           <div className="absolute top-18 left-32 hidden md:block">
-            <img src="/SearchImage2.png" alt="Logo" className="rounded" />
+            <Image
+              src="/SearchImage2.png"
+              alt="Logo"
+              className="rounded"
+              width={120}
+              height={120}
+            />
           </div>
           <div className="absolute bottom-60 right-20 hidden md:block">
-            <img src="/SearchImage3.png" alt="Logo" className="rounded" />
+            <Image
+              src="/SearchImage3.png"
+              alt="Logo"
+              className="rounded"
+              width={120}
+              height={120}
+            />
           </div>
 
           <div className="mt-16 mx-auto max-w-5xl bg-white shadow-xl rounded-b-[80px] px-10 py-4 flex flex-col md:flex-row items-center justify-between gap-2">

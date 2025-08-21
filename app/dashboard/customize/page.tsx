@@ -475,6 +475,7 @@ export default function CustomizeDashboardPage() {
               margin={[12, 12]}
               containerPadding={[16, 16]}
               isDraggable
+              isResizable
             >
               {selectedCards.map(key => {
                 const card = availableCards.find(c => c.key === key);
@@ -491,7 +492,6 @@ export default function CustomizeDashboardPage() {
             </GridLayout>
           )}
 
-          {/* Charts */}
           {selectedCharts.length > 0 && (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mx-4">
               {selectedCharts.map(key => {

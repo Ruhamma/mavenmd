@@ -12,6 +12,7 @@ import {
 } from 'chart.js';
 import { Bar, Line } from 'react-chartjs-2';
 import { IconChartBar, IconChartLine } from '@tabler/icons-react';
+import { useRouter } from 'next/navigation';
 
 ChartJS.register(
   CategoryScale,
@@ -25,6 +26,7 @@ ChartJS.register(
 );
 
 export default function AnalyticsCard() {
+  const route = useRouter();
   const barData = {
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
     datasets: [
@@ -90,7 +92,10 @@ export default function AnalyticsCard() {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
-      <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-sm flex flex-col">
+      <div
+        className="bg-white rounded-2xl p-4 sm:p-6 shadow-sm flex flex-col cursor-pointer"
+        onClick={() => route.push('/dashboard/analytics-detail-page')}
+      >
         <div className="flex items-center gap-2 mb-2">
           <IconChartBar size={20} className="text-primary-800" />
           <h2 className="font-semibold text-gray-800 text-lg sm:text-xl">Appointment Bookings</h2>

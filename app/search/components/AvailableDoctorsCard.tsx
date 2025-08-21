@@ -1,6 +1,6 @@
 import React from 'react';
 import { IconStar, IconMapPin, IconClock, IconHeart } from '@tabler/icons-react';
-import Image from 'next/image';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 type AvailableDoctorsCardProps = {
   name: string;
@@ -10,7 +10,7 @@ type AvailableDoctorsCardProps = {
   price: number;
   distance: string;
   availability: string;
-  imageUrl: string;
+  imageUrl?: string;
   services: string[];
   onBookNow: () => void;
   onFavorite: () => void;
@@ -25,7 +25,6 @@ const AvailableDoctorsCard: React.FC<AvailableDoctorsCardProps> = ({
   price,
   distance,
   availability,
-  imageUrl,
   services,
   onBookNow,
   onFavorite,
@@ -47,23 +46,17 @@ const AvailableDoctorsCard: React.FC<AvailableDoctorsCardProps> = ({
   return (
     <div className="relative bg-white rounded-xl shadow-md p-4 w-full max-w-sm">
       <div className="flex items-start gap-4">
-        {/* Doctor Profile Section */}
         <div className="flex-shrink-0">
-          <Image
-            src={imageUrl}
-            alt={name}
-            width={64}
-            height={64}
-            className="rounded-full object-cover"
-          />
+          <Avatar className="w-16 h-16">
+            <AvatarImage src={''} className="rounded-full w-20 object-cover" />
+            <AvatarFallback>{name.slice(0, 2).toUpperCase()}</AvatarFallback>
+          </Avatar>
         </div>
 
         <div className="flex-1">
-          {/* Name and Specialty */}
           <h3 className="text-base font-bold text-primary-800">{name}</h3>
           <p className="text-xs text-gray-600">{specialty}</p>
 
-          {/* Rating */}
           <div className="flex items-center gap-1 mt-2">
             <div className="flex items-center gap-1">
               {Array.from({ length: 5 }, (_, i) => (

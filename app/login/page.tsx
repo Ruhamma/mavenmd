@@ -220,12 +220,15 @@ const Login = () => {
                 '/loginEllipse1.png',
                 '/loginEllipse2.png',
               ].map((src, index) => (
-                <img
+                <Image
                   key={index}
                   className={`absolute w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full`}
                   style={{ left: `${12 + index * 6}%`, top: '82%' }}
                   src={src}
                   alt={`Ellipse ${index + 1}`}
+                  width={48}
+                  height={48}
+                  priority={false}
                 />
               ))}
 
