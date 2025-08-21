@@ -5,20 +5,25 @@ import DashboardCard from './components/DashboardCard';
 import { IconCalendar, IconCash, IconUsers } from '@tabler/icons-react';
 import AnalyticsCard from './components/AnalyticsCard';
 import { useGetAppointmentsAnalyticsQuery } from '@/services/appointments/api';
-import { useGetMeQuery } from '@/services/auth/api';
+import { useAuth } from '@/services/auth/api';
 
 export default function DashboardPage() {
+  // Fetch analytics data
   const { data, isLoading, isError } = useGetAppointmentsAnalyticsQuery();
   const analytics = data?.result;
-  const { data: user } = useGetMeQuery();
-  const doctorName = user?.fullName || 'Doctor';
+
+  const { user } = useAuth();
+  const doctorName = user?.result?.user?.fullName || 'Doctor';
 
   return (
     <div className="space-y-6">
       <div className="bg-primary-800 text-white p-6 sm:p-8 md:p-10 rounded-xl shadow-md mx-auto">
-        <p className="text-2xl sm:text-3xl md:text-4xl font-semibold">Welcome {doctorName}!</p>
+        <p className="text-2xl sm:text-3xl md:text-4xl font-semibold">
+          Welcome {doctorName}!
+        </p>
         <p className="text-base sm:text-lg md:text-xl mt-2 leading-snug">
-          Take care and stay sharp. <br className="hidden sm:block" /> Your work matters!
+          Take care and stay sharp. <br className="hidden sm:block" /> Your work
+          matters!
         </p>
       </div>
 
