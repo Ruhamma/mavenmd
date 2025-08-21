@@ -6,7 +6,7 @@ export const profileApi = createApi({
     baseUrl: process.env.NEXT_PUBLIC_API || 'https://mavenmd-backend.onrender.com/api/',
     credentials: 'include',
   }),
-  tagTypes: ['Auth', 'profile'],
+  tagTypes: ['Auth', 'profile', 'appointment'],
   endpoints: builder => ({
     getUserDetail: builder.query({
       query: ({ id }) => `/patients/${id}`,
@@ -16,7 +16,24 @@ export const profileApi = createApi({
       query: () => `/service-provider`,
       providesTags: ['Auth', 'profile'],
     }),
+    getServiceProviderDetail: builder.query({
+      query: id => `/service-provider/profile-preview/${id}`,
+      providesTags: ['Auth', 'profile'],
+    }),
+    bookAppointment: builder.mutation({
+      query: ({ serviceProviderId, ...data }) => ({
+        url: `/appointments/book/${serviceProviderId}`,
+        method: 'POST',
+        body: data,
+      }),
+      invalidatesTags: ['appointment'],
+    }),
   }),
 });
 
-export const { useGetUserDetailQuery } = profileApi;
+export const {
+  useGetUserDetailQuery,
+  useGetServiceProvideQuery,
+  useGetServiceProviderDetailQuery,
+  useBookAppointmentMutation,
+} = profileApi;
