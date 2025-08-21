@@ -9,10 +9,10 @@ import { Button } from './ui/button';
 const navItems = [
   { label: 'Home', path: '/' },
   { label: 'About', path: '/about' },
-  { label: 'Specialties', path: '/doctors' },
+  { label: 'Specialties', path: '/doctors', disabled: true },
   { label: 'Doctors', path: '/search' },
-  { label: 'Symptoms', path: '/symptoms' },
-  { label: 'Help', path: '/help' },
+  { label: 'Symptoms', path: '/symptoms', disabled: true },
+  { label: 'Help', path: '/help', disabled: true },
 ];
 
 const Header = () => {
@@ -36,23 +36,26 @@ const Header = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex bg-primary-800 rounded-full px-6 py-2 space-x-2">
-          {navItems.map(({ label, path }, index) => {
+          {navItems.map(({ label, path, disabled }, index) => {
             const isActive = pathname === path;
             return (
               <button
                 key={index}
-                onClick={() => handleNavigation(path)}
+                onClick={() => {
+                  if (!disabled) handleNavigation(path);
+                }}
                 className={`w-[100px] text-sm font-medium px-3 py-2 rounded-3xl transition-all duration-200
-                  ${isActive
+        ${isActive
                     ? 'bg-white text-primary-800 font-semibold'
                     : 'text-white hover:bg-white hover:text-primary-800 hover:font-semibold'
                   }
-                `}
+      `}
               >
                 {label}
               </button>
             );
           })}
+
         </nav>
 
         {/* Desktop Right Icons */}
@@ -113,23 +116,26 @@ const Header = () => {
 
         {/* Nav Links */}
         <div className="flex flex-col p-4 space-y-2">
-          {navItems.map(({ label, path }, index) => {
+          {navItems.map(({ label, path, disabled }, index) => {
             const isActive = pathname === path;
             return (
               <button
                 key={index}
-                onClick={() => handleNavigation(path)}
-                className={`w-full text-left text-base font-medium px-4 py-3 rounded-xl transition-all duration-200
-                  ${isActive
-                    ? 'bg-primary-800 text-white font-semibold'
-                    : 'text-primary-800 hover:bg-primary-800 hover:text-white hover:font-semibold'
+                onClick={() => {
+                  if (!disabled) handleNavigation(path);
+                }}
+                className={`w-[100px] text-sm font-medium px-3 py-2 rounded-3xl transition-all duration-200
+        ${isActive
+                    ? 'bg-white text-primary-800 font-semibold'
+                    : 'text-white hover:bg-white hover:text-primary-800 hover:font-semibold'
                   }
-                `}
+      `}
               >
                 {label}
               </button>
             );
           })}
+
         </div>
         {/* Icons inside menu */}
         <div className="mt-auto p-4 border-t border-gray-200 flex space-x-3">

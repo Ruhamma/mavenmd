@@ -1,5 +1,6 @@
 import React from 'react';
 import Footer from '../../../components/Footer';
+import Link from 'next/link';
 
 const page = () => {
   return (
@@ -28,12 +29,16 @@ const page = () => {
             </p>
 
             <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
-              <button className="px-6 py-3 bg-primary-800  rounded-2xl shadow text-white text-sm font-medium  tracking-wide">
-                Book now
-              </button>
-              <button className="px-6 py-3 rounded-2xl  outline-2 outline-white text-white text-sm font-medium  tracking-wide">
-                Get started
-              </button>
+              <Link href="/search" passHref>
+                <button className="px-6 py-3 bg-primary-800 hover:bg-primary-700 rounded-2xl shadow text-white text-sm font-medium  tracking-wide">
+                  Book now
+                </button>
+              </Link>
+              <Link href="/register" passHref>
+                <button className="px-6 py-3 bg-transparent border-2 border-white text-white text-sm font-medium  tracking-wide rounded-2xl hover:bg-white hover:text-primary-800 transition">
+                  Get started
+                </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -309,15 +314,16 @@ const page = () => {
 
             {/* Buttons */}
             <div className="flex flex-wrap justify-end gap-4 mt-4 pr-4">
-              {/* Book Now Button */}
-              <button className="bg-white rounded-2xl shadow-[6px_6px_10px_0px_rgba(0,0,0,0.25)] px-6 py-3 text-sm font-medium text-primary-800   tracking-wide">
-                Book now
-              </button>
-
-              {/* Get Started Button */}
-              <button className="rounded-2xl o outline-[1] outline-white px-6 py-3 text-sm font-medium   tracking-wide">
-                Get started
-              </button>
+              <Link href="/search" passHref>
+                <button className="bg-white text-primary-800 py-2 px-6 rounded-3xl font-medium shadow-md hover:opacity-90 transition">
+                  Book Now
+                </button>
+              </Link>
+              <Link href="/register" passHref>
+                <button className="bg-transparent border-2 border-white text-white py-2 px-6 rounded-3xl font-medium shadow-md hover:bg-white hover:text-primary-800 transition">
+                  Get Started
+                </button>
+              </Link>
             </div>
           </div>
         </div>

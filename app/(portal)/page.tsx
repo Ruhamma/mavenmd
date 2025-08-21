@@ -5,6 +5,7 @@ import Image from 'next/image';
 import DoctorCard from '../../components/DoctorCard';
 import { TestimonialCard } from '../../components/TestimonialCard';
 import FAQSection from '../../components/FaqSection';
+import Link from 'next/link';
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' as const } },
@@ -163,17 +164,19 @@ export default function Home() {
                     See How It Works
                   </button>
                 </div>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  animate={{
-                    boxShadow: ['0 0 0 rgba(0,0,0,0)', '0 0 20px rgba(11, 11, 162, 0.4)'],
-                  }}
-                  transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
-                  className="bg-primary-800 shadow-md text-white py-3 px-6 rounded-3xl font-medium hover:bg-white hover:text-primary-800 transition flex items-center justify-center mx-auto lg:mx-0"
-                >
-                  Book Now
-                  <IconArrowRight className="ml-2" size={20} />
-                </motion.button>
+                <Link href="/search" passHref>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    animate={{
+                      boxShadow: ['0 0 0 rgba(0,0,0,0)', '0 0 20px rgba(11, 11, 162, 0.4)'],
+                    }}
+                    transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
+                    className="bg-primary-800 shadow-md text-white py-3 px-6 rounded-3xl font-medium hover:bg-white hover:text-primary-800 transition flex items-center justify-center mx-auto lg:mx-0"
+                  >
+                    Book Now
+                    <IconArrowRight className="ml-2" size={20} />
+                  </motion.button>
+                </Link>
               </motion.div>
 
               <motion.div variants={fadeIn} className="hidden lg:block w-full lg:w-1/2 relative">
@@ -377,9 +380,12 @@ export default function Home() {
                 doctors for in-person visits anytime, anywhere. Learn how it works and why patients
                 trust us.
               </p>
-              <button className="bg-primary-800 shadow-md text-white py-2 px-6 rounded-3xl cursor-pointer font-medium hover:bg-white hover:text-primary-800 transition">
-                About us
-              </button>
+              <Link href="/about" passHref>
+                <button className="bg-primary-800 shadow-md text-white py-2 px-6 rounded-3xl cursor-pointer font-medium hover:bg-white hover:text-primary-800 transition flex items-center">
+                  About us
+                  <IconArrowRight className="ml-2" size={20} />
+                </button>
+              </Link>
 
               <div className="flex justify-center mt-8 space-x-[-40px]">
                 <div className="relative w-48 h-80 rounded-2xl overflow-hidden shadow-md mt-10">
@@ -472,10 +478,12 @@ export default function Home() {
                 trust us.
               </p>
               <div className="flex justify-end">
-                <button className="bg-primary-800 shadow-md text-white py-2 px-4 rounded-3xl cursor-pointer font-medium hover:bg-white hover:text-primary-800 transition flex items-center justify-center">
-                  About us
-                  <IconArrowRight className="ml-2" size={20} />
-                </button>
+                <Link href="/about" passHref>
+                  <button className="bg-primary-800 shadow-md text-white py-2 px-6 rounded-3xl cursor-pointer font-medium hover:bg-white hover:text-primary-800 transition flex items-center">
+                    About us
+                    <IconArrowRight className="ml-2" size={20} />
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -673,12 +681,16 @@ export default function Home() {
 
             {/* Buttons Section */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:justify-end">
-              <button className="bg-white text-primary-800 py-2 px-6 rounded-3xl font-medium shadow-md hover:opacity-90 transition">
-                Book Now
-              </button>
-              <button className="bg-transparent border-2 border-white text-white py-2 px-6 rounded-3xl font-medium shadow-md hover:bg-white hover:text-primary-800 transition">
-                Get Started
-              </button>
+              <Link href="/search" passHref>
+                <button className="bg-white text-primary-800 py-2 px-6 rounded-3xl font-medium shadow-md hover:opacity-90 transition">
+                  Book Now
+                </button>
+              </Link>
+              <Link href="/register" passHref>
+                <button className="bg-transparent border-2 border-white text-white py-2 px-6 rounded-3xl font-medium shadow-md hover:bg-white hover:text-primary-800 transition">
+                  Get Started
+                </button>
+              </Link>
             </div>
           </div>
         </section>
@@ -713,10 +725,13 @@ export default function Home() {
           <p className="text-center sm:text-left text-lg font-semibold text-white">
             Your health doesn’t wait, neither should you
           </p>
-          <button className="mt-3 sm:mt-0 flex items-center text-white font-medium hover:underline transition cursor-pointer">
-            Act Now
-            <IconArrowRight className="ml-2" size={24} stroke={2} />
-          </button>
+          <Link href="/register" passHref>
+            <button className="mt-3 sm:mt-0 flex items-center text-white font-medium hover:underline transition cursor-pointer">
+              Act Now
+              <IconArrowRight className="ml-2" size={24} stroke={2} />
+            </button>
+          </Link>
+
         </section>
         <section>
           <div className="py-16 px-4 sm:px-6 md:px-10 text-center">

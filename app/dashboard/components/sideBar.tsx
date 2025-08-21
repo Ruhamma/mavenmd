@@ -20,15 +20,11 @@ import 'react-resizable/css/styles.css';
 const sidebarItems = [
   { label: 'Dashboard', path: '/dashboard', icon: <IconLayoutDashboard size={20} /> },
   { label: 'Appointments', path: '/dashboard/appointments', icon: <IconCalendarEvent size={20} /> },
-  { label: 'Alerts', path: '/dashboard/alerts', icon: <IconBell size={20} /> },
-  {
-    label: 'Collections & Payments',
-    path: '/dashboard/payments',
-    icon: <IconDatabase size={20} />,
-  },
+  { label: 'Alerts', path: '/dashboard/alerts', icon: <IconBell size={20} />, disabled: true },
+  { label: 'Collections & Payments', path: '/dashboard/payments', icon: <IconDatabase size={20} />, disabled: true },
   { label: 'Patients', path: '/dashboard/patients', icon: <IconUser size={20} /> },
   { label: 'Customize', path: '/dashboard/customize', icon: <IconTools size={20} /> },
-  { label: 'Settings', path: '/dashboard/settings', icon: <IconSettings size={20} /> },
+  { label: 'Settings', path: '/dashboard/settings', icon: <IconSettings size={20} /> , disabled: true},
 ];
 
 const initialSidebarItems = sidebarItems.map(item => ({
@@ -37,8 +33,8 @@ const initialSidebarItems = sidebarItems.map(item => ({
 }));
 
 const bottomItems = [
-  { label: 'Help', path: '/help', icon: <IconHelp size={20} /> },
-  { label: 'Log out', path: '/logout', icon: <IconLogout size={20} /> },
+  { label: 'Help', path: '/help', icon: <IconHelp size={20} />, disabled: true },
+  { label: 'Log out', path: '/logout', icon: <IconLogout size={20} /> , disabled: true},
 ];
 
 const SideBar = () => {
@@ -46,11 +42,11 @@ const SideBar = () => {
   const pathname = usePathname();
   const [items, setItems] = useState(initialSidebarItems);
 
-  const handleNavigation = (path: string) => {
+  const handleNavigation = (path: string, disabled?: boolean) => {
+    if (disabled) return; 
     router.push(path);
   };
 
-  // Desktop layout (md+)
   const layout: Layout[] = items.map((item, index) => ({
     i: item.i,
     x: 0,
@@ -69,7 +65,7 @@ const SideBar = () => {
 
   return (
     <aside className="h-full w-[70px] md:w-[270px] bg-white flex flex-col py-4 px-2 md:px-3 transition-all">
-      {/* ===================== Desktop (md+) — Reorderable ===================== */}
+      {/* Desktop */}
       <div className="hidden md:flex md:flex-col md:justify-between h-full">
         <div>
           <GridLayout
@@ -77,19 +73,19 @@ const SideBar = () => {
             layout={layout}
             cols={1}
             rowHeight={40}
-            width={240}            // tuned for md:w-[270px] minus padding
-            isDraggable={true}     // only rendered on md+, so it's fine
+            width={240}
+            isDraggable={true}
             isResizable={false}
             onLayoutChange={handleLayoutChange}
             compactType="vertical"
             draggableHandle=".sidebar-drag-handle"
           >
-            {items.map(({ i, label, path, icon }) => {
+            {items.map(({ i, label, path, icon, disabled }) => {
               const isActive = pathname === path;
               return (
                 <div key={i} className="draggable-item">
                   <button
-                    onClick={() => handleNavigation(path)}
+                    onClick={() => handleNavigation(path, disabled)}
                     className={`w-full flex items-center justify-start gap-3 px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                       ${
                         isActive
@@ -107,7 +103,7 @@ const SideBar = () => {
           </GridLayout>
         </div>
 
-        {/* Bottom nav items (desktop) */}
+        {/* Bottom nav items */}
         <div className="space-y-2 mt-2">
           {bottomItems.map(({ label, path, icon }, index) => {
             const isActive = pathname === path;
@@ -131,15 +127,15 @@ const SideBar = () => {
         </div>
       </div>
 
-      {/* ===================== Mobile (< md) — Icons only ===================== */}
+      {/* Mobile (< md) */}
       <div className="flex md:hidden flex-col justify-between h-full">
         <div className="space-y-2">
-          {sidebarItems.map(({ label, path, icon }, index) => {
+          {sidebarItems.map(({ label, path, icon, disabled }) => {
             const isActive = pathname === path;
             return (
               <button
-                key={index}
-                onClick={() => handleNavigation(path)}
+                key={label}
+                onClick={() => handleNavigation(path, disabled)}
                 aria-label={label}
                 className={`w-full flex items-center justify-center px-2 py-2 rounded-lg text-sm transition-all
                   ${
@@ -150,14 +146,12 @@ const SideBar = () => {
                 `}
               >
                 {icon}
-                {/* keep for a11y only */}
                 <span className="sr-only">{label}</span>
               </button>
             );
           })}
         </div>
 
-        {/* Bottom nav items (mobile) */}
         <div className="space-y-2 mt-2">
           {bottomItems.map(({ label, path, icon }, index) => {
             const isActive = pathname === path;
