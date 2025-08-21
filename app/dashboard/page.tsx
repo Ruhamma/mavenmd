@@ -10,7 +10,7 @@ import { useGetMeQuery } from '@/services/auth/api';
 export default function DashboardPage() {
   const { data, isLoading, isError } = useGetAppointmentsAnalyticsQuery();
   const analytics = data?.result;
-  const { data: user } = useGetMeQuery();
+  const { data: user } = useGetMeQuery({});
   const doctorName = user?.fullName || 'Doctor';
 
   return (

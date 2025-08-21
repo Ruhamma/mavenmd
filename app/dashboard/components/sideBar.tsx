@@ -22,13 +22,19 @@ const sidebarItems = [
   { label: 'Appointments', path: '/dashboard/appointments', icon: <IconCalendarEvent size={20} /> },
   { label: 'Alerts', path: '/dashboard/alerts', icon: <IconBell size={20} /> },
   {
-    label: 'Collections and Payments',
+    label: 'Collections & Payments',
     path: '/dashboard/payments',
     icon: <IconDatabase size={20} />,
   },
   { label: 'Patients', path: '/dashboard/patients', icon: <IconUser size={20} /> },
   { label: 'Customize', path: '/dashboard/customize', icon: <IconTools size={20} /> },
   { label: 'Settings', path: '/dashboard/settings', icon: <IconSettings size={20} /> },
+];
+
+const initialSidebarItems = sidebarItems.map((item, idx) => ({
+  ...item,
+  i: item.label.replace(/\s+/g, '-').toLowerCase(),
+}));
 
 const bottomItems = [
   { label: 'Help', path: '/help', icon: <IconHelp size={20} /> },
@@ -62,13 +68,13 @@ const SideBar = () => {
   };
 
   return (
-    <aside className="h-full w-[70px] md:w-[260px] bg-white flex flex-col justify-between py-4 px-2 md:px-4 transition-all">
+    <aside className="h-full w-[70px] md:w-[270px] bg-white flex flex-col justify-between py-4 px-2 md:px-3 transition-all">
       <div>
         <GridLayout
           className="layout"
           layout={layout}
           cols={1}
-          rowHeight={50}
+          rowHeight={40}
           width={220} // approximate width of sidebar
           isDraggable={true}
           isResizable={false}
@@ -82,7 +88,7 @@ const SideBar = () => {
               <div key={i} className="draggable-item">
                 <button
                   onClick={() => handleNavigation(path)}
-                  className={`w-full flex items-center justify-center md:justify-start gap-0 md:gap-3 px-2 md:px-4 py-2 rounded-lg text-sm font-medium transition-all
+                  className={`w-full flex items-center justify-center md:justify-start gap-0 md:gap-3 px-2 md:px-3 py-1.5 rounded-lg text-sm font-medium transition-all
                     ${isActive
                       ? 'bg-[#E7E7FF] text-primary-800 font-semibold'
                       : 'text-gray-700 hover:bg-gray-100'
@@ -90,7 +96,7 @@ const SideBar = () => {
                   `}
                 >
                   <span className="sidebar-drag-handle flex items-center">{icon}</span>
-                  <span className="hidden md:inline">{label}</span>
+                  <span className="hidden md:inline whitespace-nowrap">{label}</span>
                 </button>
               </div>
             );
