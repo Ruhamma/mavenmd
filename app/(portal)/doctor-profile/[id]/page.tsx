@@ -19,6 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 export default function DoctorProfile() {
   const { id } = useParams();
@@ -81,14 +82,17 @@ export default function DoctorProfile() {
     <div className="min-h-screen bg-gray-50 p-4 sm:p-6 md:p-10">
       <div className="bg-gradient-to-r from-primary-800 to-primary-800 rounded-2xl text-white p-4 sm:p-6 md:p-10 relative overflow-hidden">
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6">
-          <div className="rounded-full border-4 border-white w-[72px] h-[72px] sm:w-[80px] sm:h-[80px] relative flex-shrink-0">
-            <Image
-              src="/images/doc1.jpg"
-              alt="Doctor Avatar"
-              className="overflow-hidden object-cover rounded-full"
-              fill
-              sizes="(max-width: 640px) 72px, 80px"
-            />
+          <div className="rounded-full  relative flex-shrink-0">
+            <Avatar className="w-20 h-20">
+              <AvatarImage
+                src={serviceProvider?.result?.avatar}
+                className="rounded-full w-20 object-cover"
+                sizes="(max-width: 640px) 72px, 80px"
+              />
+              <AvatarFallback>
+                {serviceProvider?.result?.fullName.slice(0, 2).toUpperCase()}
+              </AvatarFallback>
+            </Avatar>
           </div>
           <div className="flex-1 text-center sm:text-left">
             <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold">
@@ -114,10 +118,11 @@ export default function DoctorProfile() {
           </div>
         </div>
         <p className="mt-4 sm:mt-6 text-xs sm:text-sm md:text-base max-w-4xl mx-auto sm:mx-0">
-          Dr. Sarah Johnson is a board-certified physician specialized in Cardiology and Internal
-          Medicine. She has over 15 years of experience in diagnosing and managing cardiovascular
-          conditions. Her approach is patient-centered and evidence-based, ensuring every patient
-          receives the highest level of care.
+          {serviceProvider?.result?.fullName}
+          is a board-certified physician specialized in Cardiology and Internal Medicine. She has
+          over 15 years of experience in diagnosing and managing cardiovascular conditions. Her
+          approach is patient-centered and evidence-based, ensuring every patient receives the
+          highest level of care.
         </p>
       </div>
 
