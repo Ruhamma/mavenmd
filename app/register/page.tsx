@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 'use client';
 import { useRegisterProviderMutation, useRegisterUserMutation } from '@/services/auth/api';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -99,7 +101,7 @@ const RegisterPage = () => {
       route.push('/login');
     } catch (err: any) {
       if (err?.data?.details) {
-        err.data.details.forEach(d => {
+        err.data.details.forEach((d: any) => {
           toast.error(`${d.field}: ${d.message}`);
         });
       } else {
@@ -127,7 +129,7 @@ const RegisterPage = () => {
       toast.success('Doctor registered successfully!');
     } catch (err: any) {
       if (err?.data?.details) {
-        err.data.details.forEach(d => {
+        err.data.details.forEach((d: any) => {
           toast.error(`${d.field}: ${d.message}`);
         });
       } else {

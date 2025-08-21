@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 'use client';
 
 import { IconPhoneCall, IconMapPin, IconChartBar } from '@tabler/icons-react';
@@ -23,7 +25,10 @@ export default function DashboardCards() {
   //  Extract and sort next appointment
   const nextAppointment = data?.result?.appointments
     ?.filter((a: any) => a.status === 'PENDING' && new Date(a.appointmentDate) > new Date())
-    ?.sort((a: any, b: any) => new Date(a.appointmentDate).getTime() - new Date(b.appointmentDate).getTime())[0];
+    ?.sort(
+      (a: any, b: any) =>
+        new Date(a.appointmentDate).getTime() - new Date(b.appointmentDate).getTime(),
+    )[0];
 
   const barData = {
     labels: ['Jun', 'May', 'Apr', 'Mar', 'Feb', 'Jan'],

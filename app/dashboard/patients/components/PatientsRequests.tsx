@@ -1,10 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 'use client';
 
 import React from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { IconClock, IconMapPin } from '@tabler/icons-react';
-import { useConfirmAppointmentMutation, useCancelAppointmentMutation } from '@/services/appointments/api';
+import {
+  useConfirmAppointmentMutation,
+  useCancelAppointmentMutation,
+} from '@/services/appointments/api';
 
 type Urgency = {
   label: string;
