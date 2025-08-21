@@ -10,6 +10,7 @@ type DashboardCardProps = {
   icon: React.ReactNode;
   appointment?: boolean;
   customize?: boolean;
+  as?: 'div' | 'button';
 };
 
 const DashboardCard: React.FC<DashboardCardProps> = ({
@@ -21,11 +22,15 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
   icon,
   appointment,
   customize,
+  as: Component = 'div',
 }) => {
   const isPositive = changeDirection === 'up';
 
   return (
-    <div className="bg-white rounded-2xl sm:rounded-3xl shadow-sm p-3 sm:p-6 w-full relative">
+    <Component
+      className="bg-white rounded-2xl sm:rounded-3xl shadow-sm p-3 sm:p-6 w-full relative 
+                 focus:outline-none focus:ring-2 focus:ring-primary-500 cursor-pointer"
+    >
       <div className="flex items-center justify-between mb-3 sm:mb-4">
         <div className="flex items-center gap-2 sm:gap-4">
           <div
@@ -45,6 +50,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
             <p className="text-gray-500 text-[10px] sm:text-sm mt-0.5 sm:mt-1">{title}</p>
           </div>
         </div>
+
         {customize ? (
           <div className="drag-handle cursor-move text-sm text-gray-600 mb-2 absolute top-2 sm:top-4 right-2 sm:right-4">
             ⇅ Drag
@@ -74,7 +80,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
         {isPositive ? <IconTrendingUp size={12} /> : <IconTrendingDown size={12} />}
         <span>{changeText}</span>
       </div>
-    </div>
+    </Component>
   );
 };
 

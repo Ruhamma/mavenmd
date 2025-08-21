@@ -27,6 +27,15 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import CancellationModal from './component/Cancellation';
+import ResponseTimeModal from './component/Response';
 
 ChartJS.register(
   CategoryScale,
@@ -147,24 +156,52 @@ const page = () => {
     <div className="p-4 space-y-6">
       {/* Top Stat Cards */}
       <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-        <DashboardCard
-          totalVisits={18.4}
-          title="Total Patients"
-          percentageChange="+2.5%"
-          changeDirection="down"
-          changeText="8% vs yesterday"
-          icon={<IconCircleDashedX size={24} className="text-red-900" />}
-          appointment
-        />
-        <DashboardCard
-          totalVisits={4.2}
-          title="Total Appointments"
-          percentageChange="-2.5%"
-          changeDirection="up"
-          changeText="8% vs yesterday"
-          icon={<IconClockFilled size={24} className="text-blue-900" />}
-          appointment
-        />
+        <Dialog>
+          <DialogTrigger asChild>
+            <div>
+              <DashboardCard
+                totalVisits={18.4}
+                title="Cancellation Rate"
+                percentageChange="+2.5%"
+                changeDirection="down"
+                changeText="8% vs yesterday"
+                icon={<IconCircleDashedX size={24} className="text-red-900" />}
+                appointment
+              />
+            </div>
+          </DialogTrigger>
+
+          <DialogContent className="sm:max-w-4xl w-full max-h-[80vh] overflow-auto">
+            <DialogHeader>
+              <DialogTitle>Cancellation</DialogTitle>
+            </DialogHeader>
+            <CancellationModal />
+          </DialogContent>
+        </Dialog>
+
+        <Dialog>
+          <DialogTrigger asChild>
+            <div>
+              <DashboardCard
+                totalVisits={4.2}
+                title="Average response time"
+                percentageChange="-2.5%"
+                changeDirection="up"
+                changeText="8% vs yesterday"
+                icon={<IconClockFilled size={24} className="text-blue-900" />}
+                appointment
+              />
+            </div>
+          </DialogTrigger>
+
+          <DialogContent className="sm:min-w-4xl overflow-auto max-h-[80vh] ">
+            <DialogHeader>
+              <DialogTitle>Communication Analysis</DialogTitle>
+            </DialogHeader>
+            <ResponseTimeModal />
+          </DialogContent>
+        </Dialog>
+
         <DashboardCard
           totalVisits={4.1}
           percentageChange="+2.5%"

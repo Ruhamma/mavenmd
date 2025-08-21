@@ -6,6 +6,7 @@ import { IconCalendar, IconCash, IconUsers } from '@tabler/icons-react';
 import AnalyticsCard from './components/AnalyticsCard';
 import { useGetAppointmentsAnalyticsQuery } from '@/services/appointments/api';
 import { useAuth } from '@/services/auth/api';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 export default function DashboardPage() {
   // Fetch analytics data
@@ -14,6 +15,14 @@ export default function DashboardPage() {
 
   const { user } = useAuth();
   const doctorName = user?.result?.user?.fullName || 'Doctor';
+
+  // Mock tooltip data
+  const tooltipData = {
+    totalPatients: 'Patients registered in your clinic. 5 new today.',
+    totalAppointments: 'All scheduled appointments. 2 cancellations today.',
+    completedAppointments: 'Appointments successfully completed this week.',
+    pendingAppointments: 'Appointments awaiting confirmation or completion.',
+  };
 
   return (
     <div className="space-y-6">
@@ -25,38 +34,85 @@ export default function DashboardPage() {
       </div>
 
       <div className="grid gap-4 sm:gap-6 grid-cols-2 lg:grid-cols-4">
-        <DashboardCard
-          totalVisits={analytics?.totalPatients ?? 0}
-          title="Total Patients"
-          percentageChange="+2.5%"
-          changeDirection="up"
-          changeText="8% vs yesterday"
-          icon={<IconUsers size={16} className="text-white sm:size-[24px]" />}
-        />
-        <DashboardCard
-          totalVisits={analytics?.totalAppointments ?? 0}
-          title="Total Appointments"
-          percentageChange="-2.5%"
-          changeDirection="down"
-          changeText="8% vs yesterday"
-          icon={<IconCalendar size={16} className="text-white sm:size-[24px]" />}
-        />
-        <DashboardCard
-          totalVisits={analytics?.totalCompletedAppointments ?? 0}
-          percentageChange="+2.5%"
-          changeDirection="up"
-          changeText="8% vs yesterday"
-          title="Completed Appointments"
-          icon={<IconCash size={16} className="text-white sm:size-[24px]" />}
-        />
-        <DashboardCard
-          totalVisits={analytics?.totalPendingAppointments ?? 0}
-          title="Pending Appointments"
-          percentageChange="-2.5%"
-          changeDirection="down"
-          changeText="8% vs yesterday"
-          icon={<IconCalendar size={16} className="text-white sm:size-[24px]" />}
-        />
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <div>
+                <DashboardCard
+                  totalVisits={analytics?.totalPatients ?? 0}
+                  title="Total Patients"
+                  percentageChange="+2.5%"
+                  changeDirection="up"
+                  changeText="8% vs yesterday"
+                  icon={<IconUsers size={16} className="text-white sm:size-[24px]" />}
+                />
+              </div>
+            </TooltipTrigger>
+            <TooltipContent className="text-sm p-3 rounded-md shadow-lg max-w-[200px]">
+              {tooltipData.totalPatients ?? 'No data available'}
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <div>
+                <DashboardCard
+                  totalVisits={analytics?.totalAppointments ?? 0}
+                  title="Total Appointments"
+                  percentageChange="-2.5%"
+                  changeDirection="down"
+                  changeText="8% vs yesterday"
+                  icon={<IconCalendar size={16} className="text-white sm:size-[24px]" />}
+                />
+              </div>
+            </TooltipTrigger>
+            <TooltipContent className="text-sm p-3 rounded-md shadow-lg max-w-[200px]">
+              {tooltipData.totalAppointments}
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <div>
+                <DashboardCard
+                  totalVisits={analytics?.totalCompletedAppointments ?? 0}
+                  percentageChange="+2.5%"
+                  changeDirection="up"
+                  changeText="8% vs yesterday"
+                  title="Completed Appointments"
+                  icon={<IconCash size={16} className="text-white sm:size-[24px]" />}
+                />
+              </div>
+            </TooltipTrigger>
+            <TooltipContent className="text-sm p-3 rounded-md shadow-lg max-w-[200px]">
+              {tooltipData.completedAppointments}
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <div>
+                <DashboardCard
+                  totalVisits={analytics?.totalPendingAppointments ?? 0}
+                  title="Pending Appointments"
+                  percentageChange="-2.5%"
+                  changeDirection="down"
+                  changeText="8% vs yesterday"
+                  icon={<IconCalendar size={16} className="text-white sm:size-[24px]" />}
+                />
+              </div>
+            </TooltipTrigger>
+            <TooltipContent className="text-sm p-3 rounded-md shadow-lg max-w-[200px]">
+              {tooltipData.pendingAppointments}
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </div>
 
       <AnalyticsCard />
