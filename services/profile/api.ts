@@ -21,8 +21,8 @@ export const profileApi = createApi({
       providesTags: ['Auth', 'profile'],
     }),
     bookAppointment: builder.mutation({
-      query: ({ serviceProviderId, ...data }) => ({
-        url: `/appointments/book/${serviceProviderId}`,
+      query: ({ ...data }) => ({
+        url: `/appointments/book`,
         method: 'POST',
         body: data,
       }),

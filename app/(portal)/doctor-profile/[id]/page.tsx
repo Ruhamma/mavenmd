@@ -100,7 +100,15 @@ export default function DoctorProfile() {
             </p>
           </div>
           <div className="mt-3 sm:mt-0 sm:ml-auto w-full sm:w-auto">
-            <button className="w-full sm:w-auto bg-white text-primary-800 font-medium px-4 py-2 rounded-xl shadow hover:bg-gray-100 transition">
+            <button
+              className="w-full sm:w-auto bg-white text-primary-800 font-medium px-4 py-2 rounded-xl shadow hover:bg-gray-100 transition"
+              onClick={() => {
+                const el = document.getElementById('pick-date-section');
+                if (el) {
+                  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+              }}
+            >
               Book Now
             </button>
           </div>
@@ -116,7 +124,12 @@ export default function DoctorProfile() {
       {/* Content */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6 md:mt-8">
         <div className="lg:col-span-2 space-y-4">
-          <div className="bg-white rounded-xl shadow p-4 sm:p-6">
+          <div className="bg-white rounded-xl shadow p-4 sm:p-6" id="pick-date-section">
+            <h2 className="text-md sm:text-lg font-semibold mb-3 sm:mb-4">Pick a Date & Time</h2>
+            <p className="text-xs sm:text-sm mb-1">
+              Please select a date and time for your appointment with{' '}
+              {serviceProvider?.result?.fullName}.
+            </p>
             <DatePicker value={selectedDate} onChange={date => setSelectedDate(date ?? null)} />
           </div>
 
@@ -146,19 +159,24 @@ export default function DoctorProfile() {
           </div>
           <div className="bg-white rounded-xl shadow p-4 sm:p-6">
             <h2 className="text-md sm:text-lg font-semibold mb-3">Appointment Type</h2>
+            <p className="text-xs sm:text-sm mb-1">
+              Please select the type of appointment you would like to book.
+            </p>
             <Select value={appointmentType} onValueChange={setAppointmentType}>
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select type" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="ROUTINE">Routine</SelectItem>
-                <SelectItem value="EMERGENCY">Emergency</SelectItem>
+                <SelectItem value="URGENT">Urgent</SelectItem>
+                <SelectItem value="INITIAL_VISIT">Initial Visit</SelectItem>
                 <SelectItem value="FOLLOWUP">Follow-up</SelectItem>
               </SelectContent>
             </Select>
           </div>
           <div className="bg-white rounded-xl shadow p-4 sm:p-6">
             <h2 className="text-md sm:text-lg font-semibold mb-3">Complaints</h2>
+            <p className="text-xs sm:text-sm mb-1">Please describe your complaints or issues.</p>
             <textarea
               value={complaints}
               onChange={e => setComplaints(e.target.value)}
@@ -168,6 +186,7 @@ export default function DoctorProfile() {
           </div>
           <div className="bg-white rounded-xl shadow p-4 sm:p-6">
             <h2 className="text-md sm:text-lg font-semibold mb-3">Symptoms</h2>
+            <p className="text-xs sm:text-sm mb-1">Please describe your symptoms.</p>
             <div className="flex flex-wrap gap-2 mb-2">
               {symptoms.map((s, i) => (
                 <span
