@@ -109,7 +109,7 @@ export default function SessionPage() {
               <div className="flex flex-col items-center gap-0.5 mt-2">
                 <h2 className="text-base font-semibold">{user?.fullName ?? 'N/A'}</h2>
                 <p className="text-xs text-gray-600">
-                  Age {patient?.age ?? 'N/A'} · {patient?.gender ?? 'N/A'}
+                  Age {patient?.age ?? '40'} · {patient?.gender ?? '  Female'}
                 </p>
                 <p className="text-xs text-gray-600">
                   Patient ID: {patient?.id ? `P-${patient.id}` : 'N/A'}
@@ -120,7 +120,7 @@ export default function SessionPage() {
             </div>
             <div className="hidden sm:flex items-center gap-4">
               <Image
-                src="https://placehold.co/80x80"
+                src="https://randomuser.me/api/portraits/women/44.jpg"
                 width={80}
                 height={80}
                 className="rounded-full w-20 h-20"
@@ -130,7 +130,7 @@ export default function SessionPage() {
                 <div>
                   <h2 className="text-xl font-semibold">{user?.fullName ?? 'N/A'}</h2>
                   <p className="text-sm text-gray-600">
-                    Age {patient?.age ?? 'N/A'} · {patient?.gender ?? 'N/A'}
+                    Age {patient?.age ?? '40'} · {patient?.gender ?? 'Female'}
                   </p>
                   <p className="text-sm text-gray-600">
                     Patient ID: {patient?.id ? `P-${patient.id}` : 'N/A'}

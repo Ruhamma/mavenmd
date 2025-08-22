@@ -3,15 +3,19 @@ import React from 'react';
 type PatientsCardProps = {
   totalVisits: number | string;
   title: string;
-  icon: React.ReactNode;  
+  icon: React.ReactNode;
+  iconBgColor?: string; 
 };
 
-const PatientsCard: React.FC<PatientsCardProps> = ({ totalVisits, title, icon }) => {
+const PatientsCard: React.FC<PatientsCardProps> = ({ totalVisits, title, icon, iconBgColor = '#C6C8F7' }) => {
   return (
     <div className="bg-white rounded-2xl sm:rounded-3xl shadow-sm p-3 sm:p-6 w-full max-w-xs">
       <div className="flex items-center gap-2 sm:gap-3">
         {/* Icon */}
-        <div className="bg-[#C6C8F7] p-2 sm:p-3 rounded-full flex items-center justify-center">
+        <div
+          className="p-2 sm:p-3 rounded-full flex items-center justify-center"
+          style={{ backgroundColor: iconBgColor }}
+        >
           <div className="w-4 h-4 sm:w-6 sm:h-6">{icon}</div>
         </div>
 

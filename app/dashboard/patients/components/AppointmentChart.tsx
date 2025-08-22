@@ -82,7 +82,7 @@ export default function DashboardCards() {
 
   return (
     <div className="flex flex-col gap-6 p-4 max-w-md mx-auto">
-      {/* ✅ Next Appointment Card */}
+      {/*  Next Appointment Card */}
       <div className="bg-white shadow-lg rounded-xl p-4 flex flex-col gap-4">
         <div>
           <p className="text-lg font-semibold">Next Appointment</p>
@@ -94,7 +94,7 @@ export default function DashboardCards() {
           <>
             <div className="flex items-center gap-3">
               <Image
-                src="https://randomuser.me/api/portraits/men/32.jpg"
+                src="https://randomuser.me/api/portraits/women/44.jpg"
                 alt={nextAppointment.Patient?.user?.fullName || 'Patient Avatar'}
                 width={48}
                 height={48}
