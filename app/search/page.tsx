@@ -139,7 +139,8 @@ const Page = () => {
   const [viewMode, setViewMode] = useState('grid');
   const [selectedSpecialty, setSelectedSpecialty] = useState('');
   const [location, setLocation] = useState('');
-  const [, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+
   const filteredDoctors = doctors.filter(doc => {
     let matches = true;
 
@@ -172,8 +173,19 @@ const Page = () => {
       matches = false;
     }
 
+    if (searchQuery) {
+      const queryLower = searchQuery.toLowerCase();
+      if (
+        !doc?.name.toLowerCase().includes(queryLower) &&
+        !doc?.specialty.toLowerCase().includes(queryLower)
+      ) {
+        matches = false;
+      }
+    }
+
     return matches;
   });
+
   const handleHeroSearch = (loc: string, query: string) => {
     setLocation(loc);
     setSearchQuery(query);
@@ -283,8 +295,17 @@ const Page = () => {
                   </div>
                 </div>
 
-                <button className="w-full bg-primary-800 text-white py-2 rounded-xl font-medium hover:bg-violet-900 transition-colors">
-                  Apply Filter
+                <button
+                  onClick={() => {
+                    setSelectedAvailability(undefined);
+                    setSelectedPriceRange('');
+                    setSelectedRating('');
+                    setSelectedSpecialty('');
+                    setLocation('');
+                  }}
+                  className="w-full bg-primary-800 text-white py-2 rounded-xl font-medium hover:bg-violet-900 transition-colors"
+                >
+                  Clear Filter
                 </button>
               </div>
             </div>
