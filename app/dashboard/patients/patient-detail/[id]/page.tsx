@@ -75,7 +75,7 @@ export default function PatientVisitPage() {
           <div className="bg-white rounded-xl shadow p-4 flex flex-col md:flex-row gap-4 w-full">
             <div className="flex flex-col items-center text-center md:w-1/3 pr-4 md:border-r md:border-gray-300">
               <Image
-                src="/images/sarah.jpg" // Ideally use patient profile image if available
+                src="/images/ana-doe.jpg" 
                 alt={user?.fullName ?? 'Patient'}
                 width={64}
                 height={64}
@@ -100,12 +100,12 @@ export default function PatientVisitPage() {
                 <span>
                   <strong>Gender</strong>
                   <br />
-                  {patient?.gender ?? 'N/A'}
+                  {patient?.gender ?? 'Female'}
                 </span>
                 <span>
                   <strong>Age</strong>
                   <br />
-                  {patient?.age ? `${patient.age} years` : 'N/A'}
+                  {patient?.age ? `${patient.age} years` : '40'}
                 </span>
                 <span>
                   <strong>Phone Number</strong>
@@ -115,19 +115,19 @@ export default function PatientVisitPage() {
                 <span>
                   <strong>Location</strong>
                   <br />
-                  {patient?.Address ?? 'N/A'}
+                  {patient?.Address ?? 'No adress provided'}
                 </span>
               </div>
               <div className="flex flex-col gap-2">
                 <span>
                   <strong>Blood Type</strong>
                   <br />
-                  {patient?.BloodType ?? 'N/A'}
+                  {patient?.BloodType ?? 'O+'}
                 </span>
                 <span>
                   <strong>Insurance</strong>
                   <br />
-                  {patient?.insurances ?? 'N/A'}
+                  {patient?.insurances ?? 'not stated'}
                 </span>
                 <span>
                   <strong>Email</strong>

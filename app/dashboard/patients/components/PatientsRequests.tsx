@@ -10,6 +10,7 @@ import {
   useConfirmAppointmentMutation,
   useCancelAppointmentMutation,
 } from '@/services/appointments/api';
+import { toast } from 'sonner';
 
 type Urgency = {
   label: string;
@@ -51,12 +52,12 @@ const AppointmentsCard: React.FC<AppointmentsCardProps> = ({
     try {
       const res = await confirmAppointment(id).unwrap();
       console.log('Appointment confirmed:', res);
-      alert('Appointment confirmed successfully');
+      toast.success(res.message || 'Appointment confirmed successfully');
       // Optionally, refresh the page or trigger a refetch
       router.refresh();
     } catch (err: any) {
       console.error('Error confirming appointment:', err);
-      alert(err?.data?.message || 'Failed to confirm appointment');
+      toast.success(err?.data?.message || 'Failed to confirm appointment');
     }
   };
 
@@ -64,11 +65,11 @@ const AppointmentsCard: React.FC<AppointmentsCardProps> = ({
     try {
       const res = await cancelAppointment(id).unwrap();
       console.log('Appointment cancelled:', res);
-      alert('Appointment cancelled successfully');
+      toast.success(res.message || 'Appointment cancelled successfully');
       router.refresh();
     } catch (err: any) {
       console.error('Error cancelling appointment:', err);
-      alert(err?.data?.message || 'Failed to cancel appointment');
+      toast.success(err?.data?.message || 'Failed to cancel appointment');
     }
   };
 

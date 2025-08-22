@@ -11,6 +11,7 @@ import {
 import { IconPhoneFilled, IconMailFilled, IconFileDescriptionFilled } from '@tabler/icons-react';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { toast } from 'sonner';
 
 export default function SessionPage() {
   const params = useParams();
@@ -58,19 +59,20 @@ export default function SessionPage() {
           examinationFindings: findings,
         },
       }).unwrap();
-      alert(res.message || 'Session notes saved successfully');
+      toast.success(res.message || 'Session notes saved successfully');
+      // toast.success(res.message || 'Session notes saved successfully');
     } catch (err: any) {
       console.error('Failed to save session notes:', err);
-      alert(err?.data?.message || 'Failed to save session notes');
+      toast.success(err?.data?.message || 'Failed to save session notes');
     }
   };
   const handleComplete = async () => {
     try {
       const res = await completeAppointment(id).unwrap();
-      alert(res.message || 'Appointment marked as completed');
+      toast.success(res.message || 'Appointment marked as completed');
     } catch (err: any) {
       console.error('Failed to complete appointment:', err);
-      alert(err?.data?.message || 'Failed to complete appointment');
+      toast.success(err?.data?.message || 'Failed to complete appointment');
     }
   };
   if (isLoading) return <p className="p-6">Loading...</p>;
@@ -291,12 +293,11 @@ export default function SessionPage() {
             <div className="relative group">
               <button
                 className={`mt-4 w-full py-2 rounded-md font-semibold text-sm text-white
-                                    ${
-                                      appointment?.status === 'COMPLETED' ||
-                                      appointment?.status !== 'CONFIRMED'
-                                        ? 'bg-gray-400 cursor-not-allowed'
-                                        : 'bg-green-600 hover:bg-green-700'
-                                    }
+                                    ${appointment?.status === 'COMPLETED' ||
+                    appointment?.status !== 'CONFIRMED'
+                    ? 'bg-gray-400 cursor-not-allowed'
+                    : 'bg-green-600 hover:bg-green-700'
+                  }
                                     ${isCompleting ? 'opacity-70 cursor-not-allowed' : ''}`}
                 onClick={handleComplete}
                 disabled={
