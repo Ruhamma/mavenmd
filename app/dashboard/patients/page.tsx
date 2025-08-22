@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useMemo, useState } from 'react';
-import { IconFilter, IconSearch, IconUsers } from '@tabler/icons-react';
+import { IconCircleCheckFilled, IconFilter, IconSearch, IconUsers } from '@tabler/icons-react';
 import PatientsCard from './components/PatientsCard';
 import PatientsRequests from './components/PatientsRequests';
 import AppointmentChart from './components/AppointmentChart';
@@ -55,7 +55,8 @@ const PendingAppointmentsPage = () => {
                 <PatientsCard
                     title="Pending Requests"
                     totalVisits={pendingAppointments.length}
-                    icon={<IconUsers size={24} className="text-white" />}
+                    icon={<IconCircleCheckFilled size={24} className="text-white" />}
+                    iconBgColor="#FFD700"
                 />
                 <PatientsCard
                     title="Confirmed"
@@ -65,7 +66,8 @@ const PendingAppointmentsPage = () => {
                 <PatientsCard
                     title="Completed"
                     totalVisits={appointments.filter(a => a.status === 'COMPLETED').length}
-                    icon={<IconUsers size={24} className="text-white" />}
+                    icon={<IconCircleCheckFilled size={24} className="text-white" />}
+                    iconBgColor="#4CAF50"
                 />
             </div>
 
@@ -118,19 +120,19 @@ const PendingAppointmentsPage = () => {
                                 key={app.id}
                                 id={app.id}
                                 name={app.Patient?.user?.fullName ?? 'Unknown'}
-                                genderAge={`${app.Patient?.gender ?? 'N/A'}, ${app.Patient?.age ?? 'N/A'} years`}
+                                genderAge={`${app.Patient?.gender ?? 'Female'}, ${app.Patient?.age ?? '40'} years`}
                                 symptoms={
                                     Array.isArray(app.symptoms) && app.symptoms.length > 0
                                         ? app.symptoms.join(', ')
                                         : 'No symptoms'
                                 }
-                                imageUrl="/images/default-avatar.png"
+                                imageUrl="/images/ana-doe.jpg"
                                 urgency={{
                                     label: app.type,
                                     bgColor: app.type === 'ROUTINE' ? '#4338CA' : '#B91C1C',
                                 }}
                                 requestedAgo={new Date(app.createdAt).toLocaleDateString()}
-                                distance="N/A"
+                                distance="1.3 miles"
                                 status={app.status}
                             />
                         ))}

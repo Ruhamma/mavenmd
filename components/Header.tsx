@@ -6,6 +6,13 @@ import React, { useState } from 'react';
 import { useAuth } from '../services/auth/api';
 import { Button } from './ui/button';
 
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from '@/components/ui/dropdown-menu';
+
 const navItems = [
   { label: 'Home', path: '/' },
   { label: 'About', path: '/about' },
@@ -20,12 +27,14 @@ const Header = () => {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const { user } = useAuth();
+
   const handleNavigation = (path: string) => {
     router.push(path);
     setMenuOpen(false);
   };
 
   console.log(user?.result?.user?.role);
+
   return (
     <header className="bg-white shadow-xs sticky top-0 z-50">
       <div className="flex justify-between items-center p-4 px-6 lg:px-12">
@@ -45,24 +54,23 @@ const Header = () => {
                   if (!disabled) handleNavigation(path);
                 }}
                 className={`w-[100px] text-sm font-medium px-3 py-2 rounded-3xl transition-all duration-200
-        ${isActive
+                  ${isActive
                     ? 'bg-white text-primary-800 font-semibold'
                     : 'text-white hover:bg-white hover:text-primary-800 hover:font-semibold'
                   }
-      `}
+                `}
               >
                 {label}
               </button>
             );
           })}
-
         </nav>
 
         {/* Desktop Right Icons */}
         <div className="hidden lg:flex items-center space-x-2">
           {!user ? (
             <Button
-              className="  transition-colors duration-200"
+              className="transition-colors duration-200"
               onClick={() => router.push('/login')}
               variant="outline"
             >
@@ -70,10 +78,10 @@ const Header = () => {
             </Button>
           ) : (
             <button
-              className="p-2 rounded-full hover:bg-gray-100 transition-colors duration-200 cur"
+              className="p-2 rounded-full hover:bg-gray-100 transition-colors duration-200"
               onClick={() =>
                 router.push(
-                  user?.result?.user?.role === 'patient' ? '/patient-profile' : '/dashboard',
+                  user?.result?.user?.role === 'patient' ? '/patient-profile' : '/dashboard'
                 )
               }
             >
@@ -81,9 +89,25 @@ const Header = () => {
             </button>
           )}
 
-          <button className="p-2 rounded-full hover:bg-gray-100 transition-colors duration-200">
-            <IconSettings className="text-primary-800" size={24} />
-          </button>
+          {/* ✅ Settings Dropdown using shadcn */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button className="p-2 rounded-full hover:bg-gray-100 transition-colors duration-200">
+                <IconSettings className="text-primary-800" size={24} />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-40">
+              <DropdownMenuItem
+                onClick={() => {
+                  router.push('/login');
+                }}
+                className="cursor-pointer"
+              >
+                Logout
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
           <button className="p-2 rounded-full hover:bg-gray-100 transition-colors duration-200">
             <IconBell className="text-primary-800" size={24} />
           </button>
@@ -125,18 +149,18 @@ const Header = () => {
                   if (!disabled) handleNavigation(path);
                 }}
                 className={`w-[100px] text-sm font-medium px-3 py-2 rounded-3xl transition-all duration-200
-        ${isActive
+                  ${isActive
                     ? 'bg-white text-primary-800 font-semibold'
                     : 'text-white hover:bg-white hover:text-primary-800 hover:font-semibold'
                   }
-      `}
+                `}
               >
                 {label}
               </button>
             );
           })}
-
         </div>
+
         {/* Icons inside menu */}
         <div className="mt-auto p-4 border-t border-gray-200 flex space-x-3">
           {!user ? (
