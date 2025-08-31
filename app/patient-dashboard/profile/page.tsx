@@ -2,6 +2,7 @@ import { IconDotsVertical, IconBell, IconPhoto, IconLayoutDashboard, IconSetting
 import React from 'react'
 import Image from 'next/image';
 import Link from 'next/link';
+import Header from '@/components/Header';
 const appointments = [
     {
         id: 1,
@@ -22,7 +23,9 @@ const appointments = [
 ];
 const page = () => {
     return (
-        <div className="bg-gray-100 min-h-screen p-6">
+       <>
+       <Header/>
+        <div className="bg-gray-100 min-h-screen px-6 pt-18">
             <div className="max-w-7xl mx-auto flex gap-6">
                 <aside className="w-72 bg-white rounded-xl shadow-md p-8 ml-10 flex flex-col items-center">
                     {/* Profile Info */}
@@ -92,7 +95,7 @@ const page = () => {
                 <main className="flex-1 space-y-6">
                     <div className="flex w-full gap-6 items-stretch">
                         {/* Quick Stats - narrower */}
-                        <div className="flex-[2] bg-gray-50 shadow-sm p-4 rounded-xl flex flex-col">
+                        <div className="flex-[2] bg-white shadow-sm p-4 rounded-xl flex flex-col">
                             <p className="text-sm sm:text-base font-semibold m-8">Quick Stats</p>
                             <div className="grid grid-cols-2 gap-2 text-primary-800 mt-2 text-xs text-center sm:text-sm flex-grow">
                                 <div>
@@ -238,6 +241,7 @@ const page = () => {
                 </main>
             </div>
         </div>
+       </>
 
     )
 }
