@@ -218,7 +218,6 @@ export default function CustomizeDashboardPage() {
       setSelectedCards(JSON.parse(savedCards));
       setSelectedCharts(JSON.parse(savedCharts));
     } else {
-      // default = first 4 cards only
       const defaultLayout: Layout[] = availableCards.slice(0, 4).map((c, i) => ({
         i: `card-${c.key}`,
         x: i % 4,
@@ -264,7 +263,7 @@ export default function CustomizeDashboardPage() {
               {selectedCards.length} of 4 cards selected
             </span>
             {selectedCards.length >= 5 && (
-              <span className="text-sm font-medium text-amber-600 bg-amber-50 px-3 py-1 rounded-full">
+              <span className="text-sm font-medium text-red-600 bg-red-50 px-3 py-1 rounded-full">
                 Maximum selection reached
               </span>
             )}
